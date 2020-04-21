@@ -1,0 +1,9 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="weather_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/weather_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/weather_colorPrimaryDark</item>
+        <item name="colorAccent">@color/weather_colorAccent</item>
+    </style>
+</resources>

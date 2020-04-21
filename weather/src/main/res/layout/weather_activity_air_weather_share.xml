@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/weather_main_bg">
+
+        <com.mufeng.roundview.RoundConstraintLayout
+            android:id="@+id/rcl_bit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rv_backgroundColor="@color/white"
+            app:rv_cornerRadius="6.67dp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/iv_image_bg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/weather_bad_air_quality_bg"
+                app:layout_constraintTop_toTopOf="@+id/cl_air"
+                app:layout_constraintBottom_toBottomOf="@+id/cl_air"
+                app:layout_constraintStart_toStartOf="@+id/cl_air"
+                app:layout_constraintEnd_toEndOf="@+id/cl_air"
+                app:riv_corner_radius="5.33dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_air"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="9dp"
+                android:paddingBottom="20dp"
+                >
+
+                <com.lnkj.weather.widget.CircleProgressBar
+                    android:id="@+id/circleProgressBar"
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="50dp"
+                    app:antiAlias="true"
+                    app:arcColors="#FF3837"
+                    app:arcWidth="3dp"
+                    app:bgArcColor="#33000000"
+                    app:bgArcWidth="3dp"
+                    app:hintColor="#FFFFFF"
+                    app:hintSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:maxValue="300"
+                    app:startAngle="133"
+                    app:sweepAngle="268"
+                    app:unitColor="#ffffff"
+                    app:unitSize="15sp"
+                    app:valueColor="#FF3837"
+                    app:valueSize="11sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="@+id/circleProgressBar"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleProgressBar"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="11sp"
+                        android:textColor="#80ffffff"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="健康"
+                        android:textSize="11sp"
+                        android:textColor="#80ffffff"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleProgressBar"
+                    app:layout_constraintEnd_toStartOf="@+id/circleProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/circleProgressBar"
+                    app:layout_constraintVertical_bias="0.45">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="优"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toStartOf="@+id/circleProgressBar"
+                    app:layout_constraintBottom_toTopOf="@+id/circleProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/circleProgressBar">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="良"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintStart_toStartOf="@+id/circleProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/circleProgressBar"
+                    app:layout_constraintBottom_toTopOf="@+id/circleProgressBar">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="150"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="轻度"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/circleProgressBar"
+                    app:layout_constraintBottom_toTopOf="@+id/circleProgressBar"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintTop_toTopOf="@+id/circleProgressBar">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="200"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="中度"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleProgressBar"
+                    app:layout_constraintStart_toEndOf="@+id/circleProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/circleProgressBar"
+                    app:layout_constraintVertical_bias="0.4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="300"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="重度"
+                        android:textColor="#80ffffff"
+                        android:textSize="11sp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/circleProgressBar"
+                    app:layout_constraintBottom_toBottomOf="@+id/circleProgressBar"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="500"
+                        android:textSize="11sp"
+                        android:textColor="#80ffffff"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="严重"
+                        android:textSize="11sp"
+                        android:textColor="#80ffffff"
+                        />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_air_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="空气很好，快去呼吸新鲜空气吧。"
+                    android:textColor="@color/white"
+                    android:textSize="15.33sp"
+                    app:layout_constraintTop_toBottomOf="@+id/circleProgressBar" />
+
+                <com.mufeng.roundview.RoundConstraintLayout
+                    android:id="@+id/rcl_pm_2_5"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toStartOf="@+id/rcl_pm_10"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_air_tip"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:rv_backgroundColor="#4dffffff"
+                    app:rv_cornerRadius="2.67dp">
+
+                    <TextView
+                        android:id="@+id/tv_title_pm_2_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11.33dp"
+                        android:text="PM2.5"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_title_pm_2_5_cn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_title_pm_2_5_cn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="细颗粒物"
+                        android:textColor="#80ffffff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_pm_2_5"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_pm_2_5" />
+
+                    <TextView
+                        android:id="@+id/tv_pm_2_5_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16.33dp"
+                        android:text="8"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_pm_2_5_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <com.mufeng.roundview.RoundTextView
+                        android:id="@+id/tv_pm_2_5_color"
+                        android:layout_width="12.33dp"
+                        android:layout_height="3.33dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_pm_2_5_value"
+                        app:layout_constraintStart_toStartOf="@+id/tv_pm_2_5_value"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_pm_2_5_value"
+                        app:rv_backgroundColor="#FF3316"
+                        app:rv_cornerRadius="1.67dp" />
+
+                </com.mufeng.roundview.RoundConstraintLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/weather_icon_chiefly"
+                    app:layout_constraintEnd_toEndOf="@+id/rcl_pm_2_5"
+                    app:layout_constraintTop_toTopOf="@+id/rcl_pm_2_5" />
+
+                <com.mufeng.roundview.RoundConstraintLayout
+                    android:id="@+id/rcl_pm_10"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toStartOf="@+id/rcl_pm_SO2"
+                    app:layout_constraintStart_toEndOf="@+id/rcl_pm_2_5"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_air_tip"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:rv_backgroundColor="#4dffffff"
+                    app:rv_cornerRadius="2.67dp">
+
+                    <TextView
+                        android:id="@+id/tv_title_pm_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11.33dp"
+                        android:text="PM10"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_title_pm_10_cn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_title_pm_10_cn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="粗颗粒物"
+                        android:textColor="#80ffffff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_pm_10"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_pm_10" />
+
+                    <TextView
+                        android:id="@+id/tv_pm_10_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16.33dp"
+                        android:text="8"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_pm_10_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <com.mufeng.roundview.RoundTextView
+                        android:id="@+id/tv_pm_10_color"
+                        android:layout_width="12.33dp"
+                        android:layout_height="3.33dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_pm_10_value"
+                        app:layout_constraintStart_toStartOf="@+id/tv_pm_10_value"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_pm_10_value"
+                        app:rv_backgroundColor="#FF3316"
+                        app:rv_cornerRadius="1.67dp" />
+
+                </com.mufeng.roundview.RoundConstraintLayout>
+
+                <com.mufeng.roundview.RoundConstraintLayout
+                    android:id="@+id/rcl_pm_SO2"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rcl_pm_10"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_air_tip"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:rv_backgroundColor="#4dffffff"
+                    app:rv_cornerRadius="2.67dp">
+
+                    <TextView
+                        android:id="@+id/tv_title_pm_SO2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11.33dp"
+                        android:text="SO2"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_title_pm_SO2_cn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_title_pm_SO2_cn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="二氧化硫"
+                        android:textColor="#80ffffff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_pm_SO2"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_pm_SO2" />
+
+                    <TextView
+                        android:id="@+id/tv_pm_SO2_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16.33dp"
+                        android:text="8"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_pm_SO2_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <com.mufeng.roundview.RoundTextView
+                        android:id="@+id/tv_pm_SO2_color"
+                        android:layout_width="12.33dp"
+                        android:layout_height="3.33dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_pm_SO2_value"
+                        app:layout_constraintStart_toStartOf="@+id/tv_pm_SO2_value"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_pm_SO2_value"
+                        app:rv_backgroundColor="#FF3316"
+                        app:rv_cornerRadius="1.67dp" />
+
+                </com.mufeng.roundview.RoundConstraintLayout>
+
+                <com.mufeng.roundview.RoundConstraintLayout
+                    android:id="@+id/rcl_no2"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="9.3dp"
+                    app:layout_constraintEnd_toStartOf="@+id/rcl_co"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rcl_pm_2_5"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:rv_backgroundColor="#4dffffff"
+                    app:rv_cornerRadius="2.67dp">
+
+                    <TextView
+                        android:id="@+id/tv_title_no2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11.33dp"
+                        android:text="NO2"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_title_no2_cn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_title_no2_cn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="二氧化碳"
+                        android:textColor="#80ffffff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_no2"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_no2" />
+
+                    <TextView
+                        android:id="@+id/tv_no2_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16.33dp"
+                        android:text="8"
+                        android:textColor="@color/white"
+                        android:textSize="12.33sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_no2_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <com.mufeng.roundview.RoundTextView
+                        android:id="@+id/tv_no2_color"
+                        android:layout_width="12.33dp"
+                        android:layout_height="3.33dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_no2_value"
+                        app:layout_constraintStart_toStartOf="@+id/tv_no2_value"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_no2_value"
+                        app:rv_backgroundColor="#FF3316"
+                        app:rv_cornerRadius="1.67dp" />
+
+                </com.mufeng.roundview.RoundConstraintLayout>
+
+                <com.mufeng.roundview.RoundConstraintLayout
+                    android:id="@+id/rcl_co"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="9.3dp"
+                    app:layout_constraintEnd_toStartOf="@+id/rcl_o3"
+                    app:layout_constraintStart_toEndOf="@+id/rcl_no2"
+                    app:layout_constraintTop_toBottomOf="@+id/rcl_pm_2_5"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:rv_backgroundColor="#4dffffff"
+                    app:rv_cornerRadius="2.67dp">
+
+                    <TextView
+                        android:id="@+id/tv_title_co"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11.33dp"
+                        android:text="CO"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_title_co_cn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_title_co_cn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="一氧化碳"
+                        android:textColor="#80ffffff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_co"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_co" />
+
+                    <TextView
+                        android:id="@+id/tv_co_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16.33dp"
+                        android:text="8"
+                        android:textColor="@color/white"
+                        android:textSize="12.33sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_co_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <com.mufeng.roundview.RoundTextView
+                        android:id="@+id/tv_co_color"
+                        android:layout_width="12.33dp"
+                        android:layout_height="3.33dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_co_value"
+                        app:layout_constraintStart_toStartOf="@+id/tv_co_value"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_co_value"
+                        app:rv_backgroundColor="#FF3316"
+                        app:rv_cornerRadius="1.67dp" />
+
+                </com.mufeng.roundview.RoundConstraintLayout>
+
+                <com.mufeng.roundview.RoundConstraintLayout
+                    android:id="@+id/rcl_o3"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="9.3dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rcl_co"
+                    app:layout_constraintTop_toBottomOf="@+id/rcl_pm_2_5"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:rv_backgroundColor="#4dffffff"
+                    app:rv_cornerRadius="2.67dp">
+
+                    <TextView
+                        android:id="@+id/tv_title_o3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="11.33dp"
+                        android:text="O3"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_title_o3_cn"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tv_title_o3_cn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="臭氧"
+                        android:textColor="#80ffffff"
+                        android:textSize="8sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_title_o3"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title_o3" />
+
+                    <TextView
+                        android:id="@+id/tv_o3_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16.33dp"
+                        android:text="8"
+                        android:textColor="@color/white"
+                        android:textSize="12.33sp"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_o3_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <com.mufeng.roundview.RoundTextView
+                        android:id="@+id/tv_o3_color"
+                        android:layout_width="12.33dp"
+                        android:layout_height="3.33dp"
+                        android:layout_marginTop="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_o3_value"
+                        app:layout_constraintStart_toStartOf="@+id/tv_o3_value"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_o3_value"
+                        app:rv_backgroundColor="#FF3316"
+                        app:rv_cornerRadius="1.67dp" />
+
+                </com.mufeng.roundview.RoundConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="19dp"
+                android:text="浦东"
+                android:textColor="@color/color_33"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_image_bg" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="3月21日"
+                android:textColor="@color/color_99"
+                android:textSize="12sp"
+                app:layout_goneMarginBottom="18dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_content"
+                app:layout_constraintStart_toStartOf="@+id/tv_city"
+                app:layout_constraintTop_toBottomOf="@+id/tv_city" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="17dp"
+                android:visibility="gone"
+                android:layout_marginBottom="17dp"
+                android:text="今天气温变化平稳,天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宣着厚棉衣、冬大衣或厚羽绒服。"
+                android:textColor="@color/color_33"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+        </com.mufeng.roundview.RoundConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_share_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.33dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:background="#4dffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="分享到"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.33dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="1"
+                    android:background="#4dffffff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_share_wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/weather_icon_share_wechat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="微信"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2" />
+
+                <LinearLayout
+                    android:id="@+id/ll_share_wechat_timeline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/weather_icon_share_wechat_timeline" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="朋友圈"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2" />
+
+                <LinearLayout
+                    android:id="@+id/ll_share_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/weather_icon_share_qq" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="QQ"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="2" />
+
+                <LinearLayout
+                    android:id="@+id/ll_share_qzone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/weather_icon_share_qzone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="QQ空间"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#40ffffff" />
+
+            <ImageView
+                android:id="@+id/ic_close"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:src="@mipmap/weather_icon_share_close" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

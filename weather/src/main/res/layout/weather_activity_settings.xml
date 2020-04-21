@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.lnkj.weather.ui.settings.SettingsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:onClick="@{()->vm.finishEvent()}"
+                android:src="@mipmap/weather_icon_back_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="设置"
+                android:textColor="#000"
+                android:textSize="17.33sp" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="26.67dp"
+            android:background="#f8f8f8"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:text="通知栏总开关"
+            android:textColor="@color/color_99" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@color/white">
+
+            <TextView
+                android:id="@+id/tv_notice_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17dp"
+                android:text="通知栏提醒总开关"
+                android:textColor="@color/color_33"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_notice_tip"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tv_notice_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="开启后，不再错过重要天气提醒"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_notice_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_notice_title" />
+
+            <Switch
+                android:id="@+id/switch_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:thumb="@drawable/weather_switch_ios_thumb"
+                android:track="@drawable/weather_switch_ios_track_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_notice_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="#e1e1e1" />
+
+            <LinearLayout
+                android:id="@+id/ll_morning_time"
+                android:layout_width="match_parent"
+                android:layout_height="57dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="17dp"
+                    android:text="早间天气提醒"
+                    android:textColor="@color/color_33"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_morning_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:drawableEnd="@mipmap/weather_icon_arrow_right_gray"
+                    android:drawablePadding="11dp"
+                    android:gravity="end"
+                    android:text="06:00"
+                    android:textColor="@color/color_99"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="#e1e1e1" />
+
+            <LinearLayout
+                android:id="@+id/ll_night_time"
+                android:layout_width="match_parent"
+                android:layout_height="57dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="17dp"
+                    android:text="晚间天气提醒"
+                    android:textColor="@color/color_33"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_night_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:drawableEnd="@mipmap/weather_icon_arrow_right_gray"
+                    android:drawablePadding="11dp"
+                    android:gravity="end"
+                    android:text="18:00"
+                    android:textColor="@color/color_99"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="26.67dp"
+            android:background="#f8f8f8"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:text="功能设置"
+            android:textColor="@color/color_99" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="57dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="17dp"
+                    android:text="自动定位"
+                    android:textColor="@color/color_33"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="11dp"
+                    android:gravity="end"
+                    android:textColor="@color/color_99"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:checked="true"
+                    android:thumb="@drawable/weather_switch_ios_thumb"
+                    android:track="@drawable/weather_switch_ios_track_selector" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="26.67dp"
+            android:background="#f8f8f8"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:text="其他信息"
+            android:textColor="@color/color_99" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="57dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="17dp"
+                android:text="天气APP"
+                android:textColor="@color/color_33"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:drawablePadding="11dp"
+                android:gravity="end"
+                android:text="@{vm.version}"
+                android:textColor="@color/color_99"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#e1e1e1" />
+
+    </LinearLayout>
+</layout>

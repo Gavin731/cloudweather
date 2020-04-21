@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="isLocation"
+            type="Boolean" />
+
+        <variable
+            name="cityName"
+            type="String" />
+    </data>
+
+    <com.mufeng.roundview.RoundLinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:minWidth="74.67dp"
+        app:rv_cornerRadius="2.67dp"
+        app:rv_backgroundColor="@color/white"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:layout_margin="5dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isLocation ? View.VISIBLE : View.GONE}"
+            android:src="@mipmap/weather_icon_location_blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{cityName}"
+            android:layout_marginStart="3.67dp"
+            android:textColor="@color/color_33"
+            android:textSize="14.67dp"
+            />
+
+    </com.mufeng.roundview.RoundLinearLayout>
+</layout>

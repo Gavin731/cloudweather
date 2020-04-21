@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:background="@drawable/weather_life_index_good_bg">
+
+        <FrameLayout
+            isShowStatusBar="@{true}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:src="@mipmap/weather_icon_back_white" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="17.33sp"
+                tools:text="浦东今日雨伞指数" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/iv_face"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            tools:src="@mipmap/weather_icon_crying_face" />
+
+        <TextView
+            android:id="@+id/tvLifeStyleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="33.33sp"
+            tools:text="无需带伞" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:layout_marginTop="20dp"
+            android:background="#4dffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1affffff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_weather_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.57dp"
+                        android:textColor="@color/white"
+                        android:textSize="13.33sp"
+                        tools:text="晴" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.67dp"
+                        android:text="天气"
+                        android:textColor="#80ffffff"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_temperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.57dp"
+                        android:textColor="@color/white"
+                        android:textSize="13.33sp"
+                        tools:text="5~8°" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.67dp"
+                        android:text="温度"
+                        android:textColor="#80ffffff"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_temperature_difference"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15.57dp"
+                        android:textColor="@color/white"
+                        android:textSize="13.33sp"
+                        tools:text="13°" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.67dp"
+                        android:text="昼夜温差"
+                        android:textColor="#80ffffff"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28.67dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_wind_speed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="13.33sp"
+                        tools:text="1级" />
+
+                    <TextView
+                        android:id="@+id/tv_wind_direction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.67dp"
+                        android:textColor="#80ffffff"
+                        android:textSize="12sp"
+                        tools:text="西南风" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_sunrise_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="13.33sp"
+                        tools:text="06:00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.67dp"
+                        android:text="日出"
+                        android:textColor="#80ffffff"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_sunset_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="13.33sp"
+                        tools:text="06:00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.67dp"
+                        android:text="日落"
+                        android:textColor="#80ffffff"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:layout_marginTop="17dp"
+                android:background="#4dffffff" />
+
+            <TextView
+                android:id="@+id/tv_life_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:paddingStart="17dp"
+                android:paddingEnd="17dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="天气不错，午后温暖的阳光仍能满足你驱潮消霉杀菌的晾晒需求。" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:layout_marginTop="15dp"
+                android:background="#4dffffff" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:layout_marginTop="6dp"
+            android:background="#4dffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1affffff"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_knowledge_title"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginStart="18dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="16.67sp"
+                tools:text="感冒指数小贴士" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="#4dffffff" />
+
+            <TextView
+                android:id="@+id/tv_knowledge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="17.33dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="17.33dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:text="感冒指数通过综合温度、湿度、风速、天气现象及温差等因素提醒大家感冒发生的几率。尤其是老人和小孩，抵抗力较弱，更要多加防护哦。" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.33dp"
+                android:background="#4dffffff" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,8 @@
+rootProject.name='cloudweather'
+include ':app'
+include ':mvvmlib'
+include ':library-base'
+include ':library-res'
+include ':weather'
+include ':roundview-library'
+include ':sociallibrary'

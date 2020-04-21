@@ -1,0 +1,120 @@
+ext.mainApp = true  //设置为true，表示此module为主app module，一直以application方式编译
+apply from: rootProject.file('mufeng-cc-settings.gradle')
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion rootProject.compileVersion
+    buildToolsVersion rootProject.buildVersion
+
+    defaultConfig {
+        applicationId "com.lnkj.cloudweather"
+        minSdkVersion rootProject.minVersion
+        targetSdkVersion rootProject.compileVersion
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        flavorDimensions "versionCode"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi-v7a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                qqappid: "101867668"
+        ]
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"              //不显示log
+            //混淆
+            minifyEnabled false
+            //Zipalign优化
+            zipAlignEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+
+            //指定打包apk的名字
+            //指定我们release包的输出文件名就是我们的渠道名字
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    // 输出apk名称为app_kuan_v1.0_2015.01.15.apk
+                    outputFileName = "app_${variant.productFlavors[0].name}_v${variant.versionName}.apk"
+                }
+            }
+
+        }
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"              //显示log
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+    //多渠道渠道名的设置
+    productFlavors {
+        Xiaomi {}//代表UMENG_CHANNEL_VALUE = baidu
+        Huawei {}
+        Tencent {}
+        Oppo {}
+
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+
+
+    signingConfigs {
+        debug {
+            storeFile file("yunduan_weather.keystore")
+            storePassword "yunduan_weather@20200420"
+            keyAlias "yunduan_weather"
+            keyPassword "yunduan_weather@20200420"
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+            dirs project(':sociallibrary').file('libs')
+        }
+    }
+}
+
+dependencies {
+    addComponent 'weather'
+    implementation project(':sociallibrary')
+
+    // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
+    api "com.umeng.umsdk:common:2.1.0"
+    // 友盟统计SDK
+    api "com.umeng.umsdk:analytics:8.1.3"
+}

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mufeng.roundview.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:rv_backgroundColor="@color/white"
+    app:rv_cornerRadius="2.67dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择提醒时间"
+        android:gravity="center"
+        android:textColor="@color/color_00"
+        android:textSize="18sp"
+        android:layout_marginTop="17dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="#d9d9d9"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        >
+
+        <com.contrarywind.view.WheelView
+            android:id="@+id/wheelViewHour"
+            android:layout_width="45dp"
+            android:layout_height="140dp"
+            app:wheelview_gravity="center"
+            app:wheelview_textColorOut="#999999"
+            app:wheelview_textColorCenter="#333333"
+            app:wheelview_dividerColor="#51A4FF"
+            app:wheelview_textSize="18sp"
+            app:wheelview_lineSpacingMultiplier="3"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textSize="11sp"
+            android:textColor="@color/color_33"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            />
+        <com.contrarywind.view.WheelView
+            android:id="@+id/wheelViewMinute"
+            android:layout_width="45dp"
+            android:layout_height="140dp"
+            app:wheelview_gravity="center"
+            app:wheelview_textColorOut="#999999"
+            app:wheelview_textColorCenter="#333333"
+            app:wheelview_dividerColor="#51A4FF"
+            app:wheelview_textSize="18sp"
+            app:wheelview_lineSpacingMultiplier="3"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="14dp"
+        >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            />
+
+        <com.mufeng.roundview.RoundTextView
+            android:id="@+id/rtv_cancel"
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:text="取消"
+            android:textColor="#51A4FF"
+            app:rv_cornerRadius="2.67dp"
+            android:gravity="center"
+            app:rv_strokeColor="#51A4FF"
+            app:rv_strokeWidth="0.33dp"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            />
+
+
+        <com.mufeng.roundview.RoundTextView
+            android:id="@+id/rtv_submit"
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:text="确认"
+            android:textColor="@color/white"
+            app:rv_backgroundColor="#51A4FF"
+            app:rv_cornerRadius="2.67dp"
+            android:gravity="center"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+</com.mufeng.roundview.RoundLinearLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lnkj.weather">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!--用于获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!--用于访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!--用于写入缓存数据到扩展存储卡-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <application
+        android:name="debug.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/weather_ic_launcher"
+        android:label="@string/weather_app_name"
+        android:supportsRtl="true"
+        android:theme="@style/weather_AppTheme"
+        tools:replace="android:label">
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="360" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1573b7adc68a57de4c503836f5c25249"/>
+
+        <service android:name="com.amap.api.location.APSService">
+
+        </service>
+        <service android:name=".service.NoticeService"
+            />
+
+        <activity android:name=".ui.main.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.city.SearchCityActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.city.ChooseCityActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.exponent.ExponentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.hotrank.HotRankActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.city.add.AddCityActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.settings.SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.realweather.RealTimeWeatherShareActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.hour.HourDetailsShareActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.air.AirQualityShareActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.rain.RainActivity"
+            android:screenOrientation="portrait"/>
+    </application>
+</manifest>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.MainActivity">
+
+        <com.mufeng.mvvmlib.widget.ScrollViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bbl"
+            />
+
+        <com.chaychan.library.BottomBarLayout
+            android:id="@+id/bbl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center"
+            >
+
+            <com.chaychan.library.BottomBarItem
+                android:id="@+id/bbi_item_real_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:iconNormal="@mipmap/weather_icon_tab_real_time_weather"
+                app:iconSelected="@mipmap/weather_icon_tab_real_time_weather_selected"
+                app:itemText="实时天气"
+                app:itemTextSize="11sp"
+                app:textColorNormal="@color/weather_color_AFB6CB"
+                app:textColorSelected="@color/weather_color_4CA6FF"
+                />
+
+            <com.chaychan.library.BottomBarItem
+                android:id="@+id/bbi_item_hour_details"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:iconNormal="@mipmap/weather_icon_tab_hour_details"
+                app:iconSelected="@mipmap/weather_icon_tab_hour_details_selected"
+                app:itemText="小时详情"
+                app:itemTextSize="11sp"
+                app:textColorNormal="@color/weather_color_AFB6CB"
+                app:textColorSelected="@color/weather_color_4CA6FF"
+                />
+
+            <com.chaychan.library.BottomBarItem
+                android:id="@+id/bbi_item_air"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:iconNormal="@mipmap/weather_icon_tab_air_quality"
+                app:iconSelected="@mipmap/weather_icon_tab_air_quality_selected"
+                app:itemText="空气质量"
+                app:itemTextSize="11sp"
+                app:textColorNormal="@color/weather_color_AFB6CB"
+                app:textColorSelected="@color/weather_color_4CA6FF"
+                />
+
+
+        </com.chaychan.library.BottomBarLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

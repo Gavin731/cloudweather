@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.lnkj.weather.ui.rain.RainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/weather_main_bg"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/toolbar"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/weather_icon_back_white"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:onClick="@{()->vm.finishEvent()}"
+                android:layout_height="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{vm.title}"
+                tools:text="浦东新区"
+                android:textColor="@color/white"
+                android:textSize="17.33sp"
+                />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="未来两小时不会下雨，放心出门吧"
+            android:text="@{vm.rainTitle}"
+            android:textSize="16.67sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tv_rain_title"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="降雨量"
+            android:text="@{vm.rainType}"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rain_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:id="@+id/tv_rain_tip"
+            android:textSize="12sp"
+            android:layout_marginTop="39dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.publishDate}"
+            tools:text="10:55发布"
+            android:textColor="#80ffffff"
+            android:layout_marginEnd="8dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rain_title"
+            android:layout_marginTop="39dp"
+            android:id="@+id/tv_rain_date"
+            />
+
+        <com.lnkj.weather.widget.zzweatherview.rain.RainingView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rain_tip"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:id="@+id/rainingView"
+            android:scrollbars="none"
+            />
+
+        <com.mufeng.roundview.RoundTextView
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:text="知道了"
+            android:textColor="@color/white"
+            android:textSize="16.67sp"
+            android:onClick="@{()->vm.finishEvent()}"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:rv_cornerRadius="2.67dp"
+            app:rv_backgroundColor="#51A4FF"
+            android:layout_marginBottom="50dp"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

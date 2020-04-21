@@ -1,0 +1,70 @@
+//apply from: 'https://raw.githubusercontent.com/luckybilly/CC/master/cc-settings-2.gradle'
+//修改CC框架代码进行本地测试时使用下面的文件
+apply from: rootProject.file('mufeng-cc-settings.gradle')
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+android {
+    compileSdkVersion rootProject.compileVersion
+    buildToolsVersion rootProject.buildVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minVersion
+        targetSdkVersion rootProject.compileVersion
+        if (project.ext.runAsApp) {
+            applicationId 'com.lnkj.weather'
+        }
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [qqappid: "101867668"]
+    }
+    resourcePrefix "weather_"
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
+    }
+    sourceSets {
+        main {
+            assets {
+                srcDirs 'src/main/assets', 'src/main/assets/'
+            }
+        }
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+            dirs project(':sociallibrary').file('libs')
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 底部导航
+    implementation 'com.github.chaychan:BottomBarLayout:1.2.0'
+
+    // 指示器
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+    implementation project(':sociallibrary')
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
+    implementation 'com.github.mmin18:realtimeblurview:1.2.1'
+    // 圆形图片
+    api 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.contrarywind:wheelview:4.1.0'
+}

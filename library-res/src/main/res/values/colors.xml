@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#369AF2</color>
+    <color name="colorPrimaryDark">#369AF2</color>
+    <color name="colorAccent">#369AF2</color>
+    <color name="color_main">@color/colorPrimary</color>
+    <color name="color_hint">#666666</color>
+    <color name="color_text">#333333</color>
+    <color name="color_line">#EEEEEE</color> <!-- 分割线颜色-->
+    <color name="line_color">@color/color_line</color> <!-- 分割线颜色-->
+    <color name="color_bg">#FFFFFF</color><!-- 默认背景颜色-->
+    <color name="color_xing">#FB7462</color><!-- 默认背景颜色-->
+
+    <color name="color_bb">#BBBBBB</color>
+    <color name="color_EC4046">#EC4046</color>
+    <color name="color_FF9900">#FF9900</color>
+    <color name="color_33">#333333</color>
+    <color name="color_ee">#eeeeee</color>
+    <color name="bg_main">#F9F9F9</color>
+    <color name="color_24">#242424</color>
+    <color name="color_81">#818181</color>
+    <color name="color_f3">#f3f3f3</color>
+    <color name="color_99">#999999</color>
+    <color name="color_dd">#dddddd</color>
+    <color name="color_00">#000000</color>
+    <color name="text_gray_color">#999999</color>
+    <color name="black_deep">#FF000000</color>
+    <color name="color_f1665d">#f1665d</color>
+    <color name="color_c2">#c2c2c2</color>
+    <color name="color_494a5d">#494a5d</color>
+    <color name="color_00AF2F">#00AF2F</color>
+    <color name="color_ACB0B6">#ACB0B6</color>
+    <color name="color_75BFFF">#75BFFF</color>
+    <color name="color_ffb300">#ffb300</color>
+    <color name="color_ff6857">#ff6857</color>
+    <color name="color_FF8500">#FF8500</color>
+    <color name="color_cc">#cccccc</color>
+    <color name="color_30C27A">#30C27A</color>
+    <color name="color_EBEBEC">#EBEBEC</color>
+    <color name="color_30C27A_45">#7330C27A</color>
+    <color name="translucent_background">#80000000</color>
+    <color name="cccccc">#cccccc</color>
+    <color name="ff7f000000">#7f000000</color>
+    <color name="ff666666">#666666</color>
+    <color name="f4d4d4d">#4d4d4d</color>
+    <color name="alpha_white_70">#4Dffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+
+    <color name="color_FF3837">#FF3837</color>
+    <color name="color_66">#666666</color>
+    <color name="color_f9">#f9f9f9</color>
+    <color name="color_f0">#F0F0F0</color>
+    <color name="color_aa">#AAAAAA</color>
+
+    <color name="glay3">#F0F0F0</color>
+    <color name="timeCome1">#3597d0</color>
+    <color name="timeCome2">#4acc75</color>
+    <color name="color_61686D">#61686D</color>
+    <color name="color_ff6219">#ff6219</color>
+
+    <color name="color_ff2147">#ff2147</color>
+</resources>

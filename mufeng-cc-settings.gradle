@@ -1,0 +1,9 @@
+apply from: rootProject.file('cc-settings.gradle')
+
+dependencies {
+    implementation project(':library-base')
+    implementation project(':library-res')
+    if (project.ext.has('runAsApp') && project.ext.runAsApp) {
+//        implementation project(':component_interceptors')
+    }
+}
