@@ -58,7 +58,8 @@ android {
     }
     //多渠道渠道名的设置
     productFlavors {
-        Xiaomi {}//代表UMENG_CHANNEL_VALUE = baidu
+        TestZeng {}//测试渠道
+        Xiaomi {}
         Huawei {}
         Tencent {}
         Oppo {}
