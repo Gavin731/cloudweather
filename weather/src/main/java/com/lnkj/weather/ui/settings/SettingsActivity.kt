@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.app.NotificationManagerCompat
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -13,6 +14,7 @@ import com.lnkj.weather.databinding.WeatherActivitySettingsBinding
 import com.lnkj.weather.widget.DialogChooseTime
 import com.lxj.xpopup.XPopup
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
+import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.versionName
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.ext.widget.gone
@@ -26,7 +28,7 @@ import com.mufeng.mvvmlib.utilcode.utils.StatusBarUtils
  * @创建时间 2020/4/2 16:15
  * @描述
  */
-class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySettingsBinding>() {
+class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySettingsBinding>(),View.OnClickListener {
     override val viewModel: SettingsViewModel
         by viewModels()
     override val layoutResId: Int
@@ -106,6 +108,7 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
                 .show()
         }
 
+        binding.llPrivacyPolicy.setOnClickListener(this)
     }
 
     private fun initNoticeView(isChecked: Boolean){
@@ -138,6 +141,14 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
         }
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.ll_privacy_policy->{
+                startActivity<PrivacyPolicyActivity>()
+            }
+        }
     }
 
 }
