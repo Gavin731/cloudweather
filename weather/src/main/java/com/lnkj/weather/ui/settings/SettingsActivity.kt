@@ -28,17 +28,18 @@ import com.mufeng.mvvmlib.utilcode.utils.StatusBarUtils
  * @创建时间 2020/4/2 16:15
  * @描述
  */
-class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySettingsBinding>(),View.OnClickListener {
+class SettingsActivity : BaseVMActivity<SettingsViewModel, WeatherActivitySettingsBinding>(),
+    View.OnClickListener {
     override val viewModel: SettingsViewModel
-        by viewModels()
+            by viewModels()
     override val layoutResId: Int
         get() = R.layout.weather_activity_settings
 
     private var isNotice by Preference("isNotice", false)
     private var isLocation by Preference("isLocation", true)
 
-    private var nightTime by Preference("night_time","18:00")
-    private var morningTime by Preference("morning_time","06:00")
+    private var nightTime by Preference("night_time", "18:00")
+    private var morningTime by Preference("morning_time", "06:00")
 
     override fun initView(savedInstanceState: Bundle?) {
         binding.vm = viewModel
@@ -60,24 +61,24 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
         }
 
         binding.switchNotice.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
-                if (!NotificationManagerCompat.from(this).areNotificationsEnabled()){
+            if (isChecked) {
+                if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
                     XPopup.Builder(this)
-                        .asConfirm("", "通知权限未开启, 无法收到天气推送, 请前往设置", "取消","设置",{
+                        .asConfirm("", "通知权限未开启, 无法收到天气推送, 请前往设置", "取消", "设置", {
                             binding.switchNotice.isChecked = false
                             isNotice = false
                             goToSetting()
-                        },{
+                        }, {
                             binding.switchNotice.isChecked = false
                             isNotice = false
                         }, false)
                         .show()
 
-                }else{
+                } else {
                     isNotice = isChecked
                     initNoticeView(isNotice)
                 }
-            }else{
+            } else {
                 isNotice = isChecked
                 initNoticeView(isNotice)
             }
@@ -86,7 +87,7 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
 
         binding.llMorningTime.clickWithTrigger {
 
-            val dialog = DialogChooseTime(this, false, morningTime){
+            val dialog = DialogChooseTime(this, false, morningTime) {
                 morningTime = it
                 binding.tvMorningTime.text = morningTime
             }
@@ -98,7 +99,7 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
 
         binding.llNightTime.clickWithTrigger {
 
-            val dialog = DialogChooseTime(this, true, nightTime){
+            val dialog = DialogChooseTime(this, true, nightTime) {
                 nightTime = it
                 binding.tvNightTime.text = nightTime
             }
@@ -109,12 +110,13 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
         }
 
         binding.llPrivacyPolicy.setOnClickListener(this)
+        binding.llUserAgreement.setOnClickListener(this)
     }
 
-    private fun initNoticeView(isChecked: Boolean){
-        if (isChecked){
+    private fun initNoticeView(isChecked: Boolean) {
+        if (isChecked) {
             binding.llNoticeView.visible()
-        }else{
+        } else {
             binding.llNoticeView.gone()
         }
     }
@@ -144,9 +146,16 @@ class SettingsActivity: BaseVMActivity<SettingsViewModel, WeatherActivitySetting
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.ll_privacy_policy->{
-                startActivity<PrivacyPolicyActivity>()
+        when (v?.id) {
+            R.id.ll_privacy_policy -> {
+                val intent = Intent(this, PrivacyPolicyActivity::class.java)
+                intent.putExtra("pageType", "privacy_policy");
+                startActivity(intent)
+            }
+            R.id.ll_user_agreement -> {
+                val intent = Intent(this, PrivacyPolicyActivity::class.java)
+                intent.putExtra("pageType", "user_agreement");
+                startActivity(intent)
             }
         }
     }

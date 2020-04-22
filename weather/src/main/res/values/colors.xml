@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    
+    <color name="weather_color_000000">#000000</color>
+    <color name="weather_color_999999">#3B3B3B</color>
+
     <color name="weather_colorPrimary">#0080ff</color>
     <color name="weather_colorPrimaryDark">#0072e5</color>
     <color name="weather_colorAccent">#D81B60</color>

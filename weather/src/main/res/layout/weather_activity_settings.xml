@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.lnkj.weather.ui.settings.SettingsViewModel" />
@@ -23,9 +24,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:onClick="@{()->vm.finishEvent()}"
                 android:paddingStart="18dp"
                 android:paddingEnd="18dp"
-                android:onClick="@{()->vm.finishEvent()}"
                 android:src="@mipmap/weather_icon_back_gray" />
 
             <TextView
@@ -94,8 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <View
                 android:layout_width="match_parent"
@@ -257,6 +258,12 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/weather_dp_17"
+            android:background="#e1e1e1" />
+
         <LinearLayout
             android:id="@+id/ll_privacy_policy"
             android:layout_width="match_parent"
@@ -268,6 +275,27 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="17dp"
                 android:text="隐私政策"
+                android:textColor="@color/color_33"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/weather_dp_17"
+            android:background="#e1e1e1" />
+
+        <LinearLayout
+            android:id="@+id/ll_user_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="57dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="17dp"
+                android:text="用户协议"
                 android:textColor="@color/color_33"
                 android:textSize="16sp" />
         </LinearLayout>
