@@ -41,7 +41,7 @@ class AgreementPolicyPopup(context: Context, listener: AgreementPolicyListener) 
         findViewById<TextView>(R.id.tv_close_app).setOnClickListener(this)
         findViewById<TextView>(R.id.tv_ok).setOnClickListener(this)
 
-        var userText = SpannableString("《用户协议》")
+        var userText = SpannableString("《服务协议》")
         userText.setSpan(
             SpanClick(USER_TEXT),
             0,
