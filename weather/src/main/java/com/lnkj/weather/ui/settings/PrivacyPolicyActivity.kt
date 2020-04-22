@@ -41,9 +41,9 @@ class PrivacyPolicyActivity :
 
     private var pageType: String = ""
     override fun initView(savedInstanceState: Bundle?) {
-        pageType = intent.getString("pageType", PRIVACY_POLICY)
+        pageType = intent.getString("pageType", "")
         //校验组件是否有传参
-        if (intent.extras != null) {
+        if (TextUtils.isEmpty(pageType) && intent.extras != null) {
             val ccExtraRemoteCc: RemoteCC = intent.extras.get("cc_extra_remote_cc") as RemoteCC
             val jsonObject = ccExtraRemoteCc.params;
             pageType = jsonObject.get("pageType") as String;
