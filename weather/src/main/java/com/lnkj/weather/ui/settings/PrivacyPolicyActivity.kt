@@ -2,14 +2,19 @@ package com.lnkj.weather.ui.settings
 
 import android.os.Bundle
 import android.text.Html
+import android.text.TextUtils
 import android.widget.TextView
 import androidx.activity.viewModels
+import com.billy.cc.core.component.remote.RemoteCC
+import com.google.gson.JsonObject
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityPrivacyPolicyBinding
 import com.lnkj.weather.model.settings.PrivacyPolicyViewModel
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
+import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
 import com.mufeng.mvvmlib.utilcode.ext.getString
 import com.mufeng.mvvmlib.utilcode.utils.StatusBarUtils
+import org.json.JSONObject
 
 /**
  * @ClassName: PrivacyPolicyActivity
@@ -37,6 +42,12 @@ class PrivacyPolicyActivity :
     private var pageType: String = ""
     override fun initView(savedInstanceState: Bundle?) {
         pageType = intent.getString("pageType", PRIVACY_POLICY)
+        //校验组件是否有传参
+        if (intent.extras != null) {
+            val ccExtraRemoteCc: RemoteCC = intent.extras.get("cc_extra_remote_cc") as RemoteCC
+            val jsonObject = ccExtraRemoteCc.params;
+            pageType = jsonObject.get("pageType") as String;
+        }
         binding.tvTitle.text = "隐私政策"
         //用户协议
         if (pageType == USER_AGREEMENT) {

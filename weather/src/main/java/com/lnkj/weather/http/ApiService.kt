@@ -141,6 +141,6 @@ interface ApiService {
      * 高温排行
      * @return HotRankBean
      */
-    @GET("http://tq.dt357.cn/api/rank")
+    @GET("http://yunduantianqi.com/api/rank")
     suspend fun getHotRankList(): HotRankBean
 }

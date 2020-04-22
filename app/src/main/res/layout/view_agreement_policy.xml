@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/weather_dp_50"
+        android:layout_marginRight="@dimen/weather_dp_50"
+        android:background="@drawable/bg_circular_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11111111111111111" />
+
+        <TextView
+            android:id="@+id/tv_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="跳转隐私" />
+
+        <TextView
+            android:id="@+id/tv_user_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="跳转用户" />
+
+        <TextView
+            android:id="@+id/tv_close_app"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="暂不使用" />
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="同意" />
+    </LinearLayout>
+
+
+</LinearLayout>

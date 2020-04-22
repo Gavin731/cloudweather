@@ -8,6 +8,7 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.billy.cc.core.component.CC
+import com.lnkj.cloudweather.custom.popup.AgreementPolicyPopup
 import com.lnkj.cloudweather.databinding.SplashActivityBinding
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.db.database.WeatherDatabase
@@ -16,6 +17,7 @@ import com.lxj.xpopup.XPopup
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.utilcode.ext.goToAppInfoPage
 import com.mufeng.mvvmlib.utilcode.ext.permission.request
+import com.mufeng.mvvmlib.utilcode.utils.ActivityUtils
 import com.mufeng.mvvmlib.utilcode.utils.Preference
 import com.mufeng.mvvmlib.utilcode.utils.context
 import com.mufeng.mvvmlib.utilcode.utils.toast
@@ -23,7 +25,7 @@ import com.umeng.analytics.MobclickAgent
 import kotlinx.coroutines.*
 
 class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
-    CoroutineScope by MainScope() {
+    CoroutineScope by MainScope(), AgreementPolicyPopup.AgreementPolicyListener {
     override val viewModel: SplashViewModel
             by viewModels()
     override val layoutResId: Int
@@ -34,6 +36,12 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
     private var isLocation by Preference("isLocation", true)
 
     override fun initView(savedInstanceState: Bundle?) {
+        XPopup.Builder(this)
+            .asCustom(AgreementPolicyPopup(this, this))
+            .show();
+    }
+
+    fun requestPermissions() {
         val permissions = arrayListOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
@@ -94,7 +102,6 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
 
             }
         }
-
     }
 
     override fun initData() {
@@ -182,5 +189,13 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
     override fun onPause() {
         super.onPause()
         MobclickAgent.onPause(this);
+    }
+
+    override fun onCancel() {
+        ActivityUtils.finishAllActivity()
+    }
+
+    override fun onOk() {
+        requestPermissions()
     }
 }
