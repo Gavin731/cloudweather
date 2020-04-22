@@ -1,6 +1,10 @@
 package com.lnkj.cloudweather.custom.popup
 
 import android.content.Context
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import com.billy.cc.core.component.CC
@@ -21,6 +25,11 @@ import com.lxj.xpopup.core.CenterPopupView
 class AgreementPolicyPopup(context: Context, listener: AgreementPolicyListener) :
     CenterPopupView(context), View.OnClickListener {
 
+    companion object {
+        const val USER_TEXT = "user"
+        const val POLICY_TEXT = "policy"
+    }
+
     private val listener: AgreementPolicyListener = listener
 
     override fun getImplLayoutId(): Int {
@@ -29,39 +38,40 @@ class AgreementPolicyPopup(context: Context, listener: AgreementPolicyListener) 
 
     override fun onCreate() {
         super.onCreate()
-        findViewById<TextView>(R.id.tv_privacy_policy).setOnClickListener(this)
-        findViewById<TextView>(R.id.tv_user_agreement).setOnClickListener(this)
         findViewById<TextView>(R.id.tv_close_app).setOnClickListener(this)
         findViewById<TextView>(R.id.tv_ok).setOnClickListener(this)
+
+        var userText = SpannableString("《用户协议》")
+        userText.setSpan(
+            SpanClick(USER_TEXT),
+            0,
+            userText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+        var privacyText = SpannableString("《隐私政策》")
+        privacyText.setSpan(
+            SpanClick(POLICY_TEXT),
+            0,
+            privacyText.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+        val textView = findViewById<TextView>(R.id.tv_click_text);
+        textView.text = "你可阅读";
+        textView.append(userText);
+        textView.append("和");
+        textView.append(privacyText);
+        textView.append("了解详细信息。如你同意，请点击“同意”开始接受我们的服务。");
+        textView.movementMethod = LinkMovementMethod.getInstance();//开始响应点击事件
 
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_privacy_policy -> {
-                val params=HashMap<String,Any>()
-                params.put("pageType","privacy_policy")
-                CC.obtainBuilder(WeatherComponent.WEATHER_COMPONENT_NAME)
-                    .setActionName(WeatherComponent.WEATHER_ACTION_OPEN_PRIVACY_POLICY)
-                    .setParams(params)
-                    .build()
-                    .callAsync() { cc, result ->
-                    }
-            }
-            R.id.tv_user_agreement -> {
-                val params=HashMap<String,Any>()
-                params.put("pageType","user_agreement")
-                CC.obtainBuilder(WeatherComponent.WEATHER_COMPONENT_NAME)
-                    .setActionName(WeatherComponent.WEATHER_ACTION_OPEN_USER_AGREEMENT)
-                    .setParams(params)
-                    .build()
-                    .callAsync() { cc, result ->
-                    }
-            }
             R.id.tv_close_app -> {
                 listener?.onCancel()
             }
             R.id.tv_ok -> {
+                dismiss()
                 listener?.onOk()
             }
         }
@@ -70,5 +80,34 @@ class AgreementPolicyPopup(context: Context, listener: AgreementPolicyListener) 
     interface AgreementPolicyListener {
         fun onCancel()
         fun onOk()
+    }
+
+    class SpanClick(val content: String) : ClickableSpan() {
+
+        override fun onClick(widget: View) {
+            when (content) {
+                USER_TEXT -> {
+                    val params = HashMap<String, Any>()
+                    params.put("pageType", "user_agreement")
+                    CC.obtainBuilder(WeatherComponent.WEATHER_COMPONENT_NAME)
+                        .setActionName(WeatherComponent.WEATHER_ACTION_OPEN_USER_AGREEMENT)
+                        .setParams(params)
+                        .build()
+                        .callAsync() { cc, result ->
+                        }
+                }
+                POLICY_TEXT -> {
+                    val params = HashMap<String, Any>()
+                    params.put("pageType", "privacy_policy")
+                    CC.obtainBuilder(WeatherComponent.WEATHER_COMPONENT_NAME)
+                        .setActionName(WeatherComponent.WEATHER_ACTION_OPEN_PRIVACY_POLICY)
+                        .setParams(params)
+                        .build()
+                        .callAsync() { cc, result ->
+                        }
+                }
+            }
+        }
+
     }
 }

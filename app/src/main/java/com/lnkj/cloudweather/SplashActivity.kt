@@ -10,6 +10,7 @@ import com.amap.api.location.AMapLocationClientOption
 import com.billy.cc.core.component.CC
 import com.lnkj.cloudweather.custom.popup.AgreementPolicyPopup
 import com.lnkj.cloudweather.databinding.SplashActivityBinding
+import com.lnkj.cloudweather.util.SharedPreferencesUtil
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.db.database.WeatherDatabase
 import com.lnkj.library_base.router.WeatherComponent
@@ -36,9 +37,14 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
     private var isLocation by Preference("isLocation", true)
 
     override fun initView(savedInstanceState: Bundle?) {
-        XPopup.Builder(this)
-            .asCustom(AgreementPolicyPopup(this, this))
-            .show();
+        val isFirst = SharedPreferencesUtil.getSpBoolean(this, "isFirst")
+        if (isFirst) {
+            XPopup.Builder(this)
+                .asCustom(AgreementPolicyPopup(this, this))
+                .show();
+        } else {
+            requestPermissions()
+        }
     }
 
     fun requestPermissions() {
@@ -196,6 +202,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
     }
 
     override fun onOk() {
+        SharedPreferencesUtil.setSpBoolean(this, "isFirst", false)
         requestPermissions()
     }
 }

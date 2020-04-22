@@ -8,39 +8,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/weather_dp_50"
-        android:layout_marginRight="@dimen/weather_dp_50"
+        android:layout_marginLeft="@dimen/weather_dp_17"
+        android:layout_marginRight="@dimen/weather_dp_17"
         android:background="@drawable/bg_circular_white"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="11111111111111111" />
+            android:layout_marginTop="@dimen/weather_sp_30"
+            android:gravity="center"
+            android:text="服务协议和隐私政策"
+            android:textColor="#ff000000"
+            android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tv_privacy_policy"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="跳转隐私" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/weather_dp_17"
+            android:layout_marginTop="@dimen/weather_sp_20"
+            android:layout_marginRight="@dimen/weather_dp_17"
+            android:text="请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了向你提供即时通讯、内容分享等服务，我们需要收集你的设备信息、操作日志等个人信息。你可以在“设置”中查看、变更、删除个人信息并管理你的授权。"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_user_agreement"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="跳转用户" />
+            android:id="@+id/tv_click_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/weather_dp_17"
+            android:layout_marginRight="@dimen/weather_dp_17"
+            android:textColor="#ff000000"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_close_app"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="暂不使用" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="@dimen/weather_sp_20"
+            android:background="@color/line" />
 
-        <TextView
-            android:id="@+id/tv_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="同意" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/weather_dp_50"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_close_app"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="暂不使用"
+                android:textColor="#999999"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line" />
+
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="同意"
+                android:textColor="#ff51a4ff"
+                android:textSize="20sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 
