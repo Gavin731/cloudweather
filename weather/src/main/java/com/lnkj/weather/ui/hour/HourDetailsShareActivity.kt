@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.bumptech.glide.Glide
 import com.lnkj.library_base.base.BaseViewModel
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityHourlyWeatherShareBinding
@@ -88,7 +89,8 @@ class HourDetailsShareActivity : BaseVMActivity<BaseViewModel, WeatherActivityHo
         lifeTxt = intent.getString("lifeTxt","")
 
         if (weatherBg != -1) {
-            binding.ivImageBg.imageResource = weatherBg
+//            binding.ivImageBg.imageResource = weatherBg
+            Glide.with(this).load(weatherBg).into(binding.ivImageBg)
         }
 
         binding.tvTemperature.text = currentT.toString()

@@ -99,7 +99,7 @@ class RealTimeWeatherItemFragment :
             return
         }
 
-        binding.clMainLayout.gone()
+//        binding.clMainLayout.gone()
 
         binding.nestedScrollView.setOnScrollChangeListener { _: NestedScrollView?, _, scrollY, _, _ ->
             val alpha = scrollY / 2

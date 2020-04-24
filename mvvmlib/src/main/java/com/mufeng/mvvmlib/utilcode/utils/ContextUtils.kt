@@ -3,6 +3,7 @@ package com.mufeng.mvvmlib.utilcode.utils
 import android.app.Application
 import android.content.Context
 import android.content.ContextWrapper
+import android.text.TextUtils
 import android.widget.Toast
 
 /**
@@ -74,7 +75,7 @@ val Float.toSp: Float
 /* Toast 相关 */
 
 private val globalToast by lazy {
-    Toast.makeText(context, null, Toast.LENGTH_SHORT)
+    Toast.makeText(context, "", Toast.LENGTH_SHORT)
 }
 
 /**
@@ -83,8 +84,10 @@ private val globalToast by lazy {
  * @return Toast 单例的Toast对象
  */
 fun toast(text: String): Toast {
+    var content = text
+    if (TextUtils.isEmpty(content)) content = ""
     globalToast.duration = Toast.LENGTH_SHORT
-    globalToast.setText(text)
+    globalToast.setText(content)
     globalToast.show()
     return globalToast
 }
@@ -93,8 +96,10 @@ fun toast(text: String): Toast {
  * 同上，但是显示的时间稍长一点
  */
 fun longToast(text: String): Toast {
+    var content = text
+    if (TextUtils.isEmpty(content)) content = ""
     globalToast.duration = Toast.LENGTH_LONG
-    globalToast.setText(text)
+    globalToast.setText(content)
     globalToast.show()
     return globalToast
 }
