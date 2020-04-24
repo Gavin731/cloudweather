@@ -35,6 +35,7 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="never"
             android:visibility="visible"
             >
             <LinearLayout
@@ -387,7 +388,8 @@
                     <com.lnkj.weather.widget.zzweatherview.hour.HourWeatherView
                         android:id="@+id/rv_hour_weather"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never"/>
 
                     <View
                         android:layout_width="match_parent"

@@ -19,6 +19,7 @@
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         app:srlEnableLoadMore="false">
 
         <com.scwang.smartrefresh.header.MaterialHeader
@@ -32,11 +33,11 @@
             android:visibility="visible">
 
 
-
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nested_scroll_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:overScrollMode="never">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -188,16 +189,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="27dp"
                         android:layout_marginTop="15.33dp"
-                        android:maxWidth="300dp"
                         android:background="@drawable/weather_shape_rain_tip_bg"
                         android:drawableStart="@mipmap/weather_icon_small_bell"
                         android:drawableEnd="@mipmap/weather_icon_arrow_right_white"
                         android:drawablePadding="10dp"
-                        android:gravity="center"
-                        android:paddingStart="10dp"
-                        android:singleLine="true"
                         android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxWidth="300dp"
+                        android:paddingStart="10dp"
                         android:paddingEnd="10dp"
+                        android:singleLine="true"
                         android:text="@{cityWeather.rainTip}"
                         android:textColor="@color/white"
                         android:textSize="13.33dp"
@@ -402,7 +403,8 @@
                         <com.lnkj.weather.widget.zzweatherview.hour.HourWeatherView
                             android:id="@+id/rv_hour_weather"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never" />
 
                         <View
                             android:layout_width="match_parent"
@@ -492,9 +494,10 @@
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_day_list"
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                android:overScrollMode="never"
+                                android:visibility="gone" />
 
                             <LinearLayout
                                 android:id="@+id/rv_day_chart"
@@ -506,7 +509,7 @@
                                     android:id="@+id/zzWeatherView"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    />
+                                    android:overScrollMode="never" />
 
                             </LinearLayout>
 
@@ -518,9 +521,9 @@
                         android:id="@+id/ll_live_index"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
                         android:background="#1affffff"
                         android:orientation="vertical"
-                        android:layout_marginTop="6dp"
                         app:layout_constraintTop_toBottomOf="@+id/ll_day_list_chart">
 
                         <View
