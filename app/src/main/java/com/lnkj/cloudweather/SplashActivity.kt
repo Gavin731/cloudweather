@@ -40,6 +40,8 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
         val isFirst = SharedPreferencesUtil.getSpBoolean(this, "isFirst")
         if (isFirst) {
             XPopup.Builder(this)
+                .dismissOnBackPressed(false)
+                .dismissOnTouchOutside(false)
                 .asCustom(AgreementPolicyPopup(this, this))
                 .show();
         } else {
