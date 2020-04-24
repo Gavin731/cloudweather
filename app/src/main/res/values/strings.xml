@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">云端天气预报</string>
+
+    <string name="agreement_policy_first_title">服务协议和隐私政策</string>
+    <string name="agreement_policy_first_content">请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了向你提供即时通讯、内容分享等服务，我们需要收集你的设备信息、操作日志等个人信息。你可以在“设置”中查看、变更、删除个人信息并管理你的授权。</string>
 </resources>

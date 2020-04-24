@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/weather_sp_30"
             android:gravity="center"
-            android:text="服务协议和隐私政策"
+            android:text="@string/agreement_policy_first_title"
             android:textColor="#ff000000"
             android:textSize="20sp" />
 
@@ -28,7 +28,7 @@
             android:layout_marginLeft="@dimen/weather_dp_17"
             android:layout_marginTop="@dimen/weather_sp_20"
             android:layout_marginRight="@dimen/weather_dp_17"
-            android:text="请你务必审慎阅读、充分理解“服务协议”和“隐私政策”各条款，包括但不限于：为了向你提供即时通讯、内容分享等服务，我们需要收集你的设备信息、操作日志等个人信息。你可以在“设置”中查看、变更、删除个人信息并管理你的授权。"
+            android:text="@string/agreement_policy_first_content"
             android:textColor="#ff000000"
             android:textSize="16sp" />
 

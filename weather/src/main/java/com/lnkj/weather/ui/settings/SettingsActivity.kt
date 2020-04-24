@@ -149,12 +149,12 @@ class SettingsActivity : BaseVMActivity<SettingsViewModel, WeatherActivitySettin
         when (v?.id) {
             R.id.ll_privacy_policy -> {
                 val intent = Intent(this, PrivacyPolicyActivity::class.java)
-                intent.putExtra("pageType", "privacy_policy");
+                intent.putExtra("pageType", PrivacyPolicyActivity.PRIVACY_POLICY);
                 startActivity(intent)
             }
             R.id.ll_user_agreement -> {
                 val intent = Intent(this, PrivacyPolicyActivity::class.java)
-                intent.putExtra("pageType", "user_agreement");
+                intent.putExtra("pageType", PrivacyPolicyActivity.USER_AGREEMENT);
                 startActivity(intent)
             }
         }
