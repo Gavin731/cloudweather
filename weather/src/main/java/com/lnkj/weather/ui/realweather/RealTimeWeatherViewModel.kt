@@ -410,7 +410,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 }
 
                 val rainTip = if (indexs.isEmpty()) {
-                    "未来两小时不会下${WeatherUtils.isRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!, weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!)}"
+                    "未来2小时无降${WeatherUtils.isRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!, weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!)}"
                 } else {
                     weatherBean.result?.minutely?.description
                 }

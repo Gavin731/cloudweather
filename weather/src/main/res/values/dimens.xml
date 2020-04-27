@@ -5,6 +5,10 @@
     <dimen name="weather_dp_8">8dp</dimen>
     <dimen name="weather_dp_10">10dp</dimen>
     <dimen name="weather_dp_17">17dp</dimen>
+    <dimen name="weather_dp_100">100dp</dimen>
+    <dimen name="weather_dp_150">150dp</dimen>
+    <dimen name="weather_dp_200">200dp</dimen>
+    <dimen name="weather_dp_300">300dp</dimen>
 
 
     <dimen name="weather_sp_4">4sp</dimen>

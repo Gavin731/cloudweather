@@ -186,15 +186,16 @@
 
                     <TextView
                         android:id="@+id/tvRainTip"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/weather_dp_150"
                         android:layout_height="27dp"
                         android:layout_marginTop="15.33dp"
                         android:background="@drawable/weather_shape_rain_tip_bg"
                         android:drawableStart="@mipmap/weather_icon_small_bell"
                         android:drawableEnd="@mipmap/weather_icon_arrow_right_white"
                         android:drawablePadding="10dp"
-                        android:ellipsize="end"
+                        android:ellipsize="marquee"
                         android:gravity="center"
+                        android:marqueeRepeatLimit="marquee_forever"
                         android:maxWidth="300dp"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
@@ -202,7 +203,6 @@
                         android:text="@{cityWeather.rainTip}"
                         android:textColor="@color/white"
                         android:textSize="13.33dp"
-                        android:visibility="@{cityWeather.hasRain ? View.VISIBLE : View.INVISIBLE}"
                         app:layout_constraintStart_toStartOf="@+id/ll_weather_info"
                         app:layout_constraintTop_toBottomOf="@+id/ll_weather_info" />
 
@@ -391,7 +391,7 @@
                             android:layout_height="43.67dp"
                             android:gravity="center_vertical"
                             android:paddingStart="18dp"
-                            android:text="未来24小时天气"
+                            android:text="24小时天气"
                             android:textColor="@color/white"
                             android:textSize="16.67sp" />
 

@@ -328,6 +328,8 @@ class RealTimeWeatherItemFragment :
             binding.refreshLayout.finishRefresh()
             binding.clMainLayout.visible()
 
+            binding.tvRainTip.setSelected(true);
+
             // 保存当前城市天气信息
             viewModel?.updateCityWeather(
                 myCityBean,
