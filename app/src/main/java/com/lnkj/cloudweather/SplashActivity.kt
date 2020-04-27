@@ -66,14 +66,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
             *permissions.toTypedArray()
         ) {
             onDenied {
-                XPopup.Builder(this@SplashActivity)
-                    .asConfirm("", "必要权限未被允许, 云端天气将无法为您服务, 请在设置中打开权限",
-                        "关闭", "打开设置", {
-                            goToAppInfoPage()
-                        }, {
-                            finish()
-                        }, false
-                    ).show()
+                showPermissionSettingDialog();
             }
             onGranted {
                 countDownTimer = object : CountDownTimer(1000, 2000) {
@@ -97,19 +90,23 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
                 countDownTimer?.start()
             }
             onNeverAskAgain {
-                XPopup.Builder(this@SplashActivity)
-                    .asConfirm("", "必要权限未被允许, 云端天气将无法为您服务, 请在设置中打开权限",
-                        "关闭", "打开设置", {
-                            goToAppInfoPage()
-                        }, {
-                            finish()
-                        }, false
-                    ).show()
+                showPermissionSettingDialog();
             }
             onShowRationale {
-
+                showPermissionSettingDialog();
             }
         }
+    }
+
+    fun showPermissionSettingDialog(){
+        XPopup.Builder(this@SplashActivity)
+            .asConfirm("", "必要权限未被允许, 云端天气将无法为您服务, 请在设置中打开权限",
+                "关闭", "打开设置", {
+                    goToAppInfoPage()
+                }, {
+                    finish()
+                }, false
+            ).show()
     }
 
     override fun initData() {
