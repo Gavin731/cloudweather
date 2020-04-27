@@ -1,4 +1,5 @@
 package com.lnkj.library_base.db.bean
+
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -30,17 +31,43 @@ data class MyCityBean(
     var lon: String = "",
     @SerializedName("parent_city")
     var cityName: String = "",
+    @SerializedName("street")
+    var street: String = "",
     var continentName: String = "",
     var isLocation: Int = 0,
     var addTime: Long = 0,
     var weatherIcon: Int = -1,
     var temperature: String = ""
+
 ) : Parcelable
 
-fun MyCityBean.toCityBean(): CityBean{
-    return CityBean(provinceName, cid, countryName, lat, counties, lon, cityName, continentName, false)
+fun MyCityBean.toCityBean(): CityBean {
+    return CityBean(
+        provinceName,
+        cid,
+        countryName,
+        lat,
+        counties,
+        lon,
+        cityName,
+        street,
+        continentName,
+        false
+    )
 }
 
-fun CityBean.toMyCityBean(): MyCityBean{
-    return MyCityBean(null,provinceName, cid, countryName, lat, counties, lon, cityName, continentName, addTime = System.currentTimeMillis())
+fun CityBean.toMyCityBean(): MyCityBean {
+    return MyCityBean(
+        null,
+        provinceName,
+        cid,
+        countryName,
+        lat,
+        counties,
+        lon,
+        cityName,
+        street,
+        continentName,
+        addTime = System.currentTimeMillis()
+    )
 }

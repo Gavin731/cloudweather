@@ -77,11 +77,12 @@ class LocationService : Service() {
                 location.district,
                 location.longitude.toString(),
                 location.city,
+                location.street,
                 "",
                 1,
                 System.currentTimeMillis()
             )
-        }else{
+        } else {
             myCityBean.provinceName = location.province
             myCityBean.cid = location.adCode
             myCityBean.countryName = location.country
@@ -89,6 +90,7 @@ class LocationService : Service() {
             myCityBean.counties = location.district
             myCityBean.lon = location.longitude.toString()
             myCityBean.cityName = location.city
+            myCityBean.street=location.street
         }
         WeatherDatabase.get().myCityDao().saveCity(myCityBean)
         stopSelf()

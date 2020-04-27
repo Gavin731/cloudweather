@@ -1,4 +1,5 @@
 package com.lnkj.library_base.db.bean
+
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -33,8 +34,12 @@ data class CityBean(
     var lon: String = "",
     @SerializedName("parent_city")
     var cityName: String = "",
+    @SerializedName("street")
+    var street : String = "",
+
     var continentName: String = "",
     var isHot: Boolean = false,
     @Ignore
     var isLocation: Boolean = false
-)
+
+    )

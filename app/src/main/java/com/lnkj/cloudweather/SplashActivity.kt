@@ -168,6 +168,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
                             location.district,
                             location.longitude.toString(),
                             location.city,
+                            location.street,
                             "",
                             1,
                             System.currentTimeMillis()
@@ -180,6 +181,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
                         myCityBean.counties = location.district
                         myCityBean.lon = location.longitude.toString()
                         myCityBean.cityName = location.city
+                        myCityBean.street=location.street
                     }
                     WeatherDatabase.get().myCityDao().deleteLocationCity()
                     WeatherDatabase.get().myCityDao().saveCity(myCityBean)

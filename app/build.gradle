@@ -11,8 +11,8 @@ android {
         applicationId "com.lnkj.cloudweather"
         minSdkVersion rootProject.minVersion
         targetSdkVersion rootProject.compileVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 11
+        versionName "1.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"

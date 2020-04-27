@@ -163,6 +163,9 @@ class RealTimeWeatherFragment :
 
     override fun startObserve() {
         super.startObserve()
+        viewModel.currentCity.observe(this){
+            binding.tvCity.text=it.counties+" "+it.street
+        }
         viewModel.myCityBeanData.observe(this) {
 
             if (it.isEmpty()) {
