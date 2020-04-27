@@ -15,6 +15,7 @@ import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.db.database.WeatherDatabase
 import com.lnkj.library_base.router.WeatherComponent
 import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.impl.ConfirmPopupView
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.utilcode.ext.goToAppInfoPage
 import com.mufeng.mvvmlib.utilcode.ext.permission.request
@@ -35,6 +36,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
     private var countDownTimer: CountDownTimer? = null
 
     private var isLocation by Preference("isLocation", true)
+    private var confirmPopupView: ConfirmPopupView? = null
 
     override fun initView(savedInstanceState: Bundle?) {
         val isFirst = SharedPreferencesUtil.getSpBoolean(this, "isFirst")
@@ -56,7 +58,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
             Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.ACCESS_WIFI_STATE,
             Manifest.permission.CHANGE_WIFI_STATE,
-            Manifest.permission.READ_PHONE_STATE,
+//            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
@@ -66,47 +68,56 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
             *permissions.toTypedArray()
         ) {
             onDenied {
-                showPermissionSettingDialog();
+                showPermissionSettingDialog()
             }
             onGranted {
-                countDownTimer = object : CountDownTimer(1000, 2000) {
-                    override fun onFinish() {
-                        if (isLocation) {
-                            getCurrentLocation { locationSuccess(it) }
-                        } else
-                            CC.obtainBuilder(WeatherComponent.WEATHER_COMPONENT_NAME)
-                                .setActionName(WeatherComponent.WEATHER_ACTION_OPEN_MAIN_ACTIVITY)
-                                .build()
-                                .callAsync() { cc, result ->
-                                    finish()
-                                }
-                    }
-
-                    override fun onTick(millisUntilFinished: Long) {
-
-                    }
-
-                }
-                countDownTimer?.start()
+                startLocation()
             }
             onNeverAskAgain {
-                showPermissionSettingDialog();
+                showPermissionSettingDialog()
             }
             onShowRationale {
-                showPermissionSettingDialog();
+                it.retry()
             }
         }
     }
 
-    fun showPermissionSettingDialog(){
-        XPopup.Builder(this@SplashActivity)
-            .asConfirm("", "必要权限未被允许, 云端天气将无法为您服务, 请在设置中打开权限",
-                "关闭", "打开设置", {
-                    goToAppInfoPage()
-                }, {
-                    finish()
-                }, false
-            ).show()
+    fun showPermissionSettingDialog() {
+        if (confirmPopupView == null) {
+            confirmPopupView = XPopup.Builder(this@SplashActivity)
+                .asConfirm("", "必要权限未被允许, 云端天气将无法为您服务, 请在设置中打开权限",
+                    "关闭", "打开设置", {
+                        goToAppInfoPage()
+                    }, {
+                        finish()
+                    }, false
+                );
+        }
+        if (!confirmPopupView!!.isShow) {
+            confirmPopupView!!.show()
+        }
+    }
+
+    fun startLocation() {
+        countDownTimer = object : CountDownTimer(1000, 2000) {
+            override fun onFinish() {
+                if (isLocation) {
+                    getCurrentLocation { locationSuccess(it) }
+                } else
+                    CC.obtainBuilder(WeatherComponent.WEATHER_COMPONENT_NAME)
+                        .setActionName(WeatherComponent.WEATHER_ACTION_OPEN_MAIN_ACTIVITY)
+                        .build()
+                        .callAsync() { cc, result ->
+                            finish()
+                        }
+            }
+
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+        }
+        countDownTimer?.start()
     }
 
     override fun initData() {
