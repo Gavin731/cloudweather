@@ -186,7 +186,7 @@
 
                     <TextView
                         android:id="@+id/tvRainTip"
-                        android:layout_width="@dimen/weather_dp_150"
+                        android:layout_width="@dimen/weather_dp_170"
                         android:layout_height="27dp"
                         android:layout_marginTop="15.33dp"
                         android:background="@drawable/weather_shape_rain_tip_bg"

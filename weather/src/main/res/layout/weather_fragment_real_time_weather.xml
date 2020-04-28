@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:drawablePadding="5dp"
-                        />
+                        android:textSize="@dimen/weather_sp_16"/>
 
                     <net.lucode.hackware.magicindicator.MagicIndicator
                         android:id="@+id/magic_indicator"
