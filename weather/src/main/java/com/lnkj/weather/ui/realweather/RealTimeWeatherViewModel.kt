@@ -415,13 +415,24 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     weatherBean.result?.minutely?.description
                 }
 
+                //判断是否为白天
+                val sunriseTime=fishLightLifeStyle.sunriseTime
+                val sunsetTime=fishLightLifeStyle.sunsetTime
+                val isDayTime=DateUtils.isDayTime(sunriseTime,sunsetTime)
+
+                val weatherImg=if(isDayTime){
+                    weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!
+                }else{
+                    weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
+                }
+
                 val cityWeather = CityWeather(
                     cityName = cityBean.counties,
                     updateDate = DateUtils.formatTime(Date(), PATTERN_1),
                     temperature = weatherBean.result?.realtime?.temperature!!.toInt(),
                     weatherName = WeatherUtils.formatWeather(weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!, weatherBean.result?.daily?.skycon20h32h?.get(0)?.value!!),
-                    weatherIcon = WeatherUtils.getWeatherIcon(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!),
-                    weatherBg = WeatherUtils.getWeatherBg(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!),
+                    weatherIcon = WeatherUtils.getWeatherIcon(weatherImg),
+                    weatherBg = WeatherUtils.getWeatherBg(weatherImg,isDayTime),
                     voiceAnnouncements = """
                     云端天气为您播报天气情况,
                     今日,天气${todayWeather.weatherName},

@@ -30,13 +30,13 @@ object DateUtils {
 
 
     @SuppressLint("SimpleDateFormat")
-    fun formatDateT(dateStr: String, pattern: String): String{
+    fun formatDateT(dateStr: String, pattern: String): String {
         val date = SimpleDateFormat(PATTERN_13).parse(dateStr)
         return SimpleDateFormat(pattern).format(date!!)
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun formatWeekT(dateStr: String): String{
+    fun formatWeekT(dateStr: String): String {
         val date = SimpleDateFormat(PATTERN_13).parse(dateStr)
         val format: SimpleDateFormat
         var hintDate = ""
@@ -69,13 +69,13 @@ object DateUtils {
                 currentDay - day == 0 -> hintDate = "今天"
                 currentDay - day == -1 -> hintDate = "明天"
                 currentDay - day == -2 -> hintDate = "后天"
-                else ->{
-                    val weekDays = arrayListOf("周日","周一","周二","周三","周四","周五","周六")
+                else -> {
+                    val weekDays = arrayListOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
                     val calendar = Calendar.getInstance()
                     calendar.time = date
-                    var weekIndex = calendar.get(Calendar.DAY_OF_WEEK) -1
-                    if (weekIndex < 0)weekIndex = 0
-                    hintDate =  weekDays[weekIndex]
+                    var weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
+                    if (weekIndex < 0) weekIndex = 0
+                    hintDate = weekDays[weekIndex]
                 }
             }
         }
@@ -88,7 +88,7 @@ object DateUtils {
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun formatTime(date: Date,pattern: String = PATTERN_1): String{
+    fun formatTime(date: Date, pattern: String = PATTERN_1): String {
         val df = SimpleDateFormat(pattern)
         return df.format(date)
     }
@@ -99,11 +99,11 @@ object DateUtils {
      * @return Long 返回秒数
      */
     @SuppressLint("SimpleDateFormat")
-    fun formatTime00(time: Long): Long{
-        val date = Date(time*1000)
+    fun formatTime00(time: Long): Long {
+        val date = Date(time * 1000)
         val format = SimpleDateFormat(PATTERN_3)
         val dateStr = "${format.format(date)} 00:00:00"
-        return SimpleDateFormat(PATTERN_1).parse(dateStr)!!.time/1000
+        return SimpleDateFormat(PATTERN_1).parse(dateStr)!!.time / 1000
     }
 
     /**
@@ -111,7 +111,7 @@ object DateUtils {
      * @return Boolean
      */
     @SuppressLint("SimpleDateFormat")
-    fun isNight(): Boolean{
+    fun isNight(): Boolean {
         val format = SimpleDateFormat("HH")
         val hour = format.format(Date()).toInt()
         return hour !in 7..18
@@ -123,9 +123,26 @@ object DateUtils {
      * @return Int 返回秒
      */
     @SuppressLint("SimpleDateFormat")
-    fun compareDate(dateStr: String, pattern: String = PATTERN_1): Int{
+    fun compareDate(dateStr: String, pattern: String = PATTERN_1): Int {
         val dateTime = Date().time
         val dateUp = SimpleDateFormat(pattern).parse(dateStr)?.time!!
-        return (dateTime/1000 - dateUp/1000).toInt()
+        return (dateTime / 1000 - dateUp / 1000).toInt()
+    }
+
+    /**
+     * 判断当前小时分钟是否在范围之类
+     */
+    @SuppressLint("SimpleDateFormat")
+    fun isDayTime(startTimeStr: String, endTimeStr: String): Boolean {
+        val format = SimpleDateFormat(PATTERN_15)
+        val startTime = format.parse(startTimeStr).time
+        val endTime = format.parse(endTimeStr).time
+        val calendar = Calendar.getInstance()
+        val nowDate =
+            format.parse("${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}").time
+        if (nowDate in startTime..endTime) {
+            return true
+        }
+        return false
     }
 }

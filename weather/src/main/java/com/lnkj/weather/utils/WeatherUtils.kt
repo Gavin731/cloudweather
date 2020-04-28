@@ -184,7 +184,7 @@ object WeatherUtils {
      * @receiver String?
      * @return Int
      */
-    fun getWeatherBg(str: String): Int {
+    fun getWeatherBg(str: String,isDayTime:Boolean): Int {
         return when (str) {
             "CLEAR_DAY" -> R.drawable.weather_bg_fine
             "CLEAR_NIGHT" -> R.drawable.weather_bg_fine_night
@@ -194,7 +194,7 @@ object WeatherUtils {
             "PARTLY_CLOUDY_NIGHT" -> R.drawable.weather_bg_cloudy_night
             // 阴天
             "CLOUDY" ->{
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_overcast_night
                 }else {
                     R.drawable.weather_bg_overcast
@@ -202,7 +202,7 @@ object WeatherUtils {
             }
             // 轻度雾霾
             "LIGHT_HAZE","MODERATE_HAZE","HEAVY_HAZE" -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_haze_night
                 }else {
                     R.drawable.weather_bg_haze
@@ -210,7 +210,7 @@ object WeatherUtils {
             }
             // 雨
             "LIGHT_RAIN","MODERATE_RAIN","HEAVY_RAIN","STORM_RAIN" -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_heavy_rain_bight
                 }else {
                     R.drawable.weather_bg_heavy_rain
@@ -218,7 +218,7 @@ object WeatherUtils {
             }
             // 雾
             "FOG" -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_fog_night
                 }else {
                     R.drawable.weather_bg_fog
@@ -226,7 +226,7 @@ object WeatherUtils {
             }
             // 雪
             "LIGHT_SNOW","MODERATE_SNOW","HEAVY_SNOW","STORM_SNOW"  ->  {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_heavy_snow_night
                 }else {
                     R.drawable.weather_bg_heavy_snow
@@ -235,7 +235,7 @@ object WeatherUtils {
 
             // 浮尘
             "DUST","SAND","WIND" -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_jansa_night
                 }else {
                     R.drawable.weather_bg_jansa
@@ -243,7 +243,7 @@ object WeatherUtils {
             }
             // 雷阵雨
             "THUNDER_SHOWER" -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_thunder_shower_night
                 }else {
                     R.drawable.weather_bg_thunder_shower
@@ -251,7 +251,7 @@ object WeatherUtils {
             }
             // 冰雹
             "HAIL" ->  {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_freezing_rain_night
                 }else {
                     R.drawable.weather_bg_freezing_rain
@@ -259,7 +259,7 @@ object WeatherUtils {
             }
             // 雨夹雪
             "SLEET" -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime){
                     R.drawable.weather_bg_sleet_night
                 }else {
                     R.drawable.weather_bg_sleet
