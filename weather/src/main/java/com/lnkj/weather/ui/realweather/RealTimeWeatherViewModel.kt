@@ -67,7 +67,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 val air = service.getAirData("${lat},$log")
 
                 if (weatherBean.status != "ok" || yesterdayWeatherBean.status != "ok"
-                    || lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"){
+                    || lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"
+                ) {
                     apiLoading.postValue(Event(false))
                     return@launch
                 }
@@ -80,7 +81,10 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     ),
                     weatherBean.result?.daily?.temperature?.get(0)?.max!!.toInt(),
                     weatherBean.result?.daily?.temperature?.get(0)?.min!!.toInt(),
-                    WeatherUtils.formatWeather(weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!, weatherBean.result?.daily?.skycon20h32h?.get(0)?.value!!),
+                    WeatherUtils.formatWeather(
+                        weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!,
+                        weatherBean.result?.daily?.skycon20h32h?.get(0)?.value!!
+                    ),
                     WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!)
                 )
                 // 明日天气
@@ -91,7 +95,10 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     ),
                     weatherBean.result?.daily?.temperature?.get(1)?.max!!.toInt(),
                     weatherBean.result?.daily?.temperature?.get(1)?.min!!.toInt(),
-                    WeatherUtils.formatWeather(weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!, weatherBean.result?.daily?.skycon20h32h?.get(1)?.value!!),
+                    WeatherUtils.formatWeather(
+                        weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!,
+                        weatherBean.result?.daily?.skycon20h32h?.get(1)?.value!!
+                    ),
                     WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!)
                 )
                 // 小时天气数据
@@ -410,29 +417,31 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 }
 
                 val rainTip = if (indexs.isEmpty()) {
-                    "未来2小时不会下${WeatherUtils.isRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!, weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!)}，放心出门吧"
+                    "未来2小时不会下${WeatherUtils.isRain(
+                        weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!,
+                        weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
+                    )}，放心出门吧"
                 } else {
                     weatherBean.result?.minutely?.description
                 }
 
                 //判断是否为白天
-                val sunriseTime=fishLightLifeStyle.sunriseTime
-                val sunsetTime=fishLightLifeStyle.sunsetTime
-                val isDayTime=DateUtils.isDayTime(sunriseTime,sunsetTime)
+                val sunriseTime = fishLightLifeStyle.sunriseTime
+                val sunsetTime = fishLightLifeStyle.sunsetTime
+                val isDayTime = DateUtils.isDayTime(sunriseTime, sunsetTime)
 
-                val weatherImg=if(isDayTime){
+                val weatherKey = if (isDayTime) {
                     weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!
-                }else{
+                } else {
                     weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
                 }
-
                 val cityWeather = CityWeather(
                     cityName = cityBean.counties,
                     updateDate = DateUtils.formatTime(Date(), PATTERN_1),
                     temperature = weatherBean.result?.realtime?.temperature!!.toInt(),
-                    weatherName = WeatherUtils.formatWeather(weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!, weatherBean.result?.daily?.skycon20h32h?.get(0)?.value!!),
-                    weatherIcon = WeatherUtils.getWeatherIcon(weatherImg),
-                    weatherBg = WeatherUtils.getWeatherBg(weatherImg,isDayTime),
+                    weatherName = WeatherUtils.getWeatherName(weatherKey),
+                    weatherIcon = WeatherUtils.getWeatherIcon(weatherKey),
+                    weatherBg = WeatherUtils.getWeatherBg(weatherKey, isDayTime),
                     voiceAnnouncements = """
                     云端天气为您播报天气情况,
                     今日,天气${todayWeather.weatherName},
@@ -447,7 +456,9 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     humidity = "${(weatherBean.result?.realtime?.humidity!! * 100).toInt()}%",
                     airPressure = "${weatherBean.result?.realtime?.pressure?.toInt()!! / 100}hPa",
                     rainTip = rainTip!!,
-                    hasRain = WeatherUtils.hasRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!) || WeatherUtils.hasRain(weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!),
+                    hasRain = WeatherUtils.hasRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!) || WeatherUtils.hasRain(
+                        weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
+                    ),
                     todayWeather = todayWeather,
                     tomorrowWeather = tomorrowWeather,
                     hourlyWeatherList = hourlyWeatherList,
@@ -468,7 +479,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
     }
 
     var cityWeatherTime = MutableLiveData<String>()
-    fun searchWeatherTimeByCity(cityBean: MyCityBean){
+    fun searchWeatherTimeByCity(cityBean: MyCityBean) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
@@ -512,7 +523,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 val myCityBeans = withContext(Dispatchers.IO) {
                     if (isLocation) {
                         WeatherDatabase.get().myCityDao().searchCityList()
-                    }else{
+                    } else {
                         WeatherDatabase.get().myCityDao().searchCityListByNoLocation()
                     }
                 }
@@ -536,12 +547,12 @@ class RealTimeWeatherViewModel : BaseViewModel() {
     fun updateCityWeather(myCityBean: MyCityBean?, weatherIcon: Int, temperature: String) {
         myCityBean?.weatherIcon = weatherIcon
         myCityBean?.temperature = temperature
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             WeatherDatabase.get().myCityDao().saveCity(myCityBean!!)
         }
     }
 
-    fun cancel(){
+    fun cancel() {
     }
 
     override fun onCleared() {

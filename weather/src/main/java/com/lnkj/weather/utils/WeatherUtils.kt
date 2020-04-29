@@ -5,10 +5,10 @@ import com.mufeng.mvvmlib.utilcode.ext.loge
 
 object WeatherUtils {
 
-    fun formatWeather(dayWeather: String, nightWeather: String): String{
+    fun formatWeather(dayWeather: String, nightWeather: String): String {
         val day = getWeatherName(dayWeather)
         val night = getWeatherName(nightWeather)
-        if (day != night){
+        if (day != night) {
             return "${day}转$night"
         }
         return day
@@ -82,96 +82,96 @@ object WeatherUtils {
         }
     }
 
-    fun getWeatherBgByWeatherName(str: String): Int{
-        return when{
-            str.startsWith("晴") ->{
-                if (DateUtils.isNight()){
+    fun getWeatherBgByWeatherName(str: String, isDayTime: Boolean): Int {
+        return when {
+            str.startsWith("晴") -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_fine_night
-                }else {
+                } else {
                     R.drawable.weather_bg_fine
                 }
             }
-            str.startsWith("多云") ->{
-                if (DateUtils.isNight()){
+            str.startsWith("多云") -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_cloudy_night
-                }else {
+                } else {
                     R.drawable.weather_bg_cloudy
                 }
             }
             // 阴天
-            str.startsWith("阴") ->{
-                if (DateUtils.isNight()){
+            str.startsWith("阴") -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_overcast_night
-                }else {
+                } else {
                     R.drawable.weather_bg_overcast
                 }
             }
             // 轻度雾霾
             str.startsWith("雾霾") -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime) {
                     R.drawable.weather_bg_haze_night
-                }else {
+                } else {
                     R.drawable.weather_bg_haze
                 }
             }
             // 雨
-            str.startsWith("小雨")||str.startsWith("中雨")
-                    ||str.startsWith("大雨")||str.startsWith("暴雨") -> {
-                if (DateUtils.isNight()){
+            str.startsWith("小雨") || str.startsWith("中雨")
+                    || str.startsWith("大雨") || str.startsWith("暴雨") -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
-                }else {
+                } else {
                     R.drawable.weather_bg_heavy_rain
                 }
             }
             // 雾
             str.startsWith("雾") -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime) {
                     R.drawable.weather_bg_fog_night
-                }else {
+                } else {
                     R.drawable.weather_bg_fog
                 }
             }
             // 雪
-            str.startsWith("小雪")||str.startsWith("中雪")
-                    ||str.startsWith("大雪")||str.startsWith("暴雪")  ->  {
-                if (DateUtils.isNight()){
+            str.startsWith("小雪") || str.startsWith("中雪")
+                    || str.startsWith("大雪") || str.startsWith("暴雪") -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night
-                }else {
+                } else {
                     R.drawable.weather_bg_heavy_snow
                 }
             }
 
             // 浮尘
-            str.startsWith("浮尘")||
-                    str.startsWith("沙尘")||
+            str.startsWith("浮尘") ||
+                    str.startsWith("沙尘") ||
                     str.startsWith("大风") -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime) {
                     R.drawable.weather_bg_jansa_night
-                }else {
+                } else {
                     R.drawable.weather_bg_jansa
                 }
             }
             // 雷阵雨
             str.startsWith("雷阵雨") -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime) {
                     R.drawable.weather_bg_thunder_shower_night
-                }else {
+                } else {
                     R.drawable.weather_bg_thunder_shower
                 }
             }
             // 冰雹
-            str.startsWith("冰雹") ->  {
-                if (DateUtils.isNight()){
+            str.startsWith("冰雹") -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_freezing_rain_night
-                }else {
+                } else {
                     R.drawable.weather_bg_freezing_rain
                 }
             }
             // 雨夹雪
             str.startsWith("雨夹雪") -> {
-                if (DateUtils.isNight()){
+                if (!isDayTime) {
                     R.drawable.weather_bg_sleet_night
-                }else {
+                } else {
                     R.drawable.weather_bg_sleet
                 }
             }
@@ -184,7 +184,7 @@ object WeatherUtils {
      * @receiver String?
      * @return Int
      */
-    fun getWeatherBg(str: String,isDayTime:Boolean): Int {
+    fun getWeatherBg(str: String, isDayTime: Boolean): Int {
         return when (str) {
             "CLEAR_DAY" -> R.drawable.weather_bg_fine
             "CLEAR_NIGHT" -> R.drawable.weather_bg_fine_night
@@ -193,75 +193,75 @@ object WeatherUtils {
             // 多云夜间
             "PARTLY_CLOUDY_NIGHT" -> R.drawable.weather_bg_cloudy_night
             // 阴天
-            "CLOUDY" ->{
-                if (!isDayTime){
+            "CLOUDY" -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_overcast_night
-                }else {
+                } else {
                     R.drawable.weather_bg_overcast
                 }
             }
             // 轻度雾霾
-            "LIGHT_HAZE","MODERATE_HAZE","HEAVY_HAZE" -> {
-                if (!isDayTime){
+            "LIGHT_HAZE", "MODERATE_HAZE", "HEAVY_HAZE" -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_haze_night
-                }else {
+                } else {
                     R.drawable.weather_bg_haze
                 }
             }
             // 雨
-            "LIGHT_RAIN","MODERATE_RAIN","HEAVY_RAIN","STORM_RAIN" -> {
-                if (!isDayTime){
+            "LIGHT_RAIN", "MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN" -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
-                }else {
+                } else {
                     R.drawable.weather_bg_heavy_rain
                 }
             }
             // 雾
             "FOG" -> {
-                if (!isDayTime){
+                if (!isDayTime) {
                     R.drawable.weather_bg_fog_night
-                }else {
+                } else {
                     R.drawable.weather_bg_fog
                 }
             }
             // 雪
-            "LIGHT_SNOW","MODERATE_SNOW","HEAVY_SNOW","STORM_SNOW"  ->  {
-                if (!isDayTime){
+            "LIGHT_SNOW", "MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW" -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night
-                }else {
+                } else {
                     R.drawable.weather_bg_heavy_snow
                 }
             }
 
             // 浮尘
-            "DUST","SAND","WIND" -> {
-                if (!isDayTime){
+            "DUST", "SAND", "WIND" -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_jansa_night
-                }else {
+                } else {
                     R.drawable.weather_bg_jansa
                 }
             }
             // 雷阵雨
             "THUNDER_SHOWER" -> {
-                if (!isDayTime){
+                if (!isDayTime) {
                     R.drawable.weather_bg_thunder_shower_night
-                }else {
+                } else {
                     R.drawable.weather_bg_thunder_shower
                 }
             }
             // 冰雹
-            "HAIL" ->  {
-                if (!isDayTime){
+            "HAIL" -> {
+                if (!isDayTime) {
                     R.drawable.weather_bg_freezing_rain_night
-                }else {
+                } else {
                     R.drawable.weather_bg_freezing_rain
                 }
             }
             // 雨夹雪
             "SLEET" -> {
-                if (!isDayTime){
+                if (!isDayTime) {
                     R.drawable.weather_bg_sleet_night
-                }else {
+                } else {
                     R.drawable.weather_bg_sleet
                 }
             }
@@ -432,7 +432,7 @@ object WeatherUtils {
         }
     }
 
-    fun hasRain(weather: String): Boolean{
+    fun hasRain(weather: String): Boolean {
         return when (weather) {
             "LIGHT_RAIN", "MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN", "LIGHT_SNOW", "MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW", "THUNDER_SHOWER", "HAIL", "SLEET"
             -> true
@@ -440,30 +440,30 @@ object WeatherUtils {
         }
     }
 
-    fun isRain(dayWeather: String, nightWeather: String): String{
+    fun isRain(dayWeather: String, nightWeather: String): String {
         val dayRain = isRain(dayWeather)
         val nightRain = isRain(nightWeather)
-        return if (dayRain == "雨" || nightRain == "雨"){
+        return if (dayRain == "雨" || nightRain == "雨") {
             "雨"
-        }else{
+        } else {
             "雪"
         }
     }
 
-    fun isRain(weather: String): String{
+    fun isRain(weather: String): String {
         return when (weather) {
-            "LIGHT_RAIN", "MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN", "THUNDER_SHOWER", "HAIL","SLEET"
+            "LIGHT_RAIN", "MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN", "THUNDER_SHOWER", "HAIL", "SLEET"
             -> "雨"
-            "LIGHT_SNOW","MODERATE_SNOW","HEAVY_SNOW","STORM_SNOW" -> "雪"
+            "LIGHT_SNOW", "MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW" -> "雪"
             else -> "雨"
         }
     }
 
-    fun isRainByName(weather: String): String{
+    fun isRainByName(weather: String): String {
         return when (weather) {
-            "小雨", "中雨", "大雨", "暴雨", "雷阵雨", "冰雹","雨夹雪"
+            "小雨", "中雨", "大雨", "暴雨", "雷阵雨", "冰雹", "雨夹雪"
             -> "雨"
-            "小雪","中雪","大雪","暴雪" -> "雪"
+            "小雪", "中雪", "大雪", "暴雪" -> "雪"
             else -> "雨"
         }
     }
@@ -488,7 +488,7 @@ object WeatherUtils {
     }
 
     fun precipitationTxt(precipitation: Double): String {
-        return when{
+        return when {
             precipitation < 0.031 -> "无"
             precipitation in 0.031..0.25 -> "小"
             precipitation in 0.25..0.35 -> "中"
