@@ -429,6 +429,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 val sunriseTime = fishLightLifeStyle.sunriseTime
                 val sunsetTime = fishLightLifeStyle.sunsetTime
                 val isDayTime = DateUtils.isDayTime(sunriseTime, sunsetTime)
+                weatherIsDayTime.postValue(isDayTime)
 
                 val weatherKey = if (isDayTime) {
                     weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!
@@ -534,6 +535,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
 
         }
     }
+
+    var weatherIsDayTime = MutableLiveData<Boolean>()
 
 
     /** 获取我的城市 **/

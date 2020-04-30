@@ -3,10 +3,12 @@ package com.lnkj.weather.ui.realweather
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.gyf.immersionbar.ImmersionBar
 import com.iflytek.cloud.*
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.db.bean.CityWeather
@@ -312,6 +314,16 @@ class RealTimeWeatherItemFragment :
 
     override fun startObserve() {
         super.startObserve()
+        //更改状态字体颜色 todo 目前只改了首页，其余页面无效，估计要获取天气后，保存全局，父类使用全局变量控制
+        viewModel.weatherIsDayTime.observe(this){
+            Toast.makeText(activity,""+it,Toast.LENGTH_LONG).show()
+            //是否为白天
+            if(it){
+                ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).init()
+            }else{
+                ImmersionBar.with(this).statusBarDarkFont(false, 0.2f).init()
+            }
+        }
         viewModel.cityWeatherTime.observe(this){
             // 判断更新时间距离当前时间超过30分钟进行刷新
             if (DateUtils.compareDate(it) >= 5 * 60) {
@@ -325,6 +337,7 @@ class RealTimeWeatherItemFragment :
                 binding.refreshLayout.autoRefresh()
                 return@observe
             }
+
             binding.refreshLayout.finishRefresh()
             binding.clMainLayout.visible()
 
