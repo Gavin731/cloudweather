@@ -34,6 +34,7 @@ import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.widget.*
 import com.mufeng.mvvmlib.utilcode.utils.toast
+import java.util.*
 
 
 /**
@@ -77,6 +78,9 @@ class RealTimeWeatherItemFragment :
     private var myCityBean: MyCityBean? = null
 
     private var cityId = ""
+
+    private var isAlreadyRefresh = false //是否刷新过
+    private var refreshTime = Calendar.getInstance()//刷新时间
 
     fun getBitmap(): Bitmap? {
         binding.nestedScrollView.setBackgroundResource(cityWeather?.weatherBg!!)
@@ -187,6 +191,16 @@ class RealTimeWeatherItemFragment :
         initDailyList()
 
         binding.refreshLayout.setOnRefreshListener {
+            //如果已经刷新过，并且时间在30分钟内就不刷新
+            val time = Calendar.getInstance().time.time - refreshTime.time.time
+            if (isAlreadyRefresh && time <= 30 * 60 * 1000) {
+                binding.refreshLayout.finishRefresh()
+                return@setOnRefreshListener
+            }
+            //更新刷新状态
+            isAlreadyRefresh = true
+            refreshTime = Calendar.getInstance()
+
             viewModel?.getCaiYunRealtimeWeather(myCityBean!!, myCityBean?.lon!!, myCityBean?.lat!!)
         }
 
@@ -320,7 +334,7 @@ class RealTimeWeatherItemFragment :
 
     override fun startObserve() {
         super.startObserve()
-        //更改状态字体颜色 todo 目前只改了首页，其余页面无效，估计要获取天气后，保存全局，父类使用全局变量控制
+        //更改状态字体颜色
         viewModel.weatherIsDayTime.observe(this) {
             ImmersionBar.with(this).statusBarDarkFont(it, 0.2f).init()
         }
