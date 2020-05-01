@@ -13,6 +13,7 @@ import com.mufeng.mvvmlib.basic.BasicViewModel
 import com.mufeng.mvvmlib.basic.UIChange
 import com.mufeng.mvvmlib.basic.eventObserver
 import com.mufeng.mvvmlib.http.ApiException
+import com.mufeng.mvvmlib.util.WeatherDayTimeManager
 import com.mufeng.mvvmlib.utilcode.ext.fillIntentArguments
 import com.mufeng.mvvmlib.utilcode.utils.toast
 import com.mufeng.mvvmlib.widget.StatefulLayout
@@ -24,7 +25,6 @@ import com.mufeng.mvvmlib.widget.StatefulLayout
  */
 abstract class BaseVMActivity<VM : BasicViewModel, VB : ViewDataBinding> : AppCompatActivity() {
 
-    open var isDarkFont: Boolean = true
     protected lateinit var binding: VB
 
     abstract val viewModel: VM
@@ -36,7 +36,8 @@ abstract class BaseVMActivity<VM : BasicViewModel, VB : ViewDataBinding> : AppCo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ImmersionBar.with(this).statusBarDarkFont(isDarkFont, 0.2f).init()
+        ImmersionBar.with(this)
+            .statusBarDarkFont(WeatherDayTimeManager.instance.getIsDayTime(), 0.2f).init()
 
         binding = DataBindingUtil.setContentView(this, layoutResId)
         startObserve()

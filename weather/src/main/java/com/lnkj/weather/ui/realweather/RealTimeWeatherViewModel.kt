@@ -14,6 +14,7 @@ import com.lnkj.weather.utils.DateUtils.PATTERN_14
 import com.lnkj.weather.utils.WeatherUtils
 import com.mufeng.mvvmlib.basic.Event
 import com.mufeng.mvvmlib.http.handler.Request
+import com.mufeng.mvvmlib.util.WeatherDayTimeManager
 import com.mufeng.mvvmlib.utilcode.ext.formatDateStr
 import com.mufeng.mvvmlib.utilcode.ext.loge
 import kotlinx.coroutines.Dispatchers
@@ -429,6 +430,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 val sunriseTime = fishLightLifeStyle.sunriseTime
                 val sunsetTime = fishLightLifeStyle.sunsetTime
                 val isDayTime = DateUtils.isDayTime(sunriseTime, sunsetTime)
+                //保存是否为白天
+                WeatherDayTimeManager.instance.setIsDayTime(isDayTime)
                 weatherIsDayTime.postValue(isDayTime)
 
                 val weatherKey = if (isDayTime) {

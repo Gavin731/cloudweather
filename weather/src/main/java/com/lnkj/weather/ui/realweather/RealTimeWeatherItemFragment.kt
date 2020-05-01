@@ -92,7 +92,8 @@ class RealTimeWeatherItemFragment :
 
     override fun initView() {
         cityId = arguments?.getString("cityId", "0")!!
-        viewModel = ViewModelProvider(requireActivity()).get(cityId, RealTimeWeatherViewModel::class.java)
+        viewModel =
+            ViewModelProvider(requireActivity()).get(cityId, RealTimeWeatherViewModel::class.java)
         binding.vm = viewModel
         myCityBean = arguments?.getParcelable("myCityBean")
 
@@ -109,7 +110,12 @@ class RealTimeWeatherItemFragment :
         }
 
         binding.tvRainTip.clickWithTrigger {
-            RainActivity.launch(requireActivity(), myCityBean, cityWeather!!.weatherName,cityWeather?.rainTip)
+            RainActivity.launch(
+                requireActivity(),
+                myCityBean,
+                cityWeather!!.weatherName,
+                cityWeather?.rainTip
+            )
         }
 
         binding.llAirQuality.clickWithTrigger {
@@ -143,7 +149,7 @@ class RealTimeWeatherItemFragment :
             }
 
         LiveEventBus.get(EventKey.EVENT_MINUTE_CHANGE, Boolean::class.java)
-            .observe(this){
+            .observe(this) {
                 this.canRefresh = true
                 if (isResumed) {
                     // 获取上次更新时间
@@ -164,7 +170,7 @@ class RealTimeWeatherItemFragment :
     }
 
     private val loadData = Runnable {
-        if (canRefresh){
+        if (canRefresh) {
             viewModel.searchWeatherByCity(myCityBean!!)
             canRefresh = false
         }
@@ -315,16 +321,10 @@ class RealTimeWeatherItemFragment :
     override fun startObserve() {
         super.startObserve()
         //更改状态字体颜色 todo 目前只改了首页，其余页面无效，估计要获取天气后，保存全局，父类使用全局变量控制
-        viewModel.weatherIsDayTime.observe(this){
-            Toast.makeText(activity,""+it,Toast.LENGTH_LONG).show()
-            //是否为白天
-            if(it){
-                ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).init()
-            }else{
-                ImmersionBar.with(this).statusBarDarkFont(false, 0.2f).init()
-            }
+        viewModel.weatherIsDayTime.observe(this) {
+            ImmersionBar.with(this).statusBarDarkFont(it, 0.2f).init()
         }
-        viewModel.cityWeatherTime.observe(this){
+        viewModel.cityWeatherTime.observe(this) {
             // 判断更新时间距离当前时间超过30分钟进行刷新
             if (DateUtils.compareDate(it) >= 5 * 60) {
                 binding.refreshLayout.autoRefresh(500)
@@ -372,7 +372,7 @@ class RealTimeWeatherItemFragment :
             binding.zzWeatherView.postDelayed({
                 binding.zzWeatherView.list = generateDayWeatherData(it)
                 binding.zzWeatherView.setColumnNumber(5)
-            },500)
+            }, 500)
 
             // 15天天气列表
             dailyListData.clear()
