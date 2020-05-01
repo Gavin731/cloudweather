@@ -15,6 +15,7 @@ import com.lnkj.library_base.db.bean.CityWeather
 import com.lnkj.library_base.db.bean.DailyWeather
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.db.bean.toLifeStyle
+import com.lnkj.library_base.db.database.WeatherDatabase
 import com.lnkj.library_base.event.EventKey
 import com.lnkj.weather.R
 import com.lnkj.weather.base.BaseVMFragment
@@ -164,6 +165,16 @@ class RealTimeWeatherItemFragment :
 
     override fun onResume() {
         super.onResume()
+        if (isAlreadyRefresh) {
+            // 设置天气背景
+            (parentFragment as RealTimeWeatherFragment).setWeatherBg(
+                viewModel.cityWeatherData.value!!.weatherBg,
+                cityId
+            )
+            this.bottomColor =
+                ColorUtils.getBottomColor(viewModel.cityWeatherData.value!!.weatherBg)
+            return
+        }
         viewModel.searchWeatherTimeByCity(myCityBean!!)
         handler.postDelayed(loadData, 500)
     }
