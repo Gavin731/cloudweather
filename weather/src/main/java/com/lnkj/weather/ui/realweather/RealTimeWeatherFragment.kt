@@ -2,6 +2,7 @@ package com.lnkj.weather.ui.realweather
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -167,7 +168,6 @@ class RealTimeWeatherFragment :
             binding.tvCity.text=it.counties+" "+it.street
         }
         viewModel.myCityBeanData.observe(this) {
-
             if (it.isEmpty()) {
                 startActivity<SearchCityActivity>()
                 return@observe
@@ -225,6 +225,7 @@ class RealTimeWeatherFragment :
                 }
 
                 override fun onPageSelected(position: Int) {
+                    if(index!=0 && index==position)return
                     this@RealTimeWeatherFragment.index = position
                     binding.magicIndicator.onPageSelected(when{
                         titles.size <= 10 -> position
