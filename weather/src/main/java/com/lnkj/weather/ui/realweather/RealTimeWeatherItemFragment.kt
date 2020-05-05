@@ -3,7 +3,6 @@ package com.lnkj.weather.ui.realweather
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -15,7 +14,6 @@ import com.lnkj.library_base.db.bean.CityWeather
 import com.lnkj.library_base.db.bean.DailyWeather
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.db.bean.toLifeStyle
-import com.lnkj.library_base.db.database.WeatherDatabase
 import com.lnkj.library_base.event.EventKey
 import com.lnkj.weather.R
 import com.lnkj.weather.base.BaseVMFragment
@@ -521,5 +519,8 @@ class RealTimeWeatherItemFragment :
         speechSynthesizer?.destroy()
     }
 
+    fun getCityId(): String {
+        return this.cityId
+    }
 
 }
