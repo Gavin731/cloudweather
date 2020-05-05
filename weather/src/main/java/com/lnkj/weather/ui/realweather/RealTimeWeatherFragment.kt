@@ -1,5 +1,6 @@
 package com.lnkj.weather.ui.realweather
 
+import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
@@ -7,7 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.db.bean.MyCityBean
@@ -20,6 +25,7 @@ import com.lnkj.weather.utils.ColorUtils
 import com.lnkj.weather.utils.ImageUtils
 import com.mufeng.mvvmlib.basic.view.BaseVMFragment
 import com.mufeng.mvvmlib.image.GlideApp
+import com.mufeng.mvvmlib.image.GlideRequests
 import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
 import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
@@ -55,6 +61,8 @@ class RealTimeWeatherFragment :
     private lateinit var drawableStart: Drawable
 
     private var index = 0
+
+    var oldBgResId: Int = R.drawable.weather_bg_fine
 
     override fun initView() {
         binding.vm = viewModel
@@ -139,17 +147,64 @@ class RealTimeWeatherFragment :
     fun setWeatherBg(res: Int, cityId: String) {
         val title = titles.firstOrNull { it.cid == cityId }
         val i = titles.indexOf(title)
-        if (this.index == i) {
+        if (this.index == i && oldBgResId != res) {
             this.backgroundColor = ColorUtils.getTopColor(res)
+            //原来的title颜色淡出
+            var defaultColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 1f, 0.7f);
+            defaultColorAnimator.duration = 300
+            defaultColorAnimator.start()
+            //改变颜色
             binding.toolbar.backgroundColorResource = backgroundColor
-            val drawableCrossFadeFactory =
-                DrawableCrossFadeFactory.Builder(300).setCrossFadeEnabled(true).build()
-            GlideApp.with(requireActivity())
-                .load(res)
-                .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
-                .placeholder(res)
-                .into(binding.ivImageBg)
+            //更换后淡入
+            var newColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 0.7f, 1f);
+            newColorAnimator.duration = 300
+            newColorAnimator.start()
+
+
+            //原来的图片淡出
+            var defaultImgAnimator = ObjectAnimator.ofFloat(binding.ivImageBg, "alpha", 1f, 0.7f);
+            defaultImgAnimator.duration = 300
+            defaultImgAnimator.start()
+            //改变图片
+            binding.ivImageBg.setImageResource(res)
+            //更换后淡入
+            var newImgAnimator = ObjectAnimator.ofFloat(binding.ivImageBg, "alpha", 0.7f, 1f);
+            newImgAnimator.duration = 300
+            newImgAnimator.start()
+
+            oldBgResId = res;
+
+//            val drawableCrossFadeFactory =
+//                DrawableCrossFadeFactory.Builder(300).setCrossFadeEnabled(true).build()
+//            GlideApp.with(requireActivity())
+//                .load(res)
+//                .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
+//                .placeholder(oldBgResId)
+//                .listener(object : RequestListener<Drawable> {
+//                    override fun onResourceReady(
+//                        resource: Drawable?,
+//                        model: Any?,
+//                        target: Target<Drawable>?,
+//                        dataSource: DataSource?,
+//                        isFirstResource: Boolean
+//                    ): Boolean {
+//                       oldBgResId=res
+//                        return false
+//                    }
+//
+//                    override fun onLoadFailed(
+//                        e: GlideException?,
+//                        model: Any?,
+//                        target: Target<Drawable>?,
+//                        isFirstResource: Boolean
+//                    ): Boolean {
+//                        return false
+//                    }
+//
+//                })
+//                .into(binding.ivImageBg)
         }
+
     }
 
     fun setRealtimeBlurView(alpha: Int) {

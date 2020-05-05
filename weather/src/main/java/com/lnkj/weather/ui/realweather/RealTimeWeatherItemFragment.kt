@@ -174,19 +174,20 @@ class RealTimeWeatherItemFragment :
             return
         }
         viewModel.searchWeatherTimeByCity(myCityBean!!)
-        handler.postDelayed(loadData, 500)
+//        handler.postDelayed(loadData, 500)
+        binding.refreshLayout.autoRefresh()
     }
 
     override fun onPause() {
         super.onPause()
-        handler.removeCallbacks(loadData)
+//        handler.removeCallbacks(loadData)
     }
 
     private val loadData = Runnable {
-        if (canRefresh) {
-            viewModel.searchWeatherByCity(myCityBean!!)
-            canRefresh = false
-        }
+//        if (canRefresh) {
+//            viewModel.searchWeatherByCity(myCityBean!!)
+//            canRefresh = false
+//        }
     }
 
 
