@@ -84,7 +84,7 @@ class RealTimeWeatherItemFragment :
     private var refreshTime = Calendar.getInstance()//刷新时间
 
     fun getBitmap(): Bitmap? {
-        if(cityWeather==null){
+        if (cityWeather == null) {
             return null
         }
         binding.nestedScrollView.setBackgroundResource(cityWeather?.weatherBg!!)
@@ -96,7 +96,7 @@ class RealTimeWeatherItemFragment :
     override fun hideLoading() {
         super.hideLoading()
         binding.refreshLayout.finishAll()
-        binding.vObscuration.visibility= View.GONE
+        binding.vObscuration.visibility = View.GONE
     }
 
     override fun initView() {
@@ -118,7 +118,7 @@ class RealTimeWeatherItemFragment :
             (parentFragment as RealTimeWeatherFragment).setRealtimeBlurView(alpha)
         }
 
-        binding.vObscuration.clickWithTrigger {  }
+        binding.vObscuration.clickWithTrigger { }
 
         binding.tvRainTip.clickWithTrigger {
             RainActivity.launch(
@@ -171,8 +171,8 @@ class RealTimeWeatherItemFragment :
 
     override fun onResume() {
         super.onResume()
-        binding.vObscuration.visibility= View.VISIBLE
-        if (isAlreadyRefresh) {
+        binding.vObscuration.visibility = View.VISIBLE
+        if (!isRefreshData()) {
             // 设置天气背景
             (parentFragment as RealTimeWeatherFragment).setWeatherBg(
                 viewModel.cityWeatherData.value!!.weatherBg,
@@ -180,7 +180,7 @@ class RealTimeWeatherItemFragment :
             )
             this.bottomColor =
                 ColorUtils.getBottomColor(viewModel.cityWeatherData.value!!.weatherBg)
-            binding.vObscuration.visibility= View.GONE
+            binding.vObscuration.visibility = View.GONE
             return
         }
         viewModel.searchWeatherTimeByCity(myCityBean!!)
@@ -194,7 +194,7 @@ class RealTimeWeatherItemFragment :
     }
 
     private val loadData = Runnable {
-//        if (canRefresh) {
+        //        if (canRefresh) {
 //            viewModel.searchWeatherByCity(myCityBean!!)
 //            canRefresh = false
 //        }
@@ -211,11 +211,9 @@ class RealTimeWeatherItemFragment :
         initDailyList()
 
         binding.refreshLayout.setOnRefreshListener {
-            //如果已经刷新过，并且时间在30分钟内就不刷新
-            val time = Calendar.getInstance().time.time - refreshTime.time.time
-            if (isAlreadyRefresh && time <= 30 * 60 * 1000) {
+            if (!isRefreshData()) {
                 binding.refreshLayout.finishRefresh()
-                binding.vObscuration.visibility= View.GONE
+                binding.vObscuration.visibility = View.GONE
                 return@setOnRefreshListener
             }
             //更新刷新状态
@@ -374,7 +372,7 @@ class RealTimeWeatherItemFragment :
             }
 
             binding.refreshLayout.finishRefresh()
-            binding.vObscuration.visibility= View.GONE
+            binding.vObscuration.visibility = View.GONE
             binding.clMainLayout.visible()
 
             binding.tvRainTip.isSelected = true;
@@ -523,7 +521,7 @@ class RealTimeWeatherItemFragment :
     override fun onError(e: ApiException) {
         super.onError(e)
         binding.refreshLayout.finishAll()
-        binding.vObscuration.visibility= View.GONE
+        binding.vObscuration.visibility = View.GONE
     }
 
     override fun onDestroy() {
@@ -537,4 +535,14 @@ class RealTimeWeatherItemFragment :
         return this.cityId
     }
 
+    /**
+     * 已经刷新过，并且时间小雨5分钟就不刷新
+     */
+    private fun isRefreshData(): Boolean {
+        val time = Calendar.getInstance().time.time - refreshTime.time.time
+        if (isAlreadyRefresh && time <= 5 * 60 * 1000) {
+            return false
+        }
+        return true
+    }
 }
