@@ -434,11 +434,14 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 WeatherDayTimeManager.instance.setIsDayTime(isDayTime)
                 weatherIsDayTime.postValue(isDayTime)
 
-                val weatherKey = if (isDayTime) {
-                    weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!
-                } else {
-                    weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
-                }
+//                val weatherKey = if (isDayTime) {
+//                    weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!
+//                } else {
+//                    weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
+//                }
+
+                val weatherKey = hourly!!.skycon!![0]!!.value!!
+
                 val cityWeather = CityWeather(
                     cityName = cityBean.counties,
                     updateDate = DateUtils.formatTime(Date(), PATTERN_1),
