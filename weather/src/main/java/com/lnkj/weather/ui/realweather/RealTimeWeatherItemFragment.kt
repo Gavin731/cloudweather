@@ -357,6 +357,7 @@ class RealTimeWeatherItemFragment :
         viewModel.weatherIsDayTime.observe(this) {
             ImmersionBar.with(this).statusBarDarkFont(it, 0.2f).init()
         }
+        //todo onResume中更改为了5分钟，此处可以考虑删除
         viewModel.cityWeatherTime.observe(this) {
             // 判断更新时间距离当前时间超过30分钟进行刷新
             if (DateUtils.compareDate(it) >= 5 * 60) {
@@ -413,6 +414,7 @@ class RealTimeWeatherItemFragment :
             dailyListData.addAll(it.dailyWeatherList)
             dailyListAdapter.notifyDataSetChanged()
 
+            //todo onResume中更改为了5分钟，此处可以考虑删除
             // 判断更新时间距离当前时间超过30分钟进行刷新
             if (DateUtils.compareDate(it.updateDate) >= 5 * 60) {
                 binding.refreshLayout.autoRefresh()
