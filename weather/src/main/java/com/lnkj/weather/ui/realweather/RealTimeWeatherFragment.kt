@@ -80,6 +80,7 @@ class RealTimeWeatherFragment :
             // 截图
             val bitmapTop = ImageUtils.getViewBitmap(binding.toolbar, backgroundColor)
             val bitmapBottom = (fragments[index] as RealTimeWeatherItemFragment).getBitmap()
+                ?: return@clickWithTrigger
             val bitmap = ImageUtils.combineImage(bitmapTop!!, bitmapBottom!!)
             LiveEventBus.get("event_share_real_time_weather").post(bitmap)
             startActivity<RealTimeWeatherShareActivity>()

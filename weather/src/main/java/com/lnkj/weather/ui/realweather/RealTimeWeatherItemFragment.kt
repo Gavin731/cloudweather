@@ -82,6 +82,9 @@ class RealTimeWeatherItemFragment :
     private var refreshTime = Calendar.getInstance()//刷新时间
 
     fun getBitmap(): Bitmap? {
+        if(cityWeather==null){
+            return null
+        }
         binding.nestedScrollView.setBackgroundResource(cityWeather?.weatherBg!!)
         val bitmap = ImageUtils.getScrollViewBitmap(binding.nestedScrollView, bottomColor)
         binding.nestedScrollView.background = null
