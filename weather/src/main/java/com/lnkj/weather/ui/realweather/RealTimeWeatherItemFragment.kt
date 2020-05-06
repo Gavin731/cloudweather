@@ -1,8 +1,10 @@
 package com.lnkj.weather.ui.realweather
 
 import android.graphics.Bitmap
+import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -94,6 +96,7 @@ class RealTimeWeatherItemFragment :
     override fun hideLoading() {
         super.hideLoading()
         binding.refreshLayout.finishAll()
+        binding.vObscuration.visibility= View.GONE
     }
 
     override fun initView() {
@@ -114,6 +117,8 @@ class RealTimeWeatherItemFragment :
             val alpha = scrollY / 2
             (parentFragment as RealTimeWeatherFragment).setRealtimeBlurView(alpha)
         }
+
+        binding.vObscuration.clickWithTrigger {  }
 
         binding.tvRainTip.clickWithTrigger {
             RainActivity.launch(
@@ -166,6 +171,7 @@ class RealTimeWeatherItemFragment :
 
     override fun onResume() {
         super.onResume()
+        binding.vObscuration.visibility= View.VISIBLE
         if (isAlreadyRefresh) {
             // 设置天气背景
             (parentFragment as RealTimeWeatherFragment).setWeatherBg(
@@ -174,6 +180,7 @@ class RealTimeWeatherItemFragment :
             )
             this.bottomColor =
                 ColorUtils.getBottomColor(viewModel.cityWeatherData.value!!.weatherBg)
+            binding.vObscuration.visibility= View.GONE
             return
         }
         viewModel.searchWeatherTimeByCity(myCityBean!!)
@@ -208,6 +215,7 @@ class RealTimeWeatherItemFragment :
             val time = Calendar.getInstance().time.time - refreshTime.time.time
             if (isAlreadyRefresh && time <= 30 * 60 * 1000) {
                 binding.refreshLayout.finishRefresh()
+                binding.vObscuration.visibility= View.GONE
                 return@setOnRefreshListener
             }
             //更新刷新状态
@@ -366,9 +374,10 @@ class RealTimeWeatherItemFragment :
             }
 
             binding.refreshLayout.finishRefresh()
+            binding.vObscuration.visibility= View.GONE
             binding.clMainLayout.visible()
 
-            binding.tvRainTip.setSelected(true);
+            binding.tvRainTip.isSelected = true;
 
             // 保存当前城市天气信息
             viewModel?.updateCityWeather(
@@ -514,6 +523,7 @@ class RealTimeWeatherItemFragment :
     override fun onError(e: ApiException) {
         super.onError(e)
         binding.refreshLayout.finishAll()
+        binding.vObscuration.visibility= View.GONE
     }
 
     override fun onDestroy() {
