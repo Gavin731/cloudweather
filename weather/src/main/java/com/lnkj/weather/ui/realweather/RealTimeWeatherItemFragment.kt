@@ -158,6 +158,15 @@ class RealTimeWeatherItemFragment :
                     speechSynthesizer?.stopSpeaking()
                 }
             }
+
+        LiveEventBus.get(EventKey.EVENT_MINUTE_CHANGE, Boolean::class.java)
+            .observe(this) {
+                this.canRefresh = true
+                if (isResumed) {
+                    // 获取上次更新时间
+                    viewModel.searchWeatherTimeByCity(myCityBean!!)
+                }
+            }
     }
 
     override fun onResume() {
@@ -174,8 +183,23 @@ class RealTimeWeatherItemFragment :
             binding.vObscuration.visibility = View.GONE
             return
         }
+        viewModel.searchWeatherTimeByCity(myCityBean!!)
+//        handler.postDelayed(loadData, 500)
         binding.refreshLayout.autoRefresh()
     }
+
+    override fun onPause() {
+        super.onPause()
+//        handler.removeCallbacks(loadData)
+    }
+
+    private val loadData = Runnable {
+        //        if (canRefresh) {
+//            viewModel.searchWeatherByCity(myCityBean!!)
+//            canRefresh = false
+//        }
+    }
+
 
     override fun initData() {
         // 语音播报
@@ -333,6 +357,15 @@ class RealTimeWeatherItemFragment :
         viewModel.weatherIsDayTime.observe(this) {
             ImmersionBar.with(this).statusBarDarkFont(it, 0.2f).init()
         }
+        //todo onResume中更改为了5分钟，此处可以考虑删除
+        viewModel.cityWeatherTime.observe(this) {
+            // 判断更新时间距离当前时间超过30分钟进行刷新
+            if (DateUtils.compareDate(it) >= 5 * 60) {
+                binding.refreshLayout.autoRefresh(500)
+                LiveEventBus.get(EventKey.EVENT_CHANGE_CITY)
+                    .post(myCityBean)
+            }
+        }
         viewModel?.cityWeatherData?.observe(this) {
             if (it == null) {
                 binding.refreshLayout.autoRefresh()
@@ -381,6 +414,11 @@ class RealTimeWeatherItemFragment :
             dailyListData.addAll(it.dailyWeatherList)
             dailyListAdapter.notifyDataSetChanged()
 
+            //todo onResume中更改为了5分钟，此处可以考虑删除
+            // 判断更新时间距离当前时间超过30分钟进行刷新
+            if (DateUtils.compareDate(it.updateDate) >= 5 * 60) {
+                binding.refreshLayout.autoRefresh()
+            }
         }
     }
 
