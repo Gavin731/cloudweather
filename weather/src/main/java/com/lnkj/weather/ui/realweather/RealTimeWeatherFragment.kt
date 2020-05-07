@@ -188,7 +188,7 @@ class RealTimeWeatherFragment :
     }
 
     override fun initData() {
-        circleNavigator = CircleNavigator(requireContext())
+
         adapter = MyPageAdapter(childFragmentManager, fragments)
         binding.viewPager.adapter = adapter
     }
@@ -261,9 +261,9 @@ class RealTimeWeatherFragment :
             LiveEventBus.get(EventKey.EVENT_CHANGE_CITY)
                 .post(titles[0])
 
+            circleNavigator = CircleNavigator(requireContext())
             circleNavigator.circleCount = if (titles.size > 10) 10 else titles.size
             circleNavigator.circleColor = Color.WHITE
-            circleNavigator.notifyDataSetChanged()
             binding.magicIndicator.navigator = circleNavigator
 
             if (titles.size == 1) {
