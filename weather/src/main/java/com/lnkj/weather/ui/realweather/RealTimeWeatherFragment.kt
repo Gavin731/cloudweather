@@ -247,15 +247,13 @@ class RealTimeWeatherFragment :
             Log.e("-----fragments", fragments.size.toString())
 
             if (currentCity == null) {
-                currentCity=titles[0]
-                viewModel.currentCity.postValue(titles[0])
-            } else {
-                viewModel.currentCity.postValue(currentCity)
+                currentCity = titles[0]
             }
+            viewModel.currentCity.postValue(currentCity)
 
             if (currentCity!!.isLocation == 1) {
                 binding.tvCity.setCompoundDrawables(drawableStart, null, null, null)
-            }else{
+            } else {
                 binding.tvCity.setCompoundDrawables(null, null, null, null)
             }
             LiveEventBus.get(EventKey.EVENT_CHANGE_CITY)
@@ -330,14 +328,10 @@ class RealTimeWeatherFragment :
                 }
             })
             // 获取当前选中的item
-            if (currentCity == null) {
-                binding.viewPager.currentItem = 0
-            } else {
-                titles.forEachIndexed { index, myCityBean ->
-                    if (myCityBean.lat == currentCity?.lat && myCityBean.lon == currentCity?.lon) {
-                        binding.viewPager.currentItem = index
-                        return@observe
-                    }
+            titles.forEachIndexed { index, myCityBean ->
+                if (myCityBean.lat == currentCity?.lat && myCityBean.lon == currentCity?.lon) {
+                    binding.viewPager.currentItem = index
+                    return@observe
                 }
             }
 
