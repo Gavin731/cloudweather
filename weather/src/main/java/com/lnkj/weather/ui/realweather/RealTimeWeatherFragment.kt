@@ -189,8 +189,7 @@ class RealTimeWeatherFragment :
 
     override fun initData() {
 
-        adapter = MyPageAdapter(childFragmentManager, fragments)
-        binding.viewPager.adapter = adapter
+
     }
 
     override fun startObserve() {
@@ -248,18 +247,19 @@ class RealTimeWeatherFragment :
             Log.e("-----fragments", fragments.size.toString())
 
             if (currentCity == null) {
+                currentCity=titles[0]
                 viewModel.currentCity.postValue(titles[0])
             } else {
                 viewModel.currentCity.postValue(currentCity)
             }
 
-            if (titles[0].isLocation == 1) {
+            if (currentCity!!.isLocation == 1) {
                 binding.tvCity.setCompoundDrawables(drawableStart, null, null, null)
-            } else {
+            }else{
                 binding.tvCity.setCompoundDrawables(null, null, null, null)
             }
             LiveEventBus.get(EventKey.EVENT_CHANGE_CITY)
-                .post(titles[0])
+                .post(currentCity)
 
             circleNavigator = CircleNavigator(requireContext())
             circleNavigator.circleCount = if (titles.size > 10) 10 else titles.size
@@ -272,7 +272,8 @@ class RealTimeWeatherFragment :
                 binding.magicIndicator.visible()
             }
 
-            adapter.notifyDataSetChanged()
+            adapter = MyPageAdapter(childFragmentManager, fragments)
+            binding.viewPager.adapter = adapter
             binding.viewPager.offscreenPageLimit = 1
             binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
@@ -339,6 +340,7 @@ class RealTimeWeatherFragment :
                     }
                 }
             }
+
         }
     }
 }
