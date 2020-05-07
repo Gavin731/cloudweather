@@ -474,8 +474,6 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     lifeStyleList = lifeStyleList,
                     alertInfo = alertInfo
                 )
-                //todo onResume中更改为了5分钟，此处可以考虑删除，不需要保存本地
-                WeatherDatabase.get().cityWeatherDao().save(cityWeather)
                 cityWeatherData.postValue(cityWeather)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -485,7 +483,6 @@ class RealTimeWeatherViewModel : BaseViewModel() {
         }
     }
 
-    //todo onResume中更改为了5分钟
     var cityWeatherTime = MutableLiveData<String>()
     fun searchWeatherTimeByCity(cityBean: MyCityBean) {
         viewModelScope.launch {
