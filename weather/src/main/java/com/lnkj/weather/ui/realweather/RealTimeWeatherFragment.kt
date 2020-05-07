@@ -62,7 +62,7 @@ class RealTimeWeatherFragment :
 
     private var index = 0
 
-    var oldBgResId: Int = R.drawable.weather_bg_fine
+    var oldBgResId: Int = -1
 
     override fun initView() {
         binding.vm = viewModel
@@ -174,36 +174,6 @@ class RealTimeWeatherFragment :
             newImgAnimator.start()
 
             oldBgResId = res;
-
-//            val drawableCrossFadeFactory =
-//                DrawableCrossFadeFactory.Builder(300).setCrossFadeEnabled(true).build()
-//            GlideApp.with(requireActivity())
-//                .load(res)
-//                .transition(DrawableTransitionOptions.with(drawableCrossFadeFactory))
-//                .placeholder(oldBgResId)
-//                .listener(object : RequestListener<Drawable> {
-//                    override fun onResourceReady(
-//                        resource: Drawable?,
-//                        model: Any?,
-//                        target: Target<Drawable>?,
-//                        dataSource: DataSource?,
-//                        isFirstResource: Boolean
-//                    ): Boolean {
-//                       oldBgResId=res
-//                        return false
-//                    }
-//
-//                    override fun onLoadFailed(
-//                        e: GlideException?,
-//                        model: Any?,
-//                        target: Target<Drawable>?,
-//                        isFirstResource: Boolean
-//                    ): Boolean {
-//                        return false
-//                    }
-//
-//                })
-//                .into(binding.ivImageBg)
         }
 
     }
@@ -218,6 +188,9 @@ class RealTimeWeatherFragment :
     }
 
     override fun initData() {
+        circleNavigator = CircleNavigator(requireContext())
+        adapter = MyPageAdapter(childFragmentManager, fragments)
+        binding.viewPager.adapter = adapter
     }
 
     override fun startObserve() {
@@ -271,6 +244,7 @@ class RealTimeWeatherFragment :
                     fragments.add(item.value)
                 }
             }
+            newFragments.clear()
             Log.e("-----fragments", fragments.size.toString())
 
             if (currentCity == null) {
@@ -286,9 +260,10 @@ class RealTimeWeatherFragment :
             }
             LiveEventBus.get(EventKey.EVENT_CHANGE_CITY)
                 .post(titles[0])
-            circleNavigator = CircleNavigator(requireContext())
+
             circleNavigator.circleCount = if (titles.size > 10) 10 else titles.size
             circleNavigator.circleColor = Color.WHITE
+            circleNavigator.notifyDataSetChanged()
             binding.magicIndicator.navigator = circleNavigator
 
             if (titles.size == 1) {
@@ -297,8 +272,7 @@ class RealTimeWeatherFragment :
                 binding.magicIndicator.visible()
             }
 
-            adapter = MyPageAdapter(childFragmentManager, fragments)
-            binding.viewPager.adapter = adapter
+            adapter.notifyDataSetChanged()
             binding.viewPager.offscreenPageLimit = 1
             binding.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrollStateChanged(state: Int) {
