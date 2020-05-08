@@ -90,22 +90,6 @@ class RealTimeWeatherFragment :
             .observe(this) {
                 this.currentCity = null
                 viewModel.getMyCities(isLocation)
-//                if (titles.contains(it)){
-//                    val i = titles.indexOf(it)
-//                    titles.remove(it)
-//                    fragments.remove(fragments[i])
-//                    circleNavigator = CircleNavigator(requireContext())
-//                    circleNavigator.circleCount = if (titles.size > 10) 10 else titles.size
-//                    circleNavigator.circleColor = Color.WHITE
-//                    binding.magicIndicator.navigator = circleNavigator
-//                    if (titles.size == 1) {
-//                        binding.magicIndicator.gone()
-//                    } else {
-//                        binding.magicIndicator.visible()
-//                    }
-//                    adapter.notifyDataSetChanged()
-//                    viewModel.currentCity.postValue(titles[i-1])
-//                }
             }
 
         LiveEventBus.get(EventKey.EVENT_CHOOSE_ACC_CITY, MyCityBean::class.java)
@@ -118,20 +102,6 @@ class RealTimeWeatherFragment :
                     val index = titles.indexOf(it)
                     binding.viewPager.currentItem = index
                 } else {
-//                    titles.add(1, it)
-//                    fragments.add(1, RealTimeWeatherItemFragment.getInstance(it.cid!!, it))
-//                    circleNavigator = CircleNavigator(requireContext())
-//                    circleNavigator.circleCount = if (titles.size > 10) 10 else titles.size
-//                    circleNavigator.circleColor = Color.WHITE
-//                    binding.magicIndicator.navigator = circleNavigator
-//                    viewModel.currentCity.postValue(it)
-//                    adapter.notifyDataSetChanged()
-//                    binding.viewPager.currentItem = 1
-//                    if (titles.size == 1) {
-//                        binding.magicIndicator.gone()
-//                    } else {
-//                        binding.magicIndicator.visible()
-//                    }
                     viewModel.getMyCities(isLocation)
                 }
             }

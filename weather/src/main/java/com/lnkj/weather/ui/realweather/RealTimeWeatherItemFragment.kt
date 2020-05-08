@@ -141,16 +141,16 @@ class RealTimeWeatherItemFragment :
             LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(1)
         }
 
-        LiveEventBus.get(EventKey.EVENT_CHANGE_CITY, MyCityBean::class.java)
-            .observe(this) {
-                // 设置天气背景
-                if (it.counties == cityWeather?.cityName) {
-                    (parentFragment as RealTimeWeatherFragment).setWeatherBg(
-                        cityWeather?.weatherBg!!,
-                        cityId
-                    )
-                }
-            }
+//        LiveEventBus.get(EventKey.EVENT_CHANGE_CITY, MyCityBean::class.java)
+//            .observe(this) {
+//                // 设置天气背景
+//                if (it.counties == cityWeather?.cityName) {
+//                    (parentFragment as RealTimeWeatherFragment).setWeatherBg(
+//                        cityWeather?.weatherBg!!,
+//                        cityId
+//                    )
+//                }
+//            }
 
         LiveEventBus.get(EventKey.EVENT_STOP_VOICE_ANNOUNCEMENTS, Boolean::class.java)
             .observe(this) {
