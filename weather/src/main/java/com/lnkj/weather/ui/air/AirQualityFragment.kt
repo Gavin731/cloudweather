@@ -55,7 +55,7 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
             .observe(this) {
                 loaded = false
                 this.cityBean = it
-                refreshData(cityBean)
+//                refreshData(cityBean)
             }
     }
 
