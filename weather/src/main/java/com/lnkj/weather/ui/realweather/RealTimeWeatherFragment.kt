@@ -309,7 +309,6 @@ class RealTimeWeatherFragment :
                                     }
                                 }
                             }
-
                         }
                     )
                     val item = titles[position]
