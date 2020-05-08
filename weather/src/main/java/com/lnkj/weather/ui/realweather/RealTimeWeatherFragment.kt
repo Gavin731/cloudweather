@@ -121,8 +121,8 @@ class RealTimeWeatherFragment :
         if (this.index == i && oldBgResId != res) {
             this.backgroundColor = ColorUtils.getTopColor(res)
             //原来的title颜色淡出
-            var defaultColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 1f, 0.7f);
-            defaultColorAnimator.duration = 300
+            var defaultColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 1f, 0.8f);
+            defaultColorAnimator.duration = 100
             defaultColorAnimator.start()
             //改变颜色
             binding.toolbar.backgroundColorResource = backgroundColor
@@ -133,8 +133,8 @@ class RealTimeWeatherFragment :
 
 
             //原来的图片淡出
-            var defaultImgAnimator = ObjectAnimator.ofFloat(binding.ivImageBg, "alpha", 1f, 0.7f);
-            defaultImgAnimator.duration = 300
+            var defaultImgAnimator = ObjectAnimator.ofFloat(binding.ivImageBg, "alpha", 1f, 0.8f);
+            defaultImgAnimator.duration = 100
             defaultImgAnimator.start()
             //改变图片
             binding.ivImageBg.setImageResource(res)
