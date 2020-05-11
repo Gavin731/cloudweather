@@ -15,6 +15,12 @@ import com.mufeng.mvvmlib.utilcode.utils.initContext
 import com.mufeng.sociallibrary.Social
 import com.mufeng.sociallibrary.config.PlatformType
 import com.mufeng.sociallibrary.entity.platform.CommPlatConfigBean
+import com.scwang.smartrefresh.header.MaterialHeader
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator
+import com.scwang.smartrefresh.layout.api.RefreshHeader
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter
 import com.umeng.commonsdk.UMConfigure
 
 /**
@@ -22,7 +28,7 @@ import com.umeng.commonsdk.UMConfigure
  * @创建时间 2020/3/19 16:27
  * @描述
  */
-class App : Application(){
+class App : Application() {
 
     companion object {
         lateinit var INSTANCE: App
@@ -39,7 +45,7 @@ class App : Application(){
         INSTANCE = this
         //友盟
 //        UMConfigure.init(this, "5e9d7ba9dbc2ec07ad295668", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE,"");
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "");
         //设置组件化的Log开关
         UMConfigure.setLogEnabled(true);
         //设置日志加密
@@ -65,7 +71,18 @@ class App : Application(){
         LiveEventBus.config()
             .lifecycleObserverAlwaysActive(false)
         // 讯飞语音初始化
-        SpeechUtility.createUtility(context, SpeechConstant.APPID +"=5e7308e4")
+        SpeechUtility.createUtility(context, SpeechConstant.APPID + "=5e7308e4")
+
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(object : DefaultRefreshHeaderCreator {
+            override fun createRefreshHeader(
+                context: Context,
+                layout: RefreshLayout
+            ): RefreshHeader {
+                //开始设置全局的基本参数（这里设置的属性只跟下面的MaterialHeader绑定，其他Header不会生效，能覆盖DefaultRefreshInitializer的属性和Xml设置的属性）
+                layout.setEnableHeaderTranslationContent(false);
+                return MaterialHeader(context);
+            }
+        })
 
     }
 }

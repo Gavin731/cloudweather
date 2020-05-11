@@ -22,9 +22,6 @@
         android:overScrollMode="never"
         app:srlEnableLoadMore="false">
 
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <FrameLayout
             android:id="@+id/cl_main_layout"

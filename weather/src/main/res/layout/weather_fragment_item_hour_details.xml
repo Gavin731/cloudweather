@@ -27,9 +27,6 @@
         app:srlEnableLoadMore="false"
         >
 
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
