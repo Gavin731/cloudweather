@@ -111,8 +111,6 @@ class RealTimeWeatherItemFragment :
             return
         }
 
-//        binding.clMainLayout.gone()
-
         binding.nestedScrollView.setOnScrollChangeListener { _: NestedScrollView?, _, scrollY, _, _ ->
             val alpha = scrollY / 2
             (parentFragment as RealTimeWeatherFragment).setRealtimeBlurView(alpha)
@@ -305,6 +303,9 @@ class RealTimeWeatherItemFragment :
         binding.llLiveIndexHighTemperature.clickWithTrigger {
             startActivity<HotRankActivity>()
         }
+
+        //每次创建的时候先读取缓存
+        viewModel.searchWeatherByCity(myCityBean!!)
     }
 
     private fun initDailyList() {

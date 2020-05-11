@@ -474,6 +474,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     lifeStyleList = lifeStyleList,
                     alertInfo = alertInfo
                 )
+                WeatherDatabase.get().cityWeatherDao().save(cityWeather)
                 cityWeatherData.postValue(cityWeather)
             } catch (e: Exception) {
                 e.printStackTrace()
