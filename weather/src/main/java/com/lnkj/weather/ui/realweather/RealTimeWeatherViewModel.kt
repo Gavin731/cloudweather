@@ -71,28 +71,20 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 val time = measureTimeMillis {
                     runBlocking {
                         launch {
-                            withContext(Dispatchers.IO) {
-                                weatherBean = service.getCaiYunWeather(lat, log)
-                            }
+                            weatherBean = service.getCaiYunWeather(lat, log)
                         }
                         launch {
-                            withContext(Dispatchers.IO) {
-                                yesterdayWeatherBean = service.getYesterdayDailyWeather(
-                                    lat,
-                                    log,
-                                    begin = System.currentTimeMillis() / 1000 - 86400
-                                )
-                            }
+                            yesterdayWeatherBean = service.getYesterdayDailyWeather(
+                                lat,
+                                log,
+                                begin = System.currentTimeMillis() / 1000 - 86400
+                            )
                         }
                         launch {
-                            withContext(Dispatchers.IO) {
-                                lifestyleBean = service.getLifestyle("${lat},$log")
-                            }
+                            lifestyleBean = service.getLifestyle("${lat},$log")
                         }
                         launch {
-                            withContext(Dispatchers.IO) {
-                                air = service.getAirData("${lat},$log")
-                            }
+                            air = service.getAirData("${lat},$log")
                         }
                     }
                 }
