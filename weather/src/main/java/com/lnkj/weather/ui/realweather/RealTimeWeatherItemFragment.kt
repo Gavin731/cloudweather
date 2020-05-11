@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
@@ -156,6 +157,9 @@ class RealTimeWeatherItemFragment :
                     speechSynthesizer?.stopSpeaking()
                 }
             }
+
+        //每次创建的时候先读取缓存
+        viewModel.searchWeatherByCity(myCityBean!!)
     }
 
     override fun onResume() {
@@ -172,7 +176,15 @@ class RealTimeWeatherItemFragment :
             binding.vObscuration.visibility = View.GONE
             return
         }
-        binding.refreshLayout.autoRefresh()
+
+        //如果是定位城市，则延迟50毫秒请求，因为第一次创建时可能view还没初始化好，自动刷新会无效
+        if (myCityBean!!.isLocation == 1) {
+            handler.postDelayed(Runnable {
+                binding.refreshLayout.autoRefresh()
+            }, 50)
+        } else {
+            binding.refreshLayout.autoRefresh()
+        }
     }
 
     override fun initData() {
@@ -303,9 +315,6 @@ class RealTimeWeatherItemFragment :
         binding.llLiveIndexHighTemperature.clickWithTrigger {
             startActivity<HotRankActivity>()
         }
-
-        //每次创建的时候先读取缓存
-        viewModel.searchWeatherByCity(myCityBean!!)
     }
 
     private fun initDailyList() {
