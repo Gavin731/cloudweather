@@ -8,6 +8,10 @@ import com.lnkj.library_base.base.BaseViewModel
 import com.lnkj.library_base.db.bean.*
 import com.lnkj.library_base.db.database.WeatherDatabase
 import com.lnkj.weather.http.ApiService
+import com.lnkj.weather.http.bean.DailyWeatherBean
+import com.lnkj.weather.http.bean.HeAirQualityBean
+import com.lnkj.weather.http.bean.LifestyleBean
+import com.lnkj.weather.http.bean.WeatherBean
 import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.utils.DateUtils.PATTERN_1
 import com.lnkj.weather.utils.DateUtils.PATTERN_14
@@ -19,9 +23,11 @@ import com.mufeng.mvvmlib.utilcode.ext.formatDateStr
 import com.mufeng.mvvmlib.utilcode.ext.loge
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.math.absoluteValue
+import kotlin.system.measureTimeMillis
 
 /**
  * @创建者 MuFeng-T
@@ -49,27 +55,54 @@ class RealTimeWeatherViewModel : BaseViewModel() {
     }
 
     fun getCaiYunRealtimeWeather(cityBean: MyCityBean, lat: String, log: String) {
-        Log.e("TAG", "${cityBean.counties} 开始请求天气数据 ${Date().formatDateStr()}")
         viewModelScope.launch(Dispatchers.IO) {
             Log.e("TAG", "${cityBean.counties} 开始执行天气数据 ${Date().formatDateStr()}")
             try {
                 // 获取15天和24小时通用天气
-                val weatherBean = service.getCaiYunWeather(lat, log)
+                lateinit var weatherBean: WeatherBean
                 // 获取昨天天气
-                val yesterdayWeatherBean = service.getYesterdayDailyWeather(
-                    lat,
-                    log,
-                    begin = System.currentTimeMillis() / 1000 - 86400
-                )
+                lateinit var yesterdayWeatherBean: DailyWeatherBean
                 // 获取生活指数
-                val lifestyleBean = service.getLifestyle("${lat},$log")
-
+                lateinit var lifestyleBean: LifestyleBean
                 // 获取今天空气质量
-                val air = service.getAirData("${lat},$log")
+                lateinit var air: HeAirQualityBean
+                //几个网咯请求并行请求，节约请求时间
+                //todo 目前先这么写，后面熟悉kotlin了再改看看
+                val time = measureTimeMillis {
+                    runBlocking {
+                        launch {
+                            withContext(Dispatchers.IO) {
+                                weatherBean = service.getCaiYunWeather(lat, log)
+                            }
+                        }
+                        launch {
+                            withContext(Dispatchers.IO) {
+                                yesterdayWeatherBean = service.getYesterdayDailyWeather(
+                                    lat,
+                                    log,
+                                    begin = System.currentTimeMillis() / 1000 - 86400
+                                )
+                            }
+                        }
+                        launch {
+                            withContext(Dispatchers.IO) {
+                                lifestyleBean = service.getLifestyle("${lat},$log")
+                            }
+                        }
+                        launch {
+                            withContext(Dispatchers.IO) {
+                                air = service.getAirData("${lat},$log")
+                            }
+                        }
+                    }
+                }
+                Log.e("-------网咯请求一起请求返回时间", time.toString())
+
 
                 if (weatherBean.status != "ok" || yesterdayWeatherBean.status != "ok"
                     || lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"
                 ) {
+                    Log.e("-------网咯请求", "还有网咯请求返回不对")
                     apiLoading.postValue(Event(false))
                     return@launch
                 }
@@ -103,7 +136,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!)
                 )
                 // 小时天气数据
-                val hourly = weatherBean.result.hourly
+                val hourly = weatherBean.result!!.hourly
                 val hourlyWeatherList = mutableListOf<HourlyWeather>()
                 hourly?.temperature?.forEachIndexed { index, temperature ->
                     val hourlyWeather = HourlyWeather(
@@ -122,13 +155,13 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 }
 
                 // 天级天气数据
-                val daily = weatherBean.result.daily
+                val daily = weatherBean.result!!.daily
                 val dailyWeatherList = mutableListOf<DailyWeather>()
-                daily.temperature?.forEachIndexed { index, temperature ->
+                daily!!.temperature?.forEachIndexed { index, temperature ->
                     val dailyWeather = DailyWeather(
                         date = DateUtils.formatDateT(temperature?.date!!, PATTERN_14),
                         formatDate = DateUtils.formatWeekT(temperature.date),
-                        weatherName = WeatherUtils.getWeatherName(daily.skycon?.get(index)?.value!!),
+                        weatherName = WeatherUtils.getWeatherName(daily?.skycon?.get(index)?.value!!),
                         weatherIcon = WeatherUtils.getWeatherIcon(daily.skycon[index]?.value!!),
                         weatherDayName = WeatherUtils.getWeatherName(daily.skycon08h20h?.get(index)?.value!!),
                         weatherDayIcon = WeatherUtils.getWeatherIcon(daily.skycon08h20h[index]?.value!!),
@@ -155,40 +188,40 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         )?.date!!, PATTERN_14
                     ),
                     formatDate = DateUtils.formatWeekT(
-                        yesterdayWeatherBean.result.daily.temperature.get(
+                        yesterdayWeatherBean.result!!.daily!!.temperature!!.get(
                             0
                         )?.date!!
                     ),
                     weatherName = WeatherUtils.getWeatherName(
-                        yesterdayWeatherBean.result.daily.skycon?.get(
+                        yesterdayWeatherBean.result!!.daily!!.skycon?.get(
                             0
                         )?.value!!
                     ),
-                    weatherIcon = WeatherUtils.getWeatherIcon(yesterdayWeatherBean.result.daily.skycon[0]?.value!!),
+                    weatherIcon = WeatherUtils.getWeatherIcon(yesterdayWeatherBean.result!!.daily!!.skycon!![0]?.value!!),
                     weatherDayName = WeatherUtils.getWeatherName(
-                        yesterdayWeatherBean.result.daily.skycon08h20h?.get(
+                        yesterdayWeatherBean.result!!.daily!!.skycon08h20h?.get(
                             0
                         )?.value!!
                     ),
-                    weatherDayIcon = WeatherUtils.getWeatherIcon(yesterdayWeatherBean.result.daily.skycon08h20h[0]?.value!!),
+                    weatherDayIcon = WeatherUtils.getWeatherIcon(yesterdayWeatherBean!!.result!!.daily!!.skycon08h20h!![0]?.value!!),
                     weatherNightName = WeatherUtils.getWeatherName(
-                        yesterdayWeatherBean.result.daily.skycon20h32h?.get(
+                        yesterdayWeatherBean.result!!.daily!!.skycon20h32h?.get(
                             0
                         )?.value!!
                     ),
-                    weatherNightIcon = WeatherUtils.getWeatherIcon(yesterdayWeatherBean.result.daily.skycon20h32h[0]?.value!!),
-                    max = yesterdayWeatherBean.result.daily.temperature[0]?.max!!.toInt(),
-                    min = yesterdayWeatherBean.result.daily.temperature[0]?.min!!.toInt(),
+                    weatherNightIcon = WeatherUtils.getWeatherIcon(yesterdayWeatherBean.result!!.daily!!.skycon20h32h!![0]?.value!!),
+                    max = yesterdayWeatherBean.result!!.daily!!.temperature!![0]?.max!!.toInt(),
+                    min = yesterdayWeatherBean.result!!.daily!!.temperature!![0]?.min!!.toInt(),
                     airQualityName = WeatherUtils.getAirQualityDescription(
-                        yesterdayWeatherBean.result.daily.airQuality?.aqi?.get(0)?.max!!.chn!!.toInt()
+                        yesterdayWeatherBean.result!!.daily!!.airQuality?.aqi?.get(0)?.max!!.chn!!.toInt()
                     ),
-                    airQualityValue = yesterdayWeatherBean.result.daily.airQuality.aqi[0]?.max!!.chn!!.toInt(),
+                    airQualityValue = yesterdayWeatherBean.result!!.daily!!.airQuality!!.aqi!![0]?.max!!.chn!!.toInt(),
                     windSpeed = WeatherUtils.getWindSpeed(
-                        yesterdayWeatherBean.result.daily.wind?.get(
+                        yesterdayWeatherBean.result!!.daily!!.wind?.get(
                             0
                         )?.max!!.speed!!.toInt()
                     ),
-                    windDirection = WeatherUtils.getWindDirection(yesterdayWeatherBean.result.daily.wind[0]?.max!!.direction!!)
+                    windDirection = WeatherUtils.getWindDirection(yesterdayWeatherBean.result!!.daily!!.wind!![0]?.max!!.direction!!)
                 )
                 dailyWeatherList.add(0, dailyWeather)
                 //穿衣指数
@@ -402,7 +435,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     emptyList<String>()
                 } else {
                     val list = arrayListOf<String>()
-                    weatherBean.result.alert?.content?.forEach {
+                    weatherBean.result!!.alert?.content?.forEach {
                         list.add(WeatherUtils.getAlertInfo(it?.code!!))
                     }
                     list
@@ -457,7 +490,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                      温度${tomorrowWeather.min}到${tomorrowWeather.max}度
                 """,
                     airQualityName = WeatherUtils.getAirQualityDescription(air.heWeather6?.get(0)?.airNowCity?.aqi!!),
-                    airQualityValue = air.heWeather6[0]?.airNowCity?.aqi!!,
+                    airQualityValue = air.heWeather6!![0]?.airNowCity?.aqi!!,
                     windSpeed = WeatherUtils.getWindSpeed(weatherBean.result?.realtime?.wind?.speed!!.toInt()),
                     windDirection = WeatherUtils.getWindDirection(weatherBean.result?.realtime?.wind?.direction!!),
                     humidity = "${(weatherBean.result?.realtime?.humidity!! * 100).toInt()}%",
@@ -474,6 +507,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     lifeStyleList = lifeStyleList,
                     alertInfo = alertInfo
                 )
+                Log.e("-------网咯请求-组合结束", DateUtils.formatTime(Date(), DateUtils.PATTERN_0))
                 WeatherDatabase.get().cityWeatherDao().save(cityWeather)
                 cityWeatherData.postValue(cityWeather)
             } catch (e: Exception) {

@@ -11,6 +11,7 @@ import java.util.*
  */
 object DateUtils {
 
+    const val PATTERN_0 = "yyyy-MM-dd HH:mm:ss.SSS"
     const val PATTERN_1 = "yyyy-MM-dd HH:mm:ss"
     const val PATTERN_2 = "yyyy-MM-dd HH:mm"
     const val PATTERN_3 = "yyyy-MM-dd"
