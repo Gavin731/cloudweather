@@ -1,10 +1,15 @@
 package com.lnkj.weather.ui.city.add
 
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.event.EventKey
@@ -15,6 +20,7 @@ import com.lnkj.weather.ui.city.SearchCityActivity
 import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.ui.settings.SettingsActivity
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
+import com.mufeng.mvvmlib.image.GlideApp
 import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
@@ -45,7 +51,22 @@ class AddCityActivity : BaseVMActivity<AddCityViewModel, WeatherActivityAddCityB
         binding.vm = viewModel
 
         StatusBarUtils.addTranslucentView(this, toolbar)
+        GlideApp.with(this)
+            .asDrawable()
+            .load(R.drawable.weather_main_bg)
+            .into(object : CustomTarget<Drawable>() {
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
 
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
+                    binding.clAddBg.background = resource
+                }
+
+            })
         adapter = AddCityAdapter(data)
 
         addFooterView =
