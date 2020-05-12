@@ -1,14 +1,18 @@
 package com.lnkj.weather.ui.realweather
 
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.base.BaseViewModel
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityRealTimeWeatherShareBinding
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
+import com.mufeng.mvvmlib.image.GlideApp
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.utils.StatusBarUtils
 import com.mufeng.mvvmlib.utilcode.utils.toast
@@ -20,10 +24,11 @@ import com.mufeng.sociallibrary.config.PlatformType
  * @创建时间 2020/4/3 8:55
  * @描述
  */
-class RealTimeWeatherShareActivity : BaseVMActivity<BaseViewModel, WeatherActivityRealTimeWeatherShareBinding>() {
+class RealTimeWeatherShareActivity :
+    BaseVMActivity<BaseViewModel, WeatherActivityRealTimeWeatherShareBinding>() {
     private var bitmap: Bitmap? = null
     override val viewModel: BaseViewModel
-        by viewModels()
+            by viewModels()
     override val layoutResId: Int
         get() = R.layout.weather_activity_real_time_weather_share
 
@@ -31,7 +36,21 @@ class RealTimeWeatherShareActivity : BaseVMActivity<BaseViewModel, WeatherActivi
     override fun initView(savedInstanceState: Bundle?) {
 
         StatusBarUtils.addTranslucentView(this, binding.ivShareView)
+        GlideApp.with(this)
+            .asDrawable()
+            .load(R.drawable.weather_main_bg)
+            .into(object : CustomTarget<Drawable>() {
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
 
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
+                    binding.clAddBg.background = resource
+                }
+
+            })
         binding.icClose.clickWithTrigger { finish() }
 
         binding.llShareQq.clickWithTrigger {
@@ -44,10 +63,10 @@ class RealTimeWeatherShareActivity : BaseVMActivity<BaseViewModel, WeatherActivi
                 this,
                 PlatformType.QQ,
                 img = bitmap,
-                onSuccess = {type ->
+                onSuccess = { type ->
                     toast("分享成功")
                 },
-                onError = {type, errorCode, errorMsg ->
+                onError = { type, errorCode, errorMsg ->
                     toast("$type:$errorCode == $errorMsg")
                 },
                 onCancel = {
@@ -66,10 +85,10 @@ class RealTimeWeatherShareActivity : BaseVMActivity<BaseViewModel, WeatherActivi
                 this,
                 PlatformType.QQ_ZONE,
                 img = bitmap,
-                onSuccess = {type ->
+                onSuccess = { type ->
                     toast("分享成功")
                 },
-                onError = {type, errorCode, errorMsg ->
+                onError = { type, errorCode, errorMsg ->
                     toast("$type:$errorCode == $errorMsg")
                 },
                 onCancel = {
@@ -88,10 +107,10 @@ class RealTimeWeatherShareActivity : BaseVMActivity<BaseViewModel, WeatherActivi
                 this,
                 PlatformType.WEIXIN,
                 img = bitmap,
-                onSuccess = {type ->
+                onSuccess = { type ->
                     toast("分享成功")
                 },
-                onError = {type, errorCode, errorMsg ->
+                onError = { type, errorCode, errorMsg ->
                     toast("$type:$errorCode == $errorMsg")
                 },
                 onCancel = {
@@ -110,10 +129,10 @@ class RealTimeWeatherShareActivity : BaseVMActivity<BaseViewModel, WeatherActivi
                 this,
                 PlatformType.WEIXIN_CIRCLE,
                 img = bitmap,
-                onSuccess = {type ->
+                onSuccess = { type ->
                     toast("分享成功")
                 },
-                onError = {type, errorCode, errorMsg ->
+                onError = { type, errorCode, errorMsg ->
                     toast("$type:$errorCode == $errorMsg")
                 },
                 onCancel = {

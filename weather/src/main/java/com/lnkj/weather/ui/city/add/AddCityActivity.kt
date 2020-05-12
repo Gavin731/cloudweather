@@ -56,7 +56,6 @@ class AddCityActivity : BaseVMActivity<AddCityViewModel, WeatherActivityAddCityB
             .load(R.drawable.weather_main_bg)
             .into(object : CustomTarget<Drawable>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
 
                 override fun onResourceReady(
