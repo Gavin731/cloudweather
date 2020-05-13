@@ -2,6 +2,7 @@ package com.lnkj.weather.ui.main
 
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.Toast
@@ -15,6 +16,7 @@ import com.lnkj.weather.receiver.DateChangeReceiver
 import com.lnkj.weather.ui.air.AirQualityFragment
 import com.lnkj.weather.ui.hour.HourDetailsFragment
 import com.lnkj.weather.ui.realweather.RealTimeWeatherFragment
+import com.lnkj.weather.utils.DownloadUtil
 import com.lnkj.weather.widget.popup.UpdateAppPopup
 import com.lxj.xpopup.XPopup
 import com.mufeng.mvvmlib.basic.adapter.BaseViewPagerAdapter
@@ -22,6 +24,7 @@ import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.http.handler.Request
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.utils.ActivityUtils
+import java.io.File
 
 
 class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>() {
@@ -32,9 +35,10 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
         get() = R.layout.weather_activity_main
 
     private lateinit var receiver: DateChangeReceiver
+    private lateinit var downloadUtil: DownloadUtil
+    private var apkUrl: String? = ""
 
     override fun initView(savedInstanceState: Bundle?) {
-        showUpdateAppPopup("1.0.1", "")
         Request.init(applicationContext, "http://tq.dt357.cn/") {
             okHttp {
                 it
@@ -77,6 +81,16 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
     }
 
     override fun initData() {
+        //初始化下载apk
+        downloadUtil = DownloadUtil(this)
+        downloadUtil.setDownloadListener(object : DownloadUtil.DownloadFileListener {
+            override fun downloadCompleted() {
+                installApk()
+            }
+
+            override fun downloadError(e: Throwable?) {
+            }
+        })
     }
 
     fun selectFragment(index: Int) {
@@ -84,6 +98,11 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
             .post(true)
         binding.viewPager.currentItem = index
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showUpdateAppPopup("1.0.1", "")
     }
 
     override fun onPause() {
@@ -119,11 +138,31 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
     }
 
     private fun showUpdateAppPopup(version: String, downloadUrl: String) {
+        apkUrl = "${downloadUtil.getApkCachePath()}/${version}.apk"
+        val updateAppPopup = UpdateAppPopup(this, version)
+        updateAppPopup.setInstallListener(object : UpdateAppPopup.InstallApkListener {
+            override fun install() {
+                downloadUtil.download(downloadUrl, apkUrl)
+            }
+        })
         XPopup.Builder(this)
             .dismissOnBackPressed(false)
             .dismissOnTouchOutside(false)
-            .asCustom(UpdateAppPopup(this, version, downloadUrl))
+            .asCustom(updateAppPopup)
             .show();
+    }
+
+    private fun installApk() {
+        val intent = Intent("android.intent.action.VIEW")
+        intent.addCategory("android.intent.category.DEFAULT")
+        intent.data = Uri.fromFile(File(apkUrl))
+        intent.type = "application/vnd.android.package-archive";
+        startActivityForResult(intent, 10001);
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        //todo 安装完成回来后
     }
 
 }

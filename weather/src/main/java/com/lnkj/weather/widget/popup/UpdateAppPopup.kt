@@ -17,12 +17,12 @@ import com.lxj.xpopup.core.CenterPopupView
  * @UpdateRemark: 更新说明：
  * @Version: 1.0
  */
-class UpdateAppPopup(context: Context, version: String, downloadUrl: String) :
+class UpdateAppPopup(context: Context, version: String) :
     CenterPopupView(context),
     View.OnClickListener {
 
     private val version: String = version
-    private val downloadUrl: String = downloadUrl
+    private var listener: InstallApkListener? = null
 
     override fun getImplLayoutId(): Int {
         return R.layout.weather_view_update_app_popup
@@ -35,14 +35,23 @@ class UpdateAppPopup(context: Context, version: String, downloadUrl: String) :
         findViewById<TextView>(R.id.tv_version).text = "版本号${version}"
     }
 
+    fun setInstallListener(lis: InstallApkListener) {
+        this.listener = lis
+    }
+
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.ll_close -> {
                 dismiss()
             }
             R.id.tv_update -> {
+                listener!!.install()
                 dismiss()
             }
         }
+    }
+
+    interface InstallApkListener {
+        fun install()
     }
 }
