@@ -16,12 +16,11 @@ import android.content.Context
 class AndroidUtil {
 
     companion object {
-        @SuppressLint("NewApi")
-        fun getVersionCode(context: Context): Long {
+        fun getVersionCode(context: Context): Int {
             try {
                 val packageManager = context.packageManager
                 val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
-                return packageInfo.longVersionCode
+                return packageInfo.versionCode
             } catch (e: Exception) {
             }
             return 0

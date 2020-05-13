@@ -4,10 +4,12 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.event.EventKey
 import com.lnkj.weather.R
@@ -16,6 +18,7 @@ import com.lnkj.weather.receiver.DateChangeReceiver
 import com.lnkj.weather.ui.air.AirQualityFragment
 import com.lnkj.weather.ui.hour.HourDetailsFragment
 import com.lnkj.weather.ui.realweather.RealTimeWeatherFragment
+import com.lnkj.weather.utils.AndroidUtil
 import com.lnkj.weather.utils.DownloadUtil
 import com.lnkj.weather.widget.popup.UpdateAppPopup
 import com.lxj.xpopup.XPopup
@@ -91,6 +94,14 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
             override fun downloadError(e: Throwable?) {
             }
         })
+        //获取是否需要更新
+        val version = AndroidUtil.getVersionCode(this)
+        Log.e("----更新apk version", version.toString())
+        viewModel.getUpdateVersionInfo(version)
+        viewModel.versionInfo.observe(this) {
+            Log.e("----更新apk", it)
+            showUpdateAppPopup("1.0.1", "")
+        }
     }
 
     fun selectFragment(index: Int) {
@@ -102,7 +113,6 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
 
     override fun onResume() {
         super.onResume()
-        showUpdateAppPopup("1.0.1", "")
     }
 
     override fun onPause() {

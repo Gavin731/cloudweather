@@ -2,9 +2,7 @@ package com.lnkj.weather.http
 
 import com.lnkj.weather.HE_FENG_TIAN_QI_KEY
 import com.lnkj.weather.http.bean.*
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * @创建者 MuFeng-T
@@ -27,10 +25,10 @@ interface ApiService {
 
     @GET("https://search.heweather.net/top")
     suspend fun getHotCityList(
-        @Query("group")group: String = "cn",
-        @Query("key")key: String = HE_FENG_TIAN_QI_KEY,
-        @Query("number")number: Int = 7,
-        @Query("lang")lang: String = "zh"
+        @Query("group") group: String = "cn",
+        @Query("key") key: String = HE_FENG_TIAN_QI_KEY,
+        @Query("number") number: Int = 7,
+        @Query("lang") lang: String = "zh"
     ): HeWeatherCityBean
 
     /**
@@ -44,11 +42,11 @@ interface ApiService {
      */
     @GET("https://search.heweather.net/find")
     suspend fun searchCity(
-        @Query("location")location: String,
-        @Query("group")group: String = "cn",
-        @Query("key")key: String = HE_FENG_TIAN_QI_KEY,
-        @Query("number")number: Int = 20,
-        @Query("lang")lang: String = "zh"
+        @Query("location") location: String,
+        @Query("group") group: String = "cn",
+        @Query("key") key: String = HE_FENG_TIAN_QI_KEY,
+        @Query("number") number: Int = 20,
+        @Query("lang") lang: String = "zh"
     ): HeWeatherCityBean
 
     /**
@@ -58,7 +56,7 @@ interface ApiService {
      * @return RealtimeWeatherBean
      */
     @GET("https://api.caiyunapp.com/v2.5/6yo5uJgv8LldsIn2/{lat},{log}/realtime.json?alert=true&lang=zh_CN")
-    suspend fun getCaiYunRealtimeWeather(@Path("lat")lat: String, @Path("log")log: String): RealtimeWeatherBean
+    suspend fun getCaiYunRealtimeWeather(@Path("lat") lat: String, @Path("log") log: String): RealtimeWeatherBean
 
     /**
      * 获取分钟级降雨量
@@ -67,7 +65,7 @@ interface ApiService {
      * @return MinutelyRainfallBean
      */
     @GET("https://api.caiyunapp.com/v2.5/6yo5uJgv8LldsIn2/{lat},{log}/minutely.json?lang=zh_CN")
-    suspend fun getCaiYunMinutelyRainfall(@Path("lat")lat: String, @Path("log")log: String): MinutelyRainfallBean
+    suspend fun getCaiYunMinutelyRainfall(@Path("lat") lat: String, @Path("log") log: String): MinutelyRainfallBean
 
     /**
      * 获取未来15天天气
@@ -77,7 +75,7 @@ interface ApiService {
      * @return DailyWeatherBean
      */
     @GET("https://api.caiyunapp.com/v2.5/6yo5uJgv8LldsIn2/{lat},{log}/daily.json?lang=zh_CN&dailysteps=16&hourlysteps=384&begin={begin}")
-    suspend fun getDailyWeather(@Path("lat")lat: String, @Path("log")log: String, @Path("begin")begin: Long = System.currentTimeMillis() - 86400): DailyWeatherBean
+    suspend fun getDailyWeather(@Path("lat") lat: String, @Path("log") log: String, @Path("begin") begin: Long = System.currentTimeMillis() - 86400): DailyWeatherBean
 
     /**
      * 获取昨天天气
@@ -87,14 +85,18 @@ interface ApiService {
      * @return DailyWeatherBean
      */
     @GET("https://api.caiyunapp.com/v2.5/6yo5uJgv8LldsIn2/{lat},{log}/daily.json?lang=zh_CN&dailysteps=1")
-    suspend fun getYesterdayDailyWeather(@Path("lat")lat: String, @Path("log")log: String, @Query("begin")begin: Long): DailyWeatherBean
+    suspend fun getYesterdayDailyWeather(
+        @Path("lat") lat: String, @Path("log") log: String, @Query(
+            "begin"
+        ) begin: Long
+    ): DailyWeatherBean
 
     /**
      * 获取未来24小时天气
      * @return HourlyWeatherBean
      */
     @GET("https://api.caiyunapp.com/v2.5/6yo5uJgv8LldsIn2/{lat},{log}/hourly.json?lang=zh_CN")
-    suspend fun getHourlyWeather(@Path("lat")lat: String, @Path("log")log: String, @Query("hourlysteps")hourlysteps: Int): HourlyWeatherBean
+    suspend fun getHourlyWeather(@Path("lat") lat: String, @Path("log") log: String, @Query("hourlysteps") hourlysteps: Int): HourlyWeatherBean
 
     /**
      * 获取15天和24小时通用天气
@@ -103,14 +105,14 @@ interface ApiService {
      * @return WeatherBean
      */
     @GET("https://api.caiyunapp.com/v2.5/6yo5uJgv8LldsIn2/{lat},{log}/weather.json?lang=zh_CN&hourlysteps=24&dailysteps=15&alert=true")
-    suspend fun getCaiYunWeather(@Path("lat")lat: String, @Path("log")log: String): WeatherBean
+    suspend fun getCaiYunWeather(@Path("lat") lat: String, @Path("log") log: String): WeatherBean
 
     /**
      * 当天的生活指数
      * @return LifestyleBean
      */
     @GET("https://api.heweather.net/s6/weather/lifestyle?key=d0cbd0a986bd46dfba5ee1828cde4546")
-    suspend fun getLifestyle(@Query("location")location: String): LifestyleBean
+    suspend fun getLifestyle(@Query("location") location: String): LifestyleBean
 
 
     /**
@@ -119,7 +121,7 @@ interface ApiService {
      * @return HeFlWeather
      */
     @GET("https://api.heweather.net/s6/weather/now?key=d0cbd0a986bd46dfba5ee1828cde4546")
-    suspend fun getFeltTemperature(@Query("location")location: String): HeFlWeather
+    suspend fun getFeltTemperature(@Query("location") location: String): HeFlWeather
 
     /**
      * 获取空气质量
@@ -127,7 +129,7 @@ interface ApiService {
      * @return HeAirQualityBean
      */
     @GET("https://api.heweather.net/s6/air/now?key=d0cbd0a986bd46dfba5ee1828cde4546")
-    suspend fun getAirData(@Query("location")location: String): HeAirQualityBean
+    suspend fun getAirData(@Query("location") location: String): HeAirQualityBean
 
     /**
      * 获取未来三天空气质量
@@ -135,7 +137,7 @@ interface ApiService {
      * @return HeForecastAirBean
      */
     @GET("https://api.heweather.net/s6/air/forecast?key=d0cbd0a986bd46dfba5ee1828cde4546")
-    suspend fun getForecastAirData(@Query("location")location: String): HeForecastAirBean
+    suspend fun getForecastAirData(@Query("location") location: String): HeForecastAirBean
 
     /**
      * 高温排行
@@ -143,4 +145,8 @@ interface ApiService {
      */
     @GET("http://yunduantianqi.com/api/rank")
     suspend fun getHotRankList(): HotRankBean
+
+    @FormUrlEncoded
+    @POST("http://qd.yunduantianqi.com/ver.php")
+    suspend fun getVersion(@Field("version") version: Int): String
 }
