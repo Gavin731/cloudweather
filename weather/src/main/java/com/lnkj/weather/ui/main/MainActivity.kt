@@ -15,6 +15,8 @@ import com.lnkj.weather.receiver.DateChangeReceiver
 import com.lnkj.weather.ui.air.AirQualityFragment
 import com.lnkj.weather.ui.hour.HourDetailsFragment
 import com.lnkj.weather.ui.realweather.RealTimeWeatherFragment
+import com.lnkj.weather.widget.popup.UpdateAppPopup
+import com.lxj.xpopup.XPopup
 import com.mufeng.mvvmlib.basic.adapter.BaseViewPagerAdapter
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.http.handler.Request
@@ -25,14 +27,14 @@ import com.mufeng.mvvmlib.utilcode.utils.ActivityUtils
 class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>() {
 
     override val viewModel: MainViewModel
-        by viewModels()
+            by viewModels()
     override val layoutResId: Int
         get() = R.layout.weather_activity_main
 
     private lateinit var receiver: DateChangeReceiver
 
     override fun initView(savedInstanceState: Bundle?) {
-
+        showUpdateAppPopup("1.0.1", "")
         Request.init(applicationContext, "http://tq.dt357.cn/") {
             okHttp {
                 it
@@ -77,7 +79,7 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
     override fun initData() {
     }
 
-    fun selectFragment(index: Int){
+    fun selectFragment(index: Int) {
         LiveEventBus.get(EventKey.EVENT_STOP_VOICE_ANNOUNCEMENTS)
             .post(true)
         binding.viewPager.currentItem = index
@@ -114,6 +116,14 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(receiver)
+    }
+
+    private fun showUpdateAppPopup(version: String, downloadUrl: String) {
+        XPopup.Builder(this)
+            .dismissOnBackPressed(false)
+            .dismissOnTouchOutside(false)
+            .asCustom(UpdateAppPopup(this, version, downloadUrl))
+            .show();
     }
 
 }
