@@ -61,7 +61,8 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
 //            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+            Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
+            Manifest.permission.REQUEST_INSTALL_PACKAGES
         )
 
         request(
@@ -181,7 +182,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
                         myCityBean.counties = location.district
                         myCityBean.lon = location.longitude.toString()
                         myCityBean.cityName = location.city
-                        myCityBean.street=location.street
+                        myCityBean.street = location.street
                     }
                     WeatherDatabase.get().myCityDao().deleteLocationCity()
                     WeatherDatabase.get().myCityDao().saveCity(myCityBean)
