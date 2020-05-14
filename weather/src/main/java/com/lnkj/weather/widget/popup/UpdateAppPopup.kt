@@ -45,8 +45,8 @@ class UpdateAppPopup(context: Context, version: String) :
                 dismiss()
             }
             R.id.tv_update -> {
-                listener!!.install()
                 dismiss()
+                listener!!.install()
             }
         }
     }

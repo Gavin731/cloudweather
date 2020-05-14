@@ -1,6 +1,7 @@
 package com.lnkj.weather.http
 
 import com.lnkj.weather.HE_FENG_TIAN_QI_KEY
+import com.lnkj.weather.entity.UpdateAppEntity
 import com.lnkj.weather.http.bean.*
 import retrofit2.http.*
 
@@ -148,5 +149,5 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("http://qd.yunduantianqi.com/ver.php")
-    suspend fun getVersion(@Field("version") version: Int): String
+    suspend fun getVersion(@Field("version") version: Int): UpdateAppEntity
 }

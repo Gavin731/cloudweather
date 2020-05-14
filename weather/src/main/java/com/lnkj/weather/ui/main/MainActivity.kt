@@ -3,11 +3,13 @@ package com.lnkj.weather.ui.main
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -25,6 +27,7 @@ import com.lxj.xpopup.XPopup
 import com.mufeng.mvvmlib.basic.adapter.BaseViewPagerAdapter
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.http.handler.Request
+import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.utils.ActivityUtils
 import java.io.File
@@ -99,8 +102,9 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
         Log.e("----更新apk version", version.toString())
         viewModel.getUpdateVersionInfo(version)
         viewModel.versionInfo.observe(this) {
-            Log.e("----更新apk", it)
-            showUpdateAppPopup("1.0.1", "")
+            Log.e("----更新apk", GsonUtils.INSTANCE.toJson(it))
+            if (it == null || it.url === null || it.url === "") return@observe
+            showUpdateAppPopup(it.version!!, it.url!!)
         }
     }
 
@@ -163,16 +167,25 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
     }
 
     private fun installApk() {
-        val intent = Intent("android.intent.action.VIEW")
-        intent.addCategory("android.intent.category.DEFAULT")
-        intent.data = Uri.fromFile(File(apkUrl))
-        intent.type = "application/vnd.android.package-archive";
-        startActivityForResult(intent, 10001);
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        //todo 安装完成回来后
+        Log.e("-----", "开始安装apk")
+        val apkFile = File(apkUrl)
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            val uri = FileProvider.getUriForFile(
+                this,
+                "${packageName}.fileprovider",
+                apkFile
+            )
+            intent.setDataAndType(uri, "application/vnd.android.package-archive")
+        } else {
+            intent.setDataAndType(
+                Uri.fromFile(apkFile),
+                "application/vnd.android.package-archive"
+            )
+        }
+        startActivity(intent)
     }
 
 }

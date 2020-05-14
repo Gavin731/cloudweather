@@ -30,6 +30,17 @@
         android:supportsRtl="true"
         android:theme="@style/weather_AppTheme"
         tools:replace="android:label">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.lnkj.cloudweather.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/weather_file_paths" />
+        </provider>
+
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />
