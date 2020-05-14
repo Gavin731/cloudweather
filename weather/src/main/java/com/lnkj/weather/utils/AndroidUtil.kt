@@ -25,5 +25,14 @@ class AndroidUtil {
             }
             return 0
         }
+        fun getVersionName(context: Context): String {
+            try {
+                val packageManager = context.packageManager
+                val packageInfo = packageManager.getPackageInfo(context.packageName, 0)
+                return packageInfo.versionName
+            } catch (e: Exception) {
+            }
+            return "1.0"
+        }
     }
 }

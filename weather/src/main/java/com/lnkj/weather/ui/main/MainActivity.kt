@@ -99,12 +99,19 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
         })
         //获取是否需要更新
         val version = AndroidUtil.getVersionCode(this)
-        Log.e("----更新apk version", version.toString())
+        val versionName = AndroidUtil.getVersionName(this)
         viewModel.getUpdateVersionInfo(version)
         viewModel.versionInfo.observe(this) {
             Log.e("----更新apk", GsonUtils.INSTANCE.toJson(it))
             if (it == null || it.url === null || it.url === "") return@observe
             showUpdateAppPopup(it.version!!, it.url!!)
+        }
+        //删除文件
+        val apkPath = "${downloadUtil.getApkCachePath()}/${versionName}.apk"
+        Log.e("----当前版本apk地址", apkPath)
+        val file = File(apkPath)
+        if (file.exists()) {
+            file.delete()
         }
     }
 
