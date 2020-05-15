@@ -9,6 +9,7 @@
     <color name="weather_colorAccent">#D81B60</color>
     <color name="weather_color_AFB6CB">#AFB6CB</color>
     <color name="weather_color_4CA6FF">#4CA6FF</color>
+    <color name="weather_color_51A4FF">#51A4FF</color>
 
     <color name="weather_transparency_color">#00000000</color>
     <color name="weather_press_color">#3dffffff</color>

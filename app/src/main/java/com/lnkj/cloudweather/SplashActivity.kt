@@ -181,7 +181,7 @@ class SplashActivity : BaseVMActivity<SplashViewModel, SplashActivityBinding>(),
                         myCityBean.counties = location.district
                         myCityBean.lon = location.longitude.toString()
                         myCityBean.cityName = location.city
-                        myCityBean.street=location.street
+                        myCityBean.street = location.street
                     }
                     WeatherDatabase.get().myCityDao().deleteLocationCity()
                     WeatherDatabase.get().myCityDao().saveCity(myCityBean)
