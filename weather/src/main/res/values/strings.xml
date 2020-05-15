@@ -1,5 +1,5 @@
 <resources>
-    <string name="weather_app_name">云端天气预报</string>
+    <string name="weather_app_name">云端天气</string>
     <string name="weather_degree_centigrade_min_max">%s~%s°</string>
     <string name="weather_temperature_min_max">%s~%s°</string>
     <string name="weather_temperature_min_max1">%s~%s℃</string>
