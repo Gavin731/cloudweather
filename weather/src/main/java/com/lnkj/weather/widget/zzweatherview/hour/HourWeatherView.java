@@ -37,6 +37,8 @@ public class HourWeatherView extends HorizontalScrollView {
 
     private int columnNumber = 6;
 
+    private boolean isDrawPath=true;
+
     private OnWeatherItemClickListener weatherItemClickListener;
 
     public HourWeatherView(Context context) {
@@ -232,8 +234,9 @@ public class HourWeatherView extends HorizontalScrollView {
                     currentPointY1 = nextPointY1;
 
                 }
-
-                canvas.drawPath(path, paint);
+                if(isDrawPath) {
+                    canvas.drawPath(path, paint);
+                }
 
             }
 
@@ -346,6 +349,9 @@ public class HourWeatherView extends HorizontalScrollView {
         }
     }
 
+    public void isDrawPath(boolean isDraw){
+        this.isDrawPath=isDraw;
+    }
 
     public interface OnWeatherItemClickListener {
         void onItemClick(HourWeatherItemView itemView, int position, HourWeatherModel weatherModel);

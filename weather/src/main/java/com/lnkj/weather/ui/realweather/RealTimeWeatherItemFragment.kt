@@ -223,6 +223,7 @@ class RealTimeWeatherItemFragment :
                 }
             }
         }
+        binding.rvHourWeather.isDrawPath(false)
         binding.rvHourWeather.setOnWeatherItemClickListener { itemView, position, weatherModel ->
             (requireActivity() as MainActivity).selectFragment(1)
             val index =

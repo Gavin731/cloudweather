@@ -240,6 +240,7 @@ class HourDetailsItemFragment :
             // 日落时间
             binding.tvSunsetTime.text = it.sunsetTime
             // 24小时天气
+            binding.rvHourWeather.isDrawPath(false)
             binding.rvHourWeather.list = generateHourWeatherData(it)
             binding.rvHourWeather.setColumnNumber(5)
             // 空气质量数值
