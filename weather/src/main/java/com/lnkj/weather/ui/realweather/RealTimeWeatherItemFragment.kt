@@ -28,9 +28,11 @@ import com.lnkj.weather.ui.rain.RainActivity
 import com.lnkj.weather.utils.ColorUtils
 import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.utils.ImageUtils
+import com.lnkj.weather.utils.WeatherUtils
 import com.lnkj.weather.widget.zzweatherview.WeatherModel
 import com.lnkj.weather.widget.zzweatherview.hour.HourWeatherModel
 import com.mufeng.mvvmlib.http.ApiException
+import com.mufeng.mvvmlib.image.GlideApp
 import com.mufeng.mvvmlib.utilcode.ext.loge
 import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
@@ -370,6 +372,8 @@ class RealTimeWeatherItemFragment :
             binding.cityWeather = it
             binding.tvTemperature.text = "${it.temperature}"
             // 空气质量
+            GlideApp.with(this).
+                load(WeatherUtils.getAirQualityDescription(it.airQualityName)).into(binding.ivAir)
             binding.tvAirQuality.text = "${it.airQualityName} ${it.airQualityValue}"
             // 设置预警信息
             alertData.clear()

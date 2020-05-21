@@ -338,6 +338,17 @@ object WeatherUtils {
         }
     }
 
+    fun getAirQualityDescription(chn: String): Int {
+        return when (chn) {
+            in "优" -> R.mipmap.weather_icon_air
+            in "良" -> R.mipmap.weather_icon_good
+            in "轻度污染" -> R.mipmap.weather_icon_mild
+            in "中度污染" -> R.mipmap.weather_icon_middle
+            in "重度污染" -> R.mipmap.weather_icon_serious
+            else -> R.mipmap.weather_icon_severity
+        }
+    }
+
     fun getAirQualityTxt(chn: Int): String {
         return when (chn) {
             in 0..50 -> "空气很好，出去呼吸下清新空气吧。"
