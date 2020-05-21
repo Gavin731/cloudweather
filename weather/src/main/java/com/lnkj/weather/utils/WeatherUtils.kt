@@ -55,29 +55,29 @@ object WeatherUtils {
      */
     fun getWeatherIcon(str: String): Int {
         return when (str) {
-            "CLEAR_DAY" -> R.drawable.weather_ico_clear_day
-            "CLEAR_NIGHT" -> R.drawable.weather_ico_clear_night
-            "PARTLY_CLOUDY_DAY" -> R.drawable.weather_ico_partly_cloudy_day
-            "PARTLY_CLOUDY_NIGHT" -> R.drawable.weather_ico_partly_cloudy_night
-            "CLOUDY" -> R.drawable.weather_ico_cloudy
-            "LIGHT_HAZE" -> R.drawable.weather_ico_light_haze
-            "MODERATE_HAZE" -> R.drawable.weather_ico_moderate_haze
-            "HEAVY_HAZE" -> R.drawable.weather_ico_heavy_haze
-            "LIGHT_RAIN" -> R.drawable.weather_ico_light_rain
-            "MODERATE_RAIN" -> R.drawable.weather_ico_moderate_rain
-            "HEAVY_RAIN" -> R.drawable.weather_ico_heavy_rain
-            "STORM_RAIN" -> R.drawable.weather_ico_storm_rain
-            "FOG" -> R.drawable.weather_ico_fog
-            "LIGHT_SNOW" -> R.drawable.weather_ico_light_snow
-            "MODERATE_SNOW" -> R.drawable.weather_ico_moderate_snow
-            "HEAVY_SNOW" -> R.drawable.weather_ico_heavy_snow
-            "STORM_SNOW" -> R.drawable.weather_ico_storm_snow
-            "DUST" -> R.drawable.weather_ico_dust
-            "SAND" -> R.drawable.weather_ico_sand
-            "WIND" -> R.drawable.weather_ico_wind
-            "THUNDER_SHOWER" -> R.drawable.weather_ico_thunder_shower
-            "HAIL" -> R.drawable.weather_ico_hail
-            "SLEET" -> R.drawable.weather_ico_sleet
+            "CLEAR_DAY" -> R.drawable.weather_ico_clear_day  //晴-白天
+            "CLEAR_NIGHT" -> R.drawable.weather_ico_clear_night  //晴-夜晚
+            "PARTLY_CLOUDY_DAY" -> R.drawable.weather_ico_partly_cloudy_day   //多云-白天
+            "PARTLY_CLOUDY_NIGHT" -> R.drawable.weather_ico_partly_cloudy_night  //多云-夜晚
+            "CLOUDY" -> R.drawable.weather_ico_cloudy  // 阴天
+            "LIGHT_HAZE" -> R.drawable.weather_ico_light_haze  // 雾霾
+            "MODERATE_HAZE" -> R.drawable.weather_ico_moderate_haze  // 雾霾
+            "HEAVY_HAZE" -> R.drawable.weather_ico_heavy_haze  // 雾霾
+            "LIGHT_RAIN" -> R.drawable.weather_ico_light_rain  //小雨
+            "MODERATE_RAIN" -> R.drawable.weather_ico_moderate_rain  // 雨
+            "HEAVY_RAIN" -> R.drawable.weather_ico_heavy_rain  // 雨
+            "STORM_RAIN" -> R.drawable.weather_ico_storm_rain  // 雨
+            "FOG" -> R.drawable.weather_ico_fog  // 雾
+            "LIGHT_SNOW" -> R.drawable.weather_ico_light_snow  //小雪
+            "MODERATE_SNOW" -> R.drawable.weather_ico_moderate_snow   // 雪
+            "HEAVY_SNOW" -> R.drawable.weather_ico_heavy_snow   // 雪
+            "STORM_SNOW" -> R.drawable.weather_ico_storm_snow   // 雪
+            "DUST" -> R.drawable.weather_ico_dust  // 浮尘
+            "SAND" -> R.drawable.weather_ico_sand  // 浮尘
+            "WIND" -> R.drawable.weather_ico_dust  // 浮尘
+            "THUNDER_SHOWER" -> R.drawable.weather_ico_thunder_shower  // 雷阵雨
+            "HAIL" -> R.drawable.weather_ico_hail  // 冰雹
+            "SLEET" -> R.drawable.weather_ico_sleet   // 雨夹雪
             else -> -1
         }
     }
