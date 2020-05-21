@@ -113,6 +113,7 @@
 
     <color name="weather_bg_thunder_shower_night_top_color">#17183A</color>
     <color name="weather_bg_thunder_shower_night_bottom_color">#262A51</color>
-    
+
+    <color name="weather_write">#ffffff</color>
     
 </resources>

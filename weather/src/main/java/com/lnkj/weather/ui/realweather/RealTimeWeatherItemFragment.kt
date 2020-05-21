@@ -18,6 +18,7 @@ import com.lnkj.library_base.db.bean.DailyWeather
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.db.bean.toLifeStyle
 import com.lnkj.library_base.event.EventKey
+import com.lnkj.library_base.util.DisplayUtil
 import com.lnkj.weather.R
 import com.lnkj.weather.base.BaseVMFragment
 import com.lnkj.weather.databinding.WeatherFragmentItemRealTimeWeatherBinding
@@ -114,9 +115,26 @@ class RealTimeWeatherItemFragment :
             return
         }
 
+        val titlHeight = DisplayUtil.dip2px(requireActivity(), 50f)
+        val windowHeight = DisplayUtil.getDensityHeight(requireActivity()) - titlHeight
+        val scrollHeight = DisplayUtil.getDensityHeight(requireActivity()) - (titlHeight * 2)
+
         binding.nestedScrollView.setOnScrollChangeListener { _: NestedScrollView?, _, scrollY, _, _ ->
-            val alpha = scrollY / 2
-            (parentFragment as RealTimeWeatherFragment).setRealtimeBlurView(alpha)
+            when {
+                scrollHeight > scrollY -> {
+                    //滑动小于开始渐变的位置  标题栏为透明  图标及文字为白色
+                    (parentFragment as RealTimeWeatherFragment).setTitleViewAlpha(0f)
+                }
+                scrollY in scrollHeight..windowHeight -> {
+                    //alpha 为控件的透明程度  0完全透明  1 不透明
+                    var alpha = (scrollY - scrollHeight) * 1.0 / titlHeight
+                    (parentFragment as RealTimeWeatherFragment).setTitleViewAlpha(alpha.toFloat())
+                }
+                else -> {
+                    //滑动大于完全显示的位置  标题栏为白色  图标及文字为深色
+                    (parentFragment as RealTimeWeatherFragment).setTitleViewAlpha(1f)
+                }
+            }
         }
 
         binding.vObscuration.clickWithTrigger { }
@@ -372,8 +390,8 @@ class RealTimeWeatherItemFragment :
             binding.cityWeather = it
             binding.tvTemperature.text = "${it.temperature}"
             // 空气质量
-            GlideApp.with(this).
-                load(WeatherUtils.getAirQualityDescription(it.airQualityName)).into(binding.ivAir)
+            GlideApp.with(this).load(WeatherUtils.getAirQualityDescription(it.airQualityName))
+                .into(binding.ivAir)
             binding.tvAirQuality.text = "${it.airQualityName} ${it.airQualityValue}"
             // 设置预警信息
             alertData.clear()
