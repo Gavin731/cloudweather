@@ -120,26 +120,26 @@ class RealTimeWeatherFragment :
         val i = titles.indexOf(title)
         if (this.index == i && oldBgResId != res) {
             this.backgroundColor = ColorUtils.getTopColor(res)
-            //原来的title颜色淡出
-            var defaultColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 1f, 0.8f);
-            defaultColorAnimator.duration = 100
-            defaultColorAnimator.start()
-            //改变颜色
-            binding.toolbar.backgroundColorResource = backgroundColor
-            //更换后淡入
-            var newColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 0.7f, 1f);
-            newColorAnimator.duration = 300
-            newColorAnimator.start()
+//            //原来的title颜色淡出
+//            var defaultColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 1f, 0.8f);
+//            defaultColorAnimator.duration = 100
+//            defaultColorAnimator.start()
+//            //改变颜色
+//            binding.toolbar.backgroundColorResource = backgroundColor
+//            //更换后淡入
+//            var newColorAnimator = ObjectAnimator.ofFloat(binding.toolbar, "alpha", 0.7f, 1f);
+//            newColorAnimator.duration = 300
+//            newColorAnimator.start()
 
 
             //原来的图片淡出
-            var defaultImgAnimator = ObjectAnimator.ofFloat(binding.ivImageBg, "alpha", 1f, 0.8f);
+            var defaultImgAnimator = ObjectAnimator.ofFloat(binding.clRootView, "alpha", 1f, 0.8f);
             defaultImgAnimator.duration = 100
             defaultImgAnimator.start()
             //改变图片
-            binding.ivImageBg.setImageResource(res)
+            binding.clRootView.setBackgroundResource(res)
             //更换后淡入
-            var newImgAnimator = ObjectAnimator.ofFloat(binding.ivImageBg, "alpha", 0.7f, 1f);
+            var newImgAnimator = ObjectAnimator.ofFloat(binding.clRootView, "alpha", 0.7f, 1f);
             newImgAnimator.duration = 300
             newImgAnimator.start()
 
