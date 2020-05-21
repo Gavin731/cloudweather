@@ -29,7 +29,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:layout_gravity="center"
-            >
+            android:visibility="gone">
 
             <com.chaychan.library.BottomBarItem
                 android:id="@+id/bbi_item_real_time"
