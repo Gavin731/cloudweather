@@ -2,7 +2,7 @@
 <resources>
     
     <color name="weather_color_000000">#000000</color>
-    <color name="weather_color_999999">#3B3B3B</color>
+<!--    <color name="weather_color_999999">#3B3B3B</color>-->
 
     <color name="weather_colorPrimary">#0080ff</color>
     <color name="weather_colorPrimaryDark">#0072e5</color>
@@ -10,6 +10,9 @@
     <color name="weather_color_AFB6CB">#AFB6CB</color>
     <color name="weather_color_4CA6FF">#4CA6FF</color>
     <color name="weather_color_51A4FF">#51A4FF</color>
+    <color name="weather_color_222222">#222222</color>
+    <color name="weather_color_999999">#999999</color>
+    <color name="weather_color_E1E1E1">#E1E1E1</color>
 
     <color name="weather_transparency_color">#00000000</color>
     <color name="weather_press_color">#3dffffff</color>

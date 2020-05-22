@@ -23,10 +23,12 @@ public class HourWeatherItemView extends LinearLayout {
     private View rootView;
     private TextView tvTime;
     private TextView tvWeather;
-    private HourTemperatureView ttvTemp;
-    private TextView tvAirLevel;
+    private HourTemperatureView ttvTemp;//显示圆点和温度view
+    private TextView tvAirLevel,tvTemperature;
     private ImageView ivWeather;
     private LinearLayout llItemView;
+
+    private boolean isShowTempView=false;//是否显示圆点和温度view,隐藏则只显示温度text
 
     public HourWeatherItemView(Context context) {
         this(context, null);
@@ -46,11 +48,19 @@ public class HourWeatherItemView extends LinearLayout {
         tvTime = rootView.findViewById(R.id.tv_time);
         tvWeather = rootView.findViewById(R.id.tv_weather);
         ttvTemp = rootView.findViewById(R.id.ttv);
+        tvTemperature = rootView.findViewById(R.id.tv_temp);
         ivWeather = rootView.findViewById(R.id.iv_weather);
         tvAirLevel = rootView.findViewById(R.id.tv_air_level);
         llItemView = rootView.findViewById(R.id.ll_item_view);
         rootView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         addView(rootView);
+        if(isShowTempView){
+            ttvTemp.setVisibility(VISIBLE);
+            tvTemperature.setVisibility(GONE);
+        }else{
+            ttvTemp.setVisibility(GONE);
+            tvTemperature.setVisibility(VISIBLE);
+        }
     }
 
     public void setTime(String time) {
@@ -102,6 +112,8 @@ public class HourWeatherItemView extends LinearLayout {
     public void setTemp(int temp) {
         if (ttvTemp != null)
             ttvTemp.setTemperature(temp);
+
+        tvTemperature.setText(temp+"°");
     }
 
     public void setImg(int resId) {

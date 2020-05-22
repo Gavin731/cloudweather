@@ -96,7 +96,7 @@
                             android:id="@+id/iv_air"
                             android:layout_width="@dimen/weather_dp_11"
                             android:layout_height="@dimen/weather_dp_15"
-                            android:layout_marginStart="10dp"/>
+                            android:layout_marginStart="10dp" />
 
                         <TextView
                             android:id="@+id/tv_air_quality"
@@ -379,23 +379,52 @@
                         android:id="@+id/ll_hour_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#1affffff"
+                        android:background="@color/white"
                         android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/viewLine3">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="43.67dp"
-                            android:gravity="center_vertical"
-                            android:paddingStart="18dp"
-                            android:text="24小时天气"
-                            android:textColor="@color/white"
-                            android:textSize="16.67sp" />
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="43.67dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:paddingStart="18dp"
+                                android:text="24小时天气"
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="16.67sp" />
+
+                            <TextView
+                                android:id="@+id/tv_sunriseTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@mipmap/weather_icon_sunrisetime"
+                                android:drawablePadding="@dimen/weather_dp_10"
+                                android:text="@{cityWeather.lifeStyleList.get(6).sunriseTime}"
+                                android:textColor="@color/weather_color_999999"
+                                android:textSize="@dimen/weather_sp_13" />
+
+                            <TextView
+                                android:id="@+id/tv_sunsetTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/weather_dp_20"
+                                android:layout_marginLeft="@dimen/weather_dp_10"
+                                android:drawableLeft="@mipmap/weather_icon_sunsettime"
+                                android:drawablePadding="@dimen/weather_dp_6"
+                                android:text="@{cityWeather.lifeStyleList.get(6).sunsetTime}"
+                                android:textColor="@color/weather_color_999999"
+                                android:textSize="@dimen/weather_sp_13" />
+                        </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
 
                         <com.lnkj.weather.widget.zzweatherview.hour.HourWeatherView
                             android:id="@+id/rv_hour_weather"
@@ -862,7 +891,7 @@
                 android:id="@+id/v_obscuration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </FrameLayout>
 
 
