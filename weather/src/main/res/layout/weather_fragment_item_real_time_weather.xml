@@ -186,7 +186,7 @@
                         android:layout_width="@dimen/weather_dp_260"
                         android:layout_height="27dp"
                         android:layout_marginTop="15.33dp"
-                        android:background="@drawable/weather_shape_rain_tip_bg"
+                        android:background="@drawable/weather_bg_hout_alert"
                         android:drawableStart="@mipmap/weather_icon_small_bell"
                         android:drawableEnd="@mipmap/weather_icon_arrow_right_white"
                         android:drawablePadding="10dp"
