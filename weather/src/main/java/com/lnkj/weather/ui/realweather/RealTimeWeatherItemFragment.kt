@@ -373,8 +373,8 @@ class RealTimeWeatherItemFragment :
             binding.cityWeather = it
             binding.tvTemperature.text = "${it.temperature}"
             // 空气质量
-            GlideApp.with(this).
-                load(WeatherUtils.getAirQualityDescription(it.airQualityName)).into(binding.ivAir)
+            GlideApp.with(this).load(WeatherUtils.getAirQualityDescription(it.airQualityName))
+                .into(binding.ivAir)
             binding.tvAirQuality.text = "${it.airQualityName} ${it.airQualityValue}"
             // 设置预警信息
             alertData.clear()
@@ -395,6 +395,10 @@ class RealTimeWeatherItemFragment :
             dailyListData.clear()
             dailyListData.addAll(it.dailyWeatherList)
             dailyListAdapter.notifyDataSetChanged()
+
+            //设置快捷天气的空气质量
+            WeatherUtils.setAirLevel(binding.tvTodayAirLevel, it.todayWeather.airQualityValue)
+            WeatherUtils.setAirLevel(binding.tvTomorrowAirLevel, it.tomorrowWeather.airQualityValue)
 
         }
     }

@@ -98,7 +98,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     apiLoading.postValue(Event(false))
                     return@launch
                 }
-
+                val daily = weatherBean.result!!.daily
                 // 今天天气
                 val todayWeather = TodayWeather(
                     DateUtils.formatDateT(
@@ -111,7 +111,9 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!,
                         weatherBean.result?.daily?.skycon20h32h?.get(0)?.value!!
                     ),
-                    WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!)
+                    WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!),
+                    WeatherUtils.getAirQualityDescription(daily?.airQuality?.aqi?.get(0)?.max!!.chn!!),
+                    daily?.airQuality?.aqi?.get(0)?.max!!.chn!!
                 )
                 // 明日天气
                 val tomorrowWeather = TodayWeather(
@@ -125,7 +127,9 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!,
                         weatherBean.result?.daily?.skycon20h32h?.get(1)?.value!!
                     ),
-                    WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!)
+                    WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(1)?.value!!),
+                    WeatherUtils.getAirQualityDescription(daily?.airQuality?.aqi?.get(1)?.max!!.chn!!),
+                    daily?.airQuality?.aqi?.get(1)?.max!!.chn!!
                 )
                 // 小时天气数据
                 val hourly = weatherBean.result!!.hourly
@@ -147,7 +151,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 }
 
                 // 天级天气数据
-                val daily = weatherBean.result!!.daily
+
                 val dailyWeatherList = mutableListOf<DailyWeather>()
                 daily!!.temperature?.forEachIndexed { index, temperature ->
                     val dailyWeather = DailyWeather(

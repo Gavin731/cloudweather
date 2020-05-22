@@ -238,6 +238,21 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
+                                android:id="@+id/tv_today_air_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="@dimen/weather_dp_10"
+                                android:layout_marginTop="@dimen/weather_dp_4"
+                                android:gravity="center"
+                                android:paddingStart="6dp"
+                                android:paddingEnd="6dp"
+                                android:textColor="#fff"
+                                android:textSize="@dimen/weather_sp_8"
+                                app:layout_constraintLeft_toRightOf="@+id/tvToday"
+                                app:layout_constraintTop_toTopOf="@+id/tvToday"
+                                tools:text="良" />
+
+                            <TextView
                                 android:id="@+id/tvDateToday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -310,6 +325,21 @@
                                 android:textSize="@dimen/weather_sp_14"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_tomorrow_air_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="@dimen/weather_dp_10"
+                                android:layout_marginTop="@dimen/weather_dp_4"
+                                android:gravity="center"
+                                android:paddingStart="6dp"
+                                android:paddingEnd="6dp"
+                                android:textColor="#fff"
+                                android:textSize="@dimen/weather_sp_8"
+                                app:layout_constraintLeft_toRightOf="@+id/tvTomorrow"
+                                app:layout_constraintTop_toTopOf="@+id/tvTomorrow"
+                                tools:text="良" />
 
                             <TextView
                                 android:id="@+id/tvDateTomorrow"
