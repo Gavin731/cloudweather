@@ -24,11 +24,11 @@ public class HourWeatherItemView extends LinearLayout {
     private TextView tvTime;
     private TextView tvWeather;
     private HourTemperatureView ttvTemp;//显示圆点和温度view
-    private TextView tvAirLevel,tvTemperature;
+    private TextView tvAirLevel, tvTemperature;
     private ImageView ivWeather;
     private LinearLayout llItemView;
 
-    private boolean isShowTempView=false;//是否显示圆点和温度view,隐藏则只显示温度text
+    private boolean isShowTempView = false;//是否显示圆点和温度view,隐藏则只显示温度text
 
     public HourWeatherItemView(Context context) {
         this(context, null);
@@ -54,10 +54,10 @@ public class HourWeatherItemView extends LinearLayout {
         llItemView = rootView.findViewById(R.id.ll_item_view);
         rootView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         addView(rootView);
-        if(isShowTempView){
+        if (isShowTempView) {
             ttvTemp.setVisibility(VISIBLE);
             tvTemperature.setVisibility(GONE);
-        }else{
+        } else {
             ttvTemp.setVisibility(GONE);
             tvTemperature.setVisibility(VISIBLE);
         }
@@ -66,6 +66,10 @@ public class HourWeatherItemView extends LinearLayout {
     public void setTime(String time) {
         if (tvTime != null)
             tvTime.setText(time);
+    }
+
+    public void setTimeColor(int resId) {
+        tvTime.setTextColor(resId);
     }
 
     public int getTempX() {
@@ -113,7 +117,7 @@ public class HourWeatherItemView extends LinearLayout {
         if (ttvTemp != null)
             ttvTemp.setTemperature(temp);
 
-        tvTemperature.setText(temp+"°");
+        tvTemperature.setText(temp + "°");
     }
 
     public void setImg(int resId) {
@@ -132,4 +136,11 @@ public class HourWeatherItemView extends LinearLayout {
         }
     }
 
+    public void setTvWeatherColor(int resId) {
+        tvWeather.setTextColor(resId);
+    }
+
+    public void setTvTempColor(int resId) {
+        tvTemperature.setTextColor(resId);
+    }
 }

@@ -639,7 +639,7 @@
                                 android:ellipsize="end"
                                 android:singleLine="true"
                                 android:text="@{cityWeather.dressLifeStyle.dressBottomTip}"
-                                android:textColor="@color/weather_color_666666"
+                                android:textColor="#80666666"
                                 android:textSize="12sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/iv_weather_clothes"

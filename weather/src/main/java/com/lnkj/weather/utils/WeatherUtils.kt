@@ -115,8 +115,16 @@ object WeatherUtils {
                     R.drawable.weather_bg_haze
                 }
             }
+            //小雨
+            str.startsWith("小雨") -> {
+                if (!isDayTime) {
+                    R.drawable.weather_bg_shower_night
+                } else {
+                    R.drawable.weather_bg_shower
+                }
+            }
             // 雨
-            str.startsWith("小雨") || str.startsWith("中雨")
+            str.startsWith("中雨")
                     || str.startsWith("大雨") || str.startsWith("暴雨") -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
@@ -132,8 +140,16 @@ object WeatherUtils {
                     R.drawable.weather_bg_fog
                 }
             }
+            //小雪
+            str.startsWith("小雪") -> {
+                if (!isDayTime) {
+                    R.drawable.weather_bg_scouther_night
+                } else {
+                    R.drawable.weather_bg_scouther
+                }
+            }
             // 雪
-            str.startsWith("小雪") || str.startsWith("中雪")
+            str.startsWith("中雪")
                     || str.startsWith("大雪") || str.startsWith("暴雪") -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night

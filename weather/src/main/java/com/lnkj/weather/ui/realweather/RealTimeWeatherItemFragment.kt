@@ -383,6 +383,9 @@ class RealTimeWeatherItemFragment :
 
             // 24小时趋势
             binding.rvHourWeather.list = generateHourWeatherData(it)
+            binding.rvHourWeather.setTimeColor(resources.getColor(R.color.weather_color_999999))
+            binding.rvHourWeather.setTvWeatherColor(resources.getColor(R.color.weather_color_222222))
+            binding.rvHourWeather.setTvTempColor(resources.getColor(R.color.weather_color_222222))
             binding.rvHourWeather.setColumnNumber(5)
 
             // 15天天气趋势
