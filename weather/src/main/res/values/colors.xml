@@ -11,8 +11,10 @@
     <color name="weather_color_4CA6FF">#4CA6FF</color>
     <color name="weather_color_51A4FF">#51A4FF</color>
     <color name="weather_color_222222">#222222</color>
+    <color name="weather_color_666666">#ff666666</color>
     <color name="weather_color_999999">#999999</color>
     <color name="weather_color_E1E1E1">#E1E1E1</color>
+    <color name="weather_color_F2F2F2">#F2F2F2</color>
 
     <color name="weather_transparency_color">#00000000</color>
     <color name="weather_press_color">#3dffffff</color>

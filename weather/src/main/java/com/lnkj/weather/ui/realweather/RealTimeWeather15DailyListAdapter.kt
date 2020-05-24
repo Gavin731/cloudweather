@@ -24,11 +24,11 @@ class RealTimeWeather15DailyListAdapter (data: MutableList<DailyWeather>): BaseQ
         val binding = helper.getBinding<WeatherItem15dayListBinding>()
         if (binding != null) {
 
-            if (helper.layoutPosition == 0){
-                binding.alpha = 0.5f
-            }else{
-                binding.alpha = 1f
-            }
+//            if (helper.layoutPosition == 0){
+//                binding.alpha = 0.5f
+//            }else{
+//            }
+            binding.alpha = 1f
 
             if (helper.layoutPosition == 1 || helper.layoutPosition == 2 || helper.layoutPosition == 3){
                 helper.getView<LinearLayout>(R.id.ll_root_view).setBackgroundResource(R.drawable.weather_selector_hour_press_bg)

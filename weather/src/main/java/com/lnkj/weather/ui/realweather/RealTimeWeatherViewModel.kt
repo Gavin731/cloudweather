@@ -157,8 +157,14 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     val dailyWeather = DailyWeather(
                         date = DateUtils.formatDateT(temperature?.date!!, PATTERN_14),
                         formatDate = DateUtils.formatWeekT(temperature.date),
-                        weatherName = WeatherUtils.getWeatherName(daily?.skycon?.get(index)?.value!!),
-                        weatherIcon = WeatherUtils.getWeatherIcon(daily.skycon[index]?.value!!),
+
+//                        weatherName = WeatherUtils.getWeatherName(daily?.skycon?.get(index)?.value!!),
+                        weatherName=WeatherUtils.formatWeather(
+                            daily?.skycon08h20h?.get(index)?.value!!,
+                            daily?.skycon20h32h?.get(index)?.value!!
+                        ),
+
+                        weatherIcon = WeatherUtils.getWeatherIcon(daily?.skycon?.get(index)?.value!!),
                         weatherDayName = WeatherUtils.getWeatherName(daily.skycon08h20h?.get(index)?.value!!),
                         weatherDayIcon = WeatherUtils.getWeatherIcon(daily.skycon08h20h[index]?.value!!),
                         weatherNightName = WeatherUtils.getWeatherName(daily.skycon20h32h?.get(index)?.value!!),
@@ -219,7 +225,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     ),
                     windDirection = WeatherUtils.getWindDirection(yesterdayWeatherBean.result!!.daily!!.wind!![0]?.max!!.direction!!)
                 )
-                dailyWeatherList.add(0, dailyWeather)
+//                dailyWeatherList.add(0, dailyWeather)
                 //穿衣指数
                 val dress =
                     lifestyleBean.heWeather6?.get(0)?.lifestyle?.filter { it?.type == "drsg" }
@@ -490,7 +496,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     windSpeed = WeatherUtils.getWindSpeed(weatherBean.result?.realtime?.wind?.speed!!.toInt()),
                     windDirection = WeatherUtils.getWindDirection(weatherBean.result?.realtime?.wind?.direction!!),
                     humidity = "${(weatherBean.result?.realtime?.humidity!! * 100).toInt()}%",
-                    airPressure = "${weatherBean.result?.realtime?.pressure?.toInt()!! / 100}hPa",
+//                    airPressure = "${weatherBean.result?.realtime?.pressure?.toInt()!! / 100}hPa",//气压
+                    airPressure = ultravioletLight?.brf,//不想换数据库了，用气压字段表示紫外线
                     rainTip = rainTip!!,
                     hasRain = WeatherUtils.hasRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!) || WeatherUtils.hasRain(
                         weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!

@@ -32,7 +32,7 @@
                 android:text="@{dailyWeather.formatDate}"
                 tools:text="昨天"
                 android:alpha="@{alpha}"
-                android:textColor="@color/white"
+                android:textColor="@color/weather_color_222222"
                 android:layout_marginStart="19dp"
                 android:textSize="14sp" />
 
@@ -42,7 +42,7 @@
                 android:text="@{dailyWeather.date}"
                 tools:text="11/28"
                 android:alpha="@{alpha}"
-                android:textColor="@color/white"
+                android:textColor="@color/weather_color_999999"
                 android:layout_marginStart="7dp"
                 android:textSize="11sp"
                 />
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{dailyWeather.weatherName}"
-                android:textColor="@color/white"
+                android:textColor="@color/weather_color_222222"
                 android:textSize="14sp"
                 android:alpha="@{alpha}"
                 tools:text="晴"
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{@string/weather_temperature_min_max(dailyWeather.min,dailyWeather.max)}"
                 android:layout_marginEnd="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/weather_color_222222"
                 android:alpha="@{alpha}"
                 android:textSize="13.33sp"
                 tools:text="15~20°"
@@ -89,7 +89,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.33dp"
-            android:background="#4dffffff"
+            android:background="@color/weather_color_F2F2F2"
             />
 
     </LinearLayout>
