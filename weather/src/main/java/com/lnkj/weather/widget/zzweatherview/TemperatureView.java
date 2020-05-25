@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.lnkj.weather.R;
+
 /**
  * TemperatureView
  *
@@ -57,8 +59,8 @@ public class TemperatureView extends View {
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
-        textDayColor = 0xffffffff;
-        textNightColor = 0xffffffff;
+        textDayColor = context.getResources().getColor(R.color.weather_color_222222);
+        textNightColor = context.getResources().getColor(R.color.weather_color_222222);
         pointDayColor = 0xFFFFDF31;
         pointNightColor = 0xFF5DBDFF;
     }

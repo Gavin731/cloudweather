@@ -37,6 +37,10 @@ public class HourWeatherView extends HorizontalScrollView {
 
     private int columnNumber = 6;
 
+    private boolean isDrawPath = true;
+
+    private int timeColorId, weatherColor, tvTempColor;
+
     private OnWeatherItemClickListener weatherItemClickListener;
 
     public HourWeatherView(Context context) {
@@ -232,8 +236,9 @@ public class HourWeatherView extends HorizontalScrollView {
                     currentPointY1 = nextPointY1;
 
                 }
-
-                canvas.drawPath(path, paint);
+                if (isDrawPath) {
+                    canvas.drawPath(path, paint);
+                }
 
             }
 
@@ -277,6 +282,9 @@ public class HourWeatherView extends HorizontalScrollView {
         for (int i = 0; i < list.size(); i++) {
             HourWeatherModel model = list.get(i);
             final HourWeatherItemView itemView = new HourWeatherItemView(getContext());
+            itemView.setTimeColor(timeColorId);
+            itemView.setTvWeatherColor(weatherColor);
+            itemView.setTvTempColor(tvTempColor);
             itemView.setMaxTemp(max);
             itemView.setMinTemp(min);
             itemView.setTime(model.getTime());
@@ -346,9 +354,38 @@ public class HourWeatherView extends HorizontalScrollView {
         }
     }
 
+    public void isDrawPath(boolean isDraw) {
+        this.isDrawPath = isDraw;
+    }
 
     public interface OnWeatherItemClickListener {
         void onItemClick(HourWeatherItemView itemView, int position, HourWeatherModel weatherModel);
     }
 
+    /**
+     * 设置时间颜色
+     *
+     * @param resId
+     */
+    public void setTimeColor(int resId) {
+        timeColorId = resId;
+    }
+
+    /**
+     * 设置天气颜色
+     *
+     * @param resId
+     */
+    public void setTvWeatherColor(int resId) {
+        weatherColor = resId;
+    }
+
+    /**
+     * 设置文本温度颜色，不是有曲线图的温度颜色
+     *
+     * @param resId
+     */
+    public void setTvTempColor(int resId) {
+        tvTempColor = resId;
+    }
 }

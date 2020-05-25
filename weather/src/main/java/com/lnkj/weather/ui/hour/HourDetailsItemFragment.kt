@@ -11,6 +11,7 @@ import com.lnkj.weather.http.bean.HourDetailsWeatherBean
 import com.lnkj.weather.ui.exponent.ExponentActivity
 import com.lnkj.weather.ui.hotrank.HotRankActivity
 import com.lnkj.weather.ui.main.MainActivity
+import com.lnkj.weather.utils.WeatherUtils
 import com.lnkj.weather.widget.zzweatherview.hour.HourWeatherModel
 import com.mufeng.mvvmlib.basic.view.BaseVMFragment
 import com.mufeng.mvvmlib.http.ApiException
@@ -240,7 +241,12 @@ class HourDetailsItemFragment :
             // 日落时间
             binding.tvSunsetTime.text = it.sunsetTime
             // 24小时天气
+            binding.rvHourWeather.isDrawPath(false)
             binding.rvHourWeather.list = generateHourWeatherData(it)
+            binding.rvHourWeather.setTimeColor(resources.getColor(R.color.weather_color_80ffffff))
+            binding.rvHourWeather.setTvWeatherColor(resources.getColor(R.color.white))
+            binding.rvHourWeather.setTvTempColor(resources.getColor(R.color.white))
+
             binding.rvHourWeather.setColumnNumber(5)
             // 空气质量数值
             binding.circleProgressBar.hint = it.airQualityValue.toString()
@@ -258,6 +264,9 @@ class HourDetailsItemFragment :
                 }
             }
             binding.tvAirTip.text = it.airQualityTxt
+
+            //设置快捷天气的空气质量
+            WeatherUtils.setAirLevel(binding.tvTodayAirLevel, it.airQualityValue)
 
 
         }

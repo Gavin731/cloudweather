@@ -97,7 +97,6 @@ public class ZzWeatherView extends HorizontalScrollView {
 
 
                 TemperatureView tv = (TemperatureView) c.findViewById(R.id.ttv_day);
-
                 tv.setRadius(10);
 
                 int x0 = (int) (dX + tv.getxPointDay());
@@ -427,7 +426,7 @@ public class ZzWeatherView extends HorizontalScrollView {
 
             itemView.setNightImg(model.getNightPic());
             itemView.canClick(i == 1 || i == 2 || i == 3);
-            itemView.setYesterdayBg(i == 0);
+//            itemView.setYesterdayBg(i == 0);
 
             itemView.setWindOri(model.getWindOrientation());
             itemView.setWindLevel(model.getWindLevel());

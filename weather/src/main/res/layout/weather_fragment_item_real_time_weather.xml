@@ -38,8 +38,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="50dp">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/tvTemperature"
@@ -96,7 +95,7 @@
                             android:id="@+id/iv_air"
                             android:layout_width="@dimen/weather_dp_11"
                             android:layout_height="@dimen/weather_dp_15"
-                            android:layout_marginStart="10dp"/>
+                            android:layout_marginStart="10dp" />
 
                         <TextView
                             android:id="@+id/tv_air_quality"
@@ -166,7 +165,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="13dp"
-                            android:text="气压"
+                            android:text="紫外线"
                             android:textColor="#b3ffffff"
                             android:textSize="14sp" />
 
@@ -183,10 +182,10 @@
 
                     <TextView
                         android:id="@+id/tvRainTip"
-                        android:layout_width="@dimen/weather_dp_170"
+                        android:layout_width="@dimen/weather_dp_260"
                         android:layout_height="27dp"
                         android:layout_marginTop="15.33dp"
-                        android:background="@drawable/weather_shape_rain_tip_bg"
+                        android:background="@drawable/weather_bg_hout_alert"
                         android:drawableStart="@mipmap/weather_icon_small_bell"
                         android:drawableEnd="@mipmap/weather_icon_arrow_right_white"
                         android:drawablePadding="10dp"
@@ -203,21 +202,15 @@
                         app:layout_constraintStart_toStartOf="@+id/ll_weather_info"
                         app:layout_constraintTop_toBottomOf="@+id/ll_weather_info" />
 
-                    <View
-                        android:id="@+id/viewLine"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.33dp"
-                        android:layout_marginTop="170dp"
-                        android:background="#4dffffff"
-                        app:layout_constraintTop_toBottomOf="@+id/tvRainTip" />
 
                     <LinearLayout
                         android:id="@+id/ll_today_tomorrow_weather"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:background="#1affffff"
+                        android:layout_marginTop="84dp"
+                        android:background="@drawable/weather_bg_top_write"
                         android:orientation="horizontal"
-                        app:layout_constraintTop_toBottomOf="@+id/viewLine">
+                        app:layout_constraintTop_toBottomOf="@+id/tvRainTip">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cl_today_weather"
@@ -232,10 +225,25 @@
                                 android:layout_marginStart="18dp"
                                 android:layout_marginTop="12dp"
                                 android:text="今天"
-                                android:textColor="@color/white"
-                                android:textSize="14sp"
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="@dimen/weather_sp_14"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_today_air_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="@dimen/weather_dp_10"
+                                android:layout_marginTop="@dimen/weather_dp_4"
+                                android:gravity="center"
+                                android:paddingStart="6dp"
+                                android:paddingEnd="6dp"
+                                android:textColor="#fff"
+                                android:textSize="@dimen/weather_sp_8"
+                                app:layout_constraintLeft_toRightOf="@+id/tvToday"
+                                app:layout_constraintTop_toTopOf="@+id/tvToday"
+                                tools:text="良" />
 
                             <TextView
                                 android:id="@+id/tvDateToday"
@@ -244,6 +252,7 @@
                                 android:text="@{cityWeather.todayWeather.date}"
                                 android:textColor="#66ffffff"
                                 android:textSize="10.67dp"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="@+id/tvToday"
                                 app:layout_constraintStart_toStartOf="@+id/tvToday"
                                 app:layout_constraintTop_toBottomOf="@+id/tvToday" />
@@ -252,44 +261,45 @@
                                 android:id="@+id/tvTodayTemperature"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="15.33dp"
+                                android:layout_marginStart="18dp"
                                 android:text="@{@string/weather_temperature_min_max(cityWeather.todayWeather.min,cityWeather.todayWeather.max)}"
-                                android:textColor="@color/white"
-                                android:textSize="18.67dp"
-                                app:layout_constraintBottom_toBottomOf="@+id/tvToday"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/tvToday" />
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="@dimen/weather_sp_13"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/tvToday"
+                                app:layout_constraintStart_toStartOf="@+id/tvToday"
+                                app:layout_constraintTop_toBottomOf="@+id/tvDateToday" />
 
                             <ImageView
                                 android:id="@+id/ivTodayWeather"
                                 binding_image_res="@{cityWeather.todayWeather.weatherIcon}"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/tvToday"
-                                app:layout_constraintStart_toStartOf="@+id/tvToday"
-                                app:layout_constraintTop_toBottomOf="@+id/tvDateToday" />
+                                android:layout_marginEnd="15.33dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tvToday"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/tvToday" />
 
                             <TextView
                                 android:id="@+id/tvTodayWeather"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="15.67dp"
-                                android:drawableEnd="@mipmap/weather_icon_arrow_right_white"
+                                android:drawableEnd="@mipmap/arrow_black"
                                 android:drawablePadding="5dp"
                                 android:text="@{cityWeather.todayWeather.weatherName}"
-                                android:textColor="@color/white"
-                                android:textSize="16.67sp"
-                                app:layout_constraintBottom_toBottomOf="@+id/ivTodayWeather"
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="@dimen/weather_sp_13"
+                                app:layout_constraintBottom_toBottomOf="@+id/tvTodayTemperature"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/ivTodayWeather" />
+                                app:layout_constraintTop_toTopOf="@+id/tvTodayTemperature" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <View
                             android:layout_width="0.33dp"
                             android:layout_height="match_parent"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cl_tomorrow_weather"
@@ -304,10 +314,25 @@
                                 android:layout_marginStart="18dp"
                                 android:layout_marginTop="12dp"
                                 android:text="明天"
-                                android:textColor="@color/white"
-                                android:textSize="14sp"
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="@dimen/weather_sp_14"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/tv_tomorrow_air_level"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="@dimen/weather_dp_10"
+                                android:layout_marginTop="@dimen/weather_dp_4"
+                                android:gravity="center"
+                                android:paddingStart="6dp"
+                                android:paddingEnd="6dp"
+                                android:textColor="#fff"
+                                android:textSize="@dimen/weather_sp_8"
+                                app:layout_constraintLeft_toRightOf="@+id/tvTomorrow"
+                                app:layout_constraintTop_toTopOf="@+id/tvTomorrow"
+                                tools:text="良" />
 
                             <TextView
                                 android:id="@+id/tvDateTomorrow"
@@ -316,6 +341,7 @@
                                 android:text="@{cityWeather.tomorrowWeather.date}"
                                 android:textColor="#66ffffff"
                                 android:textSize="10.67sp"
+                                android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="@+id/tvTomorrow"
                                 app:layout_constraintStart_toStartOf="@+id/tvTomorrow"
                                 app:layout_constraintTop_toBottomOf="@+id/tvTomorrow" />
@@ -324,78 +350,101 @@
                                 android:id="@+id/tvTomorrowTemperature"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="15.33dp"
+                                android:layout_marginStart="18dp"
                                 android:text="@{@string/weather_temperature_min_max(cityWeather.tomorrowWeather.min,cityWeather.tomorrowWeather.max)}"
-                                android:textColor="@color/white"
-                                android:textSize="18.67sp"
-                                app:layout_constraintBottom_toBottomOf="@+id/tvTomorrow"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/tvTomorrow" />
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="@dimen/weather_sp_13"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="@+id/tvTomorrow"
+                                app:layout_constraintStart_toStartOf="@+id/tvTomorrow"
+                                app:layout_constraintTop_toBottomOf="@+id/tvDateTomorrow" />
 
                             <ImageView
                                 android:id="@+id/ivTomorrowWeather"
                                 binding_image_res="@{cityWeather.tomorrowWeather.weatherIcon}"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/tvTomorrow"
-                                app:layout_constraintStart_toStartOf="@+id/tvTomorrow"
-                                app:layout_constraintTop_toBottomOf="@+id/tvDateTomorrow" />
+                                android:layout_marginEnd="15.33dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/tvTomorrow"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/tvTomorrow" />
 
                             <TextView
                                 android:id="@+id/tvTomorrowWeather"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="15.67dp"
-                                android:drawableEnd="@mipmap/weather_icon_arrow_right_white"
+                                android:drawableEnd="@mipmap/arrow_black"
                                 android:drawablePadding="5dp"
                                 android:text="@{cityWeather.tomorrowWeather.weatherName}"
-                                android:textColor="@color/white"
-                                android:textSize="16.67sp"
-                                app:layout_constraintBottom_toBottomOf="@+id/ivTomorrowWeather"
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="@dimen/weather_sp_13"
+                                app:layout_constraintBottom_toBottomOf="@+id/tvTomorrowTemperature"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="@+id/ivTomorrowWeather" />
+                                app:layout_constraintTop_toTopOf="@+id/tvTomorrowTemperature" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/viewLine2"
+                        android:id="@+id/interval1"
                         android:layout_width="match_parent"
-                        android:layout_height="0.33dp"
-                        android:background="#4dffffff"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_today_tomorrow_weather" />
+                        android:layout_height="@dimen/weather_dp_6"
+                        android:background="@color/weather_color_F2F2F2"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_today_tomorrow_weather"/>
 
-                    <View
-                        android:id="@+id/viewLine3"
-                        android:layout_width="match_parent"
-                        android:layout_height="0.33dp"
-                        android:layout_marginTop="6.33dp"
-                        android:background="#4dffffff"
-                        app:layout_constraintTop_toBottomOf="@+id/viewLine2" />
 
                     <LinearLayout
                         android:id="@+id/ll_hour_details"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#1affffff"
+                        android:background="@color/white"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@+id/viewLine3">
+                        app:layout_constraintTop_toBottomOf="@+id/interval1">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="43.67dp"
-                            android:gravity="center_vertical"
-                            android:paddingStart="18dp"
-                            android:text="24小时天气"
-                            android:textColor="@color/white"
-                            android:textSize="16.67sp" />
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="43.67dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:paddingStart="18dp"
+                                android:text="24小时天气"
+                                android:textColor="@color/weather_color_222222"
+                                android:textSize="16.67sp" />
+
+                            <TextView
+                                android:id="@+id/tv_sunriseTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableLeft="@mipmap/weather_icon_sunrisetime"
+                                android:drawablePadding="@dimen/weather_dp_10"
+                                android:text="@{cityWeather.lifeStyleList.get(6).sunriseTime}"
+                                android:textColor="@color/weather_color_999999"
+                                android:textSize="@dimen/weather_sp_13" />
+
+                            <TextView
+                                android:id="@+id/tv_sunsetTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/weather_dp_10"
+                                android:layout_marginRight="@dimen/weather_dp_20"
+                                android:drawableLeft="@mipmap/weather_icon_sunsettime"
+                                android:drawablePadding="@dimen/weather_dp_6"
+                                android:text="@{cityWeather.lifeStyleList.get(6).sunsetTime}"
+                                android:textColor="@color/weather_color_999999"
+                                android:textSize="@dimen/weather_sp_13" />
+                        </LinearLayout>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
 
                         <com.lnkj.weather.widget.zzweatherview.hour.HourWeatherView
                             android:id="@+id/rv_hour_weather"
@@ -403,28 +452,23 @@
                             android:layout_height="wrap_content"
                             android:overScrollMode="never" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
 
                     </LinearLayout>
 
                     <View
-                        android:id="@+id/viewLine4"
+                        android:id="@+id/interval2"
                         android:layout_width="match_parent"
-                        android:layout_height="0.33dp"
-                        android:layout_marginTop="6.33dp"
-                        android:background="#4dffffff"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_hour_details" />
+                        android:layout_height="@dimen/weather_dp_6"
+                        android:background="@color/weather_color_F2F2F2"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_hour_details"/>
 
                     <LinearLayout
                         android:id="@+id/ll_day_list_chart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="#1affffff"
+                        android:background="@color/white"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@+id/viewLine4">
+                        app:layout_constraintTop_toBottomOf="@+id/interval2">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -439,7 +483,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:text="15日天气"
-                                android:textColor="@color/white"
+                                android:textColor="@color/weather_color_222222"
                                 android:textSize="16.67sp" />
 
                             <RadioGroup
@@ -456,9 +500,6 @@
                                     android:id="@+id/rb_day_chart"
                                     android:layout_width="45.3dp"
                                     android:layout_height="match_parent"
-                                    android:layout_marginStart="2dp"
-                                    android:layout_marginTop="2dp"
-                                    android:layout_marginBottom="2dp"
                                     android:background="@drawable/weather_secetor_day_chart_bg"
                                     android:button="@null"
                                     android:checked="true"
@@ -471,9 +512,6 @@
                                     android:id="@+id/rb_day_list"
                                     android:layout_width="45.3dp"
                                     android:layout_height="match_parent"
-                                    android:layout_marginTop="2dp"
-                                    android:layout_marginEnd="2dp"
-                                    android:layout_marginBottom="2dp"
                                     android:background="@drawable/weather_secetor_day_chart_bg"
                                     android:button="@null"
                                     android:gravity="center"
@@ -485,9 +523,15 @@
 
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.33dp"
+                            android:background="@color/weather_color_E1E1E1" />
+
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:background="@color/white">
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_day_list"
@@ -514,19 +558,20 @@
 
                     </LinearLayout>
 
+                    <View
+                        android:id="@+id/interval3"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/weather_dp_6"
+                        android:background="@color/weather_color_F2F2F2"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_day_list_chart"/>
+
                     <LinearLayout
                         android:id="@+id/ll_live_index"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:background="#1affffff"
+                        android:background="@color/white"
                         android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_day_list_chart">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                        app:layout_constraintTop_toBottomOf="@+id/interval3">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -534,13 +579,13 @@
                             android:layout_marginStart="17.67dp"
                             android:gravity="center_vertical"
                             android:text="今日生活指数"
-                            android:textColor="@color/white"
+                            android:textColor="@color/weather_color_222222"
                             android:textSize="16.67sp" />
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cl_live_index_coat"
@@ -550,10 +595,10 @@
                             <ImageView
                                 android:id="@+id/iv_weather_clothes"
                                 binding_image_res="@{cityWeather.dressLifeStyle.dressIcon}"
-                                android:layout_width="33.44dp"
-                                android:layout_height="28.67dp"
+                                android:layout_width="@dimen/weather_dp_30"
+                                android:layout_height="@dimen/weather_dp_30"
                                 android:layout_marginStart="34dp"
-                                android:layout_marginTop="18.33dp"
+                                android:layout_marginTop="@dimen/weather_dp_15"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -563,7 +608,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="@{cityWeather.dressLifeStyle.indexBrf}"
-                                android:textColor="@color/white"
+                                android:textColor="@color/weather_color_222222"
                                 android:textSize="12.67sp"
                                 app:layout_constraintEnd_toEndOf="@+id/iv_weather_clothes"
                                 app:layout_constraintStart_toStartOf="@+id/iv_weather_clothes"
@@ -576,9 +621,10 @@
                                 android:layout_marginStart="30dp"
                                 android:layout_marginEnd="20dp"
                                 android:ellipsize="end"
+                                android:layout_marginTop="@dimen/dp_4"
                                 android:singleLine="true"
                                 android:text="@{cityWeather.dressLifeStyle.dressTopTip}"
-                                android:textColor="@color/white"
+                                android:textColor="@color/weather_color_222222"
                                 android:textSize="14sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/iv_weather_clothes"
@@ -593,7 +639,7 @@
                                 android:ellipsize="end"
                                 android:singleLine="true"
                                 android:text="@{cityWeather.dressLifeStyle.dressBottomTip}"
-                                android:textColor="#80ffffff"
+                                android:textColor="#80666666"
                                 android:textSize="12sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/iv_weather_clothes"
@@ -604,7 +650,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -630,7 +676,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(0).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -638,7 +684,7 @@
                             <View
                                 android:layout_width="0.33dp"
                                 android:layout_height="match_parent"
-                                android:background="#4dffffff" />
+                                android:background="@color/weather_color_E1E1E1" />
 
                             <LinearLayout
                                 android:id="@+id/ll_live_index_cold"
@@ -659,7 +705,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(1).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -667,7 +713,7 @@
                             <View
                                 android:layout_width="0.33dp"
                                 android:layout_height="match_parent"
-                                android:background="#4dffffff" />
+                                android:background="@color/weather_color_E1E1E1" />
 
                             <LinearLayout
                                 android:id="@+id/ll_live_index_ultraviolet_light"
@@ -688,7 +734,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(2).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -696,7 +742,7 @@
                             <View
                                 android:layout_width="0.33dp"
                                 android:layout_height="match_parent"
-                                android:background="#4dffffff" />
+                                android:background="@color/weather_color_E1E1E1" />
 
                             <LinearLayout
                                 android:id="@+id/ll_live_index_coat_hanger"
@@ -717,7 +763,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(3).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -727,7 +773,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
 
 
                         <LinearLayout
@@ -754,7 +800,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(4).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -762,7 +808,7 @@
                             <View
                                 android:layout_width="0.33dp"
                                 android:layout_height="match_parent"
-                                android:background="#4dffffff" />
+                                android:background="@color/weather_color_E1E1E1" />
 
                             <LinearLayout
                                 android:id="@+id/ll_live_index_travel"
@@ -783,7 +829,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(5).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -791,7 +837,7 @@
                             <View
                                 android:layout_width="0.33dp"
                                 android:layout_height="match_parent"
-                                android:background="#4dffffff" />
+                                android:background="@color/weather_color_E1E1E1" />
 
                             <LinearLayout
                                 android:id="@+id/ll_live_index_angling"
@@ -812,7 +858,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="@{cityWeather.lifeStyleList.get(6).indexBrf}"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33sp" />
 
                             </LinearLayout>
@@ -820,7 +866,7 @@
                             <View
                                 android:layout_width="0.33dp"
                                 android:layout_height="match_parent"
-                                android:background="#4dffffff" />
+                                android:background="@color/weather_color_E1E1E1" />
 
                             <LinearLayout
                                 android:id="@+id/ll_live_index_high_temperature"
@@ -841,7 +887,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:text="高温排行"
-                                    android:textColor="@color/white"
+                                    android:textColor="@color/weather_color_222222"
                                     android:textSize="13.33dp" />
 
                             </LinearLayout>
@@ -850,7 +896,17 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="0.33dp"
-                            android:background="#4dffffff" />
+                            android:background="@color/weather_color_E1E1E1" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/weather_dp_50"
+                            android:background="@color/weather_color_F2F2F2"
+                            android:gravity="center"
+                            android:text="©云端天气预报"
+                            android:textColor="@color/weather_color_999999"
+                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -862,7 +918,7 @@
                 android:id="@+id/v_obscuration"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </FrameLayout>
 
 

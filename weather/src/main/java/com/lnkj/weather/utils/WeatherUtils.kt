@@ -1,5 +1,6 @@
 package com.lnkj.weather.utils
 
+import android.widget.TextView
 import com.lnkj.weather.R
 import com.mufeng.mvvmlib.utilcode.ext.loge
 
@@ -114,8 +115,16 @@ object WeatherUtils {
                     R.drawable.weather_bg_haze
                 }
             }
+            //小雨
+            str.startsWith("小雨") -> {
+                if (!isDayTime) {
+                    R.drawable.weather_bg_shower_night
+                } else {
+                    R.drawable.weather_bg_shower
+                }
+            }
             // 雨
-            str.startsWith("小雨") || str.startsWith("中雨")
+            str.startsWith("中雨")
                     || str.startsWith("大雨") || str.startsWith("暴雨") -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
@@ -131,8 +140,16 @@ object WeatherUtils {
                     R.drawable.weather_bg_fog
                 }
             }
+            //小雪
+            str.startsWith("小雪") -> {
+                if (!isDayTime) {
+                    R.drawable.weather_bg_scouther_night
+                } else {
+                    R.drawable.weather_bg_scouther
+                }
+            }
             // 雪
-            str.startsWith("小雪") || str.startsWith("中雪")
+            str.startsWith("中雪")
                     || str.startsWith("大雪") || str.startsWith("暴雪") -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night
@@ -524,6 +541,36 @@ object WeatherUtils {
         }
     }
 
+    fun setAirLevel(tvAirLevel: TextView, airLevel: Int) {
+        if (tvAirLevel != null) {
+            when (airLevel) {
+                in 0..50 -> {
+                    tvAirLevel.setBackgroundResource(R.drawable.weather_best_level_shape)
+                    tvAirLevel.text = "优质"
+                }
+                in 51..100 -> {
+                    tvAirLevel.setBackgroundResource(R.drawable.weather_good_level_shape)
+                    tvAirLevel.text = "良好"
+                }
+                in 101..150 -> {
+                    tvAirLevel.setBackgroundResource(R.drawable.weather_small_level_shape)
+                    tvAirLevel.text = "轻度"
+                }
+                in 151..200 -> {
+                    tvAirLevel.setBackgroundResource(R.drawable.weather_mid_level_shape)
+                    tvAirLevel.text = "中度"
+                }
+                in 201..300 -> {
+                    tvAirLevel.setBackgroundResource(R.drawable.weather_big_level_shape)
+                    tvAirLevel.text = "重度"
+                }
+                else -> {
+                    tvAirLevel.setBackgroundResource(R.drawable.weather_poison_level_shape)
+                    tvAirLevel.text = "严重"
+                }
+            }
+        }
+    }
 }
 
 

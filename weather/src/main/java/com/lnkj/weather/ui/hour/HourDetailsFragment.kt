@@ -11,6 +11,7 @@ import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.event.EventKey
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherFragmentHourDetailsBinding
+import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.ui.realweather.MyPageAdapter
 import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.utils.WeatherUtils
@@ -73,6 +74,9 @@ class HourDetailsFragment :
                 cityWeather.dressLifeStyle?.indexTxt ?: "",
                 WeatherUtils.getWeatherBgByWeatherName(cityWeather?.weatherName, isDayTime)
             )
+        }
+        binding.ivReturnBack.clickWithTrigger {
+            (activity as MainActivity).returnHomeFragment()
         }
 
         LiveEventBus.get(EventKey.EVENT_CHANGE_CITY, MyCityBean::class.java)

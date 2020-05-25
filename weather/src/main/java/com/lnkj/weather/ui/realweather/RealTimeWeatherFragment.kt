@@ -314,7 +314,6 @@ class RealTimeWeatherFragment :
             0f -> { //为0时 则白色文字及图标显示  父布局background为透明
                 //设置控件的background的alpha 取值为0~255
                 //设置控件的alpha 取值为0~1
-                binding.toolbar.backgroundColorResource=R.color.weather_write
                 binding.toolbar.background.alpha = 0
 //                ivLeft_white.alpha = 1f
 //                ivLeft.alpha = 0f

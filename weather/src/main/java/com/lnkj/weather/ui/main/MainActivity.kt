@@ -141,6 +141,11 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
     private var mExitTime: Long = 0
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean { //判断用户是否点击了“返回键”
         if (keyCode == KeyEvent.KEYCODE_BACK) { //与上次点击返回键时刻作差
+            //校验是否为第一个fragment
+            if(binding.bbl.currentItem!=0){
+                returnHomeFragment()
+                return true
+            }
             if (System.currentTimeMillis() - mExitTime > 2000) { //大于2000ms则认为是误操作，使用Toast进行提示
                 Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show()
                 //并记录下本次点击“返回键”的时刻，以便下次进行判断
@@ -193,6 +198,10 @@ class MainActivity : BaseVMActivity<MainViewModel, WeatherActivityMainBinding>()
             )
         }
         startActivity(intent)
+    }
+
+    fun returnHomeFragment(){
+        binding.bbl.currentItem = 0
     }
 
 }

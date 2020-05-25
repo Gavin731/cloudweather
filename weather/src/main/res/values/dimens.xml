@@ -22,7 +22,10 @@
     <dimen name="weather_dp_180">180dp</dimen>
     <dimen name="weather_dp_200">200dp</dimen>
     <dimen name="weather_dp_212">212dp</dimen>
+    <dimen name="weather_dp_240">240dp</dimen>
+    <dimen name="weather_dp_250">250dp</dimen>
     <dimen name="weather_dp_267">267dp</dimen>
+    <dimen name="weather_dp_260">260dp</dimen>
     <dimen name="weather_dp_300">300dp</dimen>
 
 
@@ -30,6 +33,8 @@
     <dimen name="weather_sp_6">6sp</dimen>
     <dimen name="weather_sp_8">8sp</dimen>
     <dimen name="weather_sp_10">10sp</dimen>
+    <dimen name="weather_sp_13">13sp</dimen>
+    <dimen name="weather_sp_14">14sp</dimen>
     <dimen name="weather_sp_15">15sp</dimen>
     <dimen name="weather_sp_16">16sp</dimen>
     <dimen name="weather_sp_20">20sp</dimen>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/weather_selector_hour_press_bg"
     android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/ll_item_view"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -19,18 +19,17 @@
             android:id="@+id/tv_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:text="16:00"
             android:layout_marginTop="20dp"
-            android:textColor="#fff"
-            android:textSize="12sp" />
+            android:gravity="center"
+            android:textColor="@color/weather_color_999999"
+            android:textSize="@dimen/weather_sp_13"
+            tools:text="16:00" />
 
         <ImageView
             android:id="@+id/iv_weather"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="11dp"
-             />
+            android:layout_marginTop="11dp" />
 
         <TextView
             android:id="@+id/tv_weather"
@@ -38,31 +37,39 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:gravity="center"
-            tools:text="晴"
-            android:textColor="#fff"
-            android:textSize="14.67sp" />
-
+            android:textColor="@color/weather_color_222222"
+            android:textSize="@dimen/weather_sp_14"
+            tools:text="晴" />
 
 
         <com.lnkj.weather.widget.zzweatherview.hour.HourTemperatureView
             android:id="@+id/ttv"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/tv_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            />
+            android:textColor="@color/weather_color_222222"
+            android:textSize="@dimen/weather_sp_13"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_air_level"
             android:layout_width="wrap_content"
             android:layout_height="12dp"
-            android:gravity="center"
-            tools:text="良"
             android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
             android:textColor="#fff"
-            android:textSize="7.33sp" />
+            android:textSize="7.33sp"
+            tools:text="良" />
     </LinearLayout>
 
 </LinearLayout>

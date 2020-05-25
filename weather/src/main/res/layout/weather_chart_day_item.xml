@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/weather_color_222222"
         android:textSize="12.67sp"
         tools:text="昨天" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/weather_color_999999"
         android:textSize="10.67sp"
         tools:text="12/07" />
 
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/weather_color_222222"
         android:textSize="14sp"
         tools:text="晴" />
 
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/weather_color_222222"
         android:textSize="14sp"
         tools:text="晴" />
 
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/weather_color_222222"
         android:textSize="11.33sp"
         tools:text="西南风" />
 
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:textColor="#fff"
+        android:textColor="@color/weather_color_999999"
         android:textSize="11.33sp"
         tools:text="3级" />
 

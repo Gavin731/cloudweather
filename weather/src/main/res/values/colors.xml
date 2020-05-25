@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <color name="weather_color_000000">#000000</color>
-    <color name="weather_color_999999">#3B3B3B</color>
+    <!--    <color name="weather_color_999999">#3B3B3B</color>-->
 
     <color name="weather_colorPrimary">#0080ff</color>
     <color name="weather_colorPrimaryDark">#0072e5</color>
@@ -10,6 +10,34 @@
     <color name="weather_color_AFB6CB">#AFB6CB</color>
     <color name="weather_color_4CA6FF">#4CA6FF</color>
     <color name="weather_color_51A4FF">#51A4FF</color>
+    <color name="weather_color_222222">#222222</color>
+    <color name="weather_color_666666">#ff666666</color>
+    <color name="weather_color_999999">#999999</color>
+    <color name="weather_color_E1E1E1">#E1E1E1</color>
+    <color name="weather_color_F2F2F2">#F2F2F2</color>
+    <color name="weather_color_80ffffff">#80ffffff</color>
+
+    <!--白色透明度-->
+    <color name="weather_translucent_white_05">#f2ffffff</color>
+    <color name="weather_translucent_white_10">#e6ffffff</color>
+    <color name="weather_translucent_white_15">#d9ffffff</color>
+    <color name="weather_translucent_white_20">#ccffffff</color>
+    <color name="weather_translucent_white_25">#bfffffff</color>
+    <color name="weather_translucent_white_30">#b3ffffff</color>
+    <color name="weather_translucent_white_35">#a6ffffff</color>
+    <color name="weather_translucent_white_40">#99ffffff</color>
+    <color name="weather_translucent_white_45">#8cffffff</color>
+    <color name="weather_translucent_white_50">#80ffffff</color>
+    <color name="weather_translucent_white_55">#73ffffff</color>
+    <color name="weather_translucent_white_60">#66ffffff</color>
+    <color name="weather_translucent_white_65">#59ffffff</color>
+    <color name="weather_translucent_white_70">#4dffffff</color>
+    <color name="weather_translucent_white_75">#40ffffff</color>
+    <color name="weather_translucent_white_80">#33ffffff</color>
+    <color name="weather_translucent_white_90">#26ffffff</color>
+    <color name="weather_translucent_white_95">#0cffffff</color>
+    <color name="weather_translucent_white_100">#00ffffff</color>
+
 
     <color name="weather_transparency_color">#00000000</color>
     <color name="weather_press_color">#3dffffff</color>
@@ -20,9 +48,8 @@
     <color name="weather_color_moderate">#ee4545</color>
     <color name="weather_color_severe">#972bbb</color>
     <color name="weather_color_seriousness">#b15828</color>
-    
-    
-    
+
+
     <color name="weather_bg_cloudy_top_color">#1ABDDB</color>
     <color name="weather_bg_cloudy_bottom_color">#129BC0</color>
 
@@ -100,7 +127,7 @@
 
     <color name="weather_bg_shower_night_top_color">#0D3639</color>
     <color name="weather_bg_shower_night_bottom_color">#0B3537</color>
-    
+
     <color name="weather_bg_sleet_top_color">#3E3EB2</color>
     <color name="weather_bg_sleet_bottom_color">#5254BD</color>
 
@@ -114,6 +141,4 @@
     <color name="weather_bg_thunder_shower_night_top_color">#17183A</color>
     <color name="weather_bg_thunder_shower_night_bottom_color">#262A51</color>
 
-    <color name="weather_write">#ffffff</color>
-    
 </resources>

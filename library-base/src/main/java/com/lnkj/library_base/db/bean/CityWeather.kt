@@ -220,6 +220,9 @@ data class TodayWeather(
     // 天气名称
     var weatherName: String,
     // 天气图标
-    var weatherIcon: Int
+    var weatherIcon: Int,
+    // 空气质量
+    var airQualityName: String,
+    var airQualityValue: Int
 )
 

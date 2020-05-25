@@ -9,6 +9,7 @@ import com.lnkj.library_base.event.EventKey
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherFragmentAirQualityBinding
 import com.lnkj.weather.http.bean.HeAirQualityBean
+import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.utils.WeatherUtils
 import com.mufeng.mvvmlib.basic.view.BaseVMFragment
@@ -46,6 +47,10 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
 
         binding.refreshLayout.setOnRefreshListener {
             refreshData(cityBean)
+        }
+
+        binding.ivReturnBack.clickWithTrigger {
+            (activity as MainActivity).returnHomeFragment()
         }
     }
 
