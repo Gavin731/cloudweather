@@ -1,5 +1,7 @@
 package com.lnkj.weather.widget.refreshheader
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
@@ -33,6 +35,7 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
 
     lateinit var iconView: ImageView
     lateinit var contextView: TextView
+    lateinit var defaultImgAnimator: ObjectAnimator
 
     constructor(context: Context) : super(context)
 
@@ -68,6 +71,10 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
         contextView.textSize = 11f
         contextView.layoutParams = layoutParams
         addView(contextView)
+
+        defaultImgAnimator = ObjectAnimator.ofFloat(iconView, "rotation", 360f)
+        defaultImgAnimator.duration=500
+        defaultImgAnimator.repeatCount=ValueAnimator.INFINITE
     }
 
 
@@ -76,6 +83,7 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
     }
 
     override fun onFinish(refreshLayout: RefreshLayout, success: Boolean): Int {
+        defaultImgAnimator.end()
         iconView.imageResource = R.mipmap.icon_refresh_complete
         if (success) {
             contextView.text = "刷新完成"
@@ -118,6 +126,7 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
                 contextView.text = "更新数据中..."
                 iconView.imageResource = R.mipmap.icon_refresh
                 iconView.visibility = View.VISIBLE
+                defaultImgAnimator.start()
             }
             RefreshState.ReleaseToRefresh -> {
                 contextView.text = "释放立即刷新"
