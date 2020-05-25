@@ -24,7 +24,7 @@
 
         <com.lnkj.weather.widget.refreshheader.WeatherClassicsHeader
             android:layout_width="match_parent"
-            android:layout_height="@dimen/weather_dp_30"/>
+            android:layout_height="@dimen/weather_dp_20"/>
 
         <FrameLayout
             android:id="@+id/cl_main_layout"
