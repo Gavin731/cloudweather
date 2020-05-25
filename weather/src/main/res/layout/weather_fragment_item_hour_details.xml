@@ -374,7 +374,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#2affffff"
+                    android:background="@color/weather_translucent_white_90"
                     android:orientation="vertical">
 
                     <TextView
@@ -389,7 +389,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.33dp"
-                        android:background="#4dffffff" />
+                        android:background="@color/weather_translucent_white_70" />
 
                     <com.lnkj.weather.widget.zzweatherview.hour.HourWeatherView
                         android:id="@+id/rv_hour_weather"
@@ -470,7 +470,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:background="#2affffff"
+                    android:background="@color/weather_translucent_white_90"
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@+id/ll_day_list_chart">
 
@@ -552,7 +552,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.33dp"
-                        android:background="#4dffffff" />
+                        android:background="@color/weather_translucent_white_70" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
