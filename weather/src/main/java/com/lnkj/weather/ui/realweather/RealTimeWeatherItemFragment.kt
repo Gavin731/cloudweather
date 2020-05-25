@@ -115,11 +115,15 @@ class RealTimeWeatherItemFragment :
             return
         }
 
-        val titlHeight = DisplayUtil.dip2px(requireActivity(), 50f)
-        val windowHeight = DisplayUtil.getDensityHeight(requireActivity()) - titlHeight
-        val scrollHeight = DisplayUtil.getDensityHeight(requireActivity()) - (titlHeight * 2)
+        val titlHeight = DisplayUtil.dip2px(requireActivity(), 50f)//100
+        val windowHeight = (DisplayUtil.getDensityHeight(requireActivity()) - titlHeight)/2 //554
+        val scrollHeight = (DisplayUtil.getDensityHeight(requireActivity()) - (titlHeight * 2))/2 //504
+        Log.e("-------titlHeight",titlHeight.toString())
+        Log.e("-------windowHeight",windowHeight.toString())
+        Log.e("-------scrollHeight",scrollHeight.toString())
 
         binding.nestedScrollView.setOnScrollChangeListener { _: NestedScrollView?, _, scrollY, _, _ ->
+            Log.e("-------scrollY",scrollY.toString())
             when {
                 scrollHeight > scrollY -> {
                     //滑动小于开始渐变的位置  标题栏为透明  图标及文字为白色
