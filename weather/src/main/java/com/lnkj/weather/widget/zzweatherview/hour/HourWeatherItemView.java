@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lnkj.weather.R;
+import com.lnkj.weather.utils.WeatherUtils;
+import com.mufeng.roundview.RoundTextView;
 
 
 /**
@@ -27,6 +29,7 @@ public class HourWeatherItemView extends LinearLayout {
     private TextView tvAirLevel, tvTemperature;
     private ImageView ivWeather;
     private LinearLayout llItemView;
+    private RoundTextView tvAirLevel2;
 
     private boolean isShowTempView = false;//是否显示圆点和温度view,隐藏则只显示温度text
 
@@ -51,6 +54,7 @@ public class HourWeatherItemView extends LinearLayout {
         tvTemperature = rootView.findViewById(R.id.tv_temp);
         ivWeather = rootView.findViewById(R.id.iv_weather);
         tvAirLevel = rootView.findViewById(R.id.tv_air_level);
+        tvAirLevel2 = rootView.findViewById(R.id.tv_air_level2);
         llItemView = rootView.findViewById(R.id.ll_item_view);
         rootView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         addView(rootView);
@@ -90,27 +94,8 @@ public class HourWeatherItemView extends LinearLayout {
     }
 
     public void setAirLevel(int airLevel) {
-        if (tvAirLevel != null) {
-            if (airLevel >= 0 && airLevel <= 50) {
-                tvAirLevel.setBackgroundResource(R.drawable.weather_best_level_shape);
-                tvAirLevel.setText("优质");
-            } else if (airLevel > 50 && airLevel <= 100) {
-                tvAirLevel.setBackgroundResource(R.drawable.weather_good_level_shape);
-                tvAirLevel.setText("良好");
-            } else if (airLevel > 100 && airLevel <= 150) {
-                tvAirLevel.setText("轻度");
-                tvAirLevel.setBackgroundResource(R.drawable.weather_small_level_shape);
-            } else if (airLevel > 150 && airLevel <= 200) {
-                tvAirLevel.setBackgroundResource(R.drawable.weather_mid_level_shape);
-                tvAirLevel.setText("中度");
-            } else if (airLevel > 200 && airLevel <= 300) {
-                tvAirLevel.setBackgroundResource(R.drawable.weather_big_level_shape);
-                tvAirLevel.setText("重度");
-            } else if (airLevel > 300) {
-                tvAirLevel.setBackgroundResource(R.drawable.weather_poison_level_shape);
-                tvAirLevel.setText("严重");
-            }
-        }
+        WeatherUtils.INSTANCE.setAirLevel(tvAirLevel, airLevel);
+        tvAirLevel2.getDelegate().setBackgroundColor(getContext().getResources().getColor(WeatherUtils.INSTANCE.getAirQualityColor(airLevel)));
     }
 
     public void setTemp(int temp) {
