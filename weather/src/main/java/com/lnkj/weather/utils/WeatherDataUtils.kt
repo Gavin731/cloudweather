@@ -266,11 +266,16 @@ object WeatherDataUtils {
         lifeStyleList.add(travelLightLifeStyle)
         lifeStyleList.add(fishLightLifeStyle)
 
+        val realtime = todayWeatherBean.result!!.realtime
         return HourDetailsWeatherBean(
             min = todayWeatherBean.result?.daily?.temperature?.get(0)?.min!!.toInt(),
             max = todayWeatherBean.result?.daily?.temperature?.get(0)?.max!!.toInt(),
             weatherName = weatherName,
-            weatherIcon = WeatherUtils.getWeatherIcon(todayWeatherBean.result?.daily?.skycon08h20h?.get(0)?.value!!),
+            weatherIcon = WeatherUtils.getWeatherIcon(
+                todayWeatherBean.result?.daily?.skycon08h20h?.get(
+                    0
+                )?.value!!
+            ),
             windSpeed = windSpeed,
             windDirection = windDirection,
             humidity = "${(todayWeatherBean.result?.daily?.humidity!!?.get(0)?.max!! * 100).toInt()}%",
@@ -279,9 +284,9 @@ object WeatherDataUtils {
             sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
             sunsetTime = daily?.astro?.get(0)?.sunset?.time!!,
             hourlyWeatherList = hourlyWeatherList,
-            airQualityValue = air.heWeather6?.get(0)?.airNowCity?.aqi!!,
-            airQualityName = WeatherUtils.getAirQualityDescription(air.heWeather6?.get(0)?.airNowCity?.aqi!!),
-            airQualityTxt = WeatherUtils.getAirQualityTxt(air.heWeather6?.get(0)?.airNowCity?.aqi!!),
+            airQualityValue = realtime!!.airQuality!!.aqi!!.chn!!,
+            airQualityName = WeatherUtils.getAirQualityDescription(realtime!!.airQuality!!.aqi!!.chn!!),
+            airQualityTxt = WeatherUtils.getAirQualityTxt(realtime!!.airQuality!!.aqi!!.chn!!),
             dressLifeStyle = dressLifeStyle,
             lifeStyleList = lifeStyleList,
             currentWeather = hourlyWeatherList[0].weatherName,
@@ -335,18 +340,19 @@ object WeatherDataUtils {
             hourlyWeatherList.add(hourlyWeather)
 
         }
+        val daily = todayWeatherBean.result?.daily
 
         val airValue = if (dayType == 2) {
-            air.heWeather6?.get(0)?.airForecast?.get(1)?.aqi!!
+            daily?.airQuality?.aqi!![1]!!.max!!.chn//明天
         } else {
-            air.heWeather6?.get(0)?.airForecast?.get(2)?.aqi!!
+            daily?.airQuality?.aqi!![2]!!.max!!.chn//后天
         }
 
-        val daily = todayWeatherBean.result?.daily
         val weatherName = WeatherUtils.formatWeather(
             daily?.skycon08h20h!![1]?.value!!,
             daily?.skycon20h32h!![1]?.value!!
         )
+
         val windSpeed =
             WeatherUtils.getWindSpeed(todayWeatherBean?.result?.daily?.wind?.get(1)?.max!!.speed!!.toInt())
         val windDirection =
@@ -557,7 +563,7 @@ object WeatherDataUtils {
             sunriseTime = sunriseTime,
             sunsetTime = sunsetTime,
             hourlyWeatherList = hourlyWeatherList,
-            airQualityValue = airValue,
+            airQualityValue = airValue!!,
             airQualityName = WeatherUtils.getAirQualityDescription(airValue),
             airQualityTxt = WeatherUtils.getAirQualityTxt(airValue),
             dressLifeStyle = dressLifeStyle,
@@ -613,14 +619,13 @@ object WeatherDataUtils {
             hourlyWeatherList.add(hourlyWeather)
 
         }
-
+        val daily = todayWeatherBean.result?.daily
         val airValue = if (dayType == 2) {
-            air.heWeather6?.get(0)?.airForecast?.get(1)?.aqi!!
+            daily?.airQuality?.aqi!![1]!!.max!!.chn//明天
         } else {
-            air.heWeather6?.get(0)?.airForecast?.get(2)?.aqi!!
+            daily?.airQuality?.aqi!![2]!!.max!!.chn//后天
         }
 
-        val daily = todayWeatherBean.result?.daily
         val weatherName = WeatherUtils.formatWeather(
             daily?.skycon08h20h!![2]?.value!!,
             daily?.skycon20h32h!![2]?.value!!
@@ -836,7 +841,7 @@ object WeatherDataUtils {
             sunriseTime = sunriseTime,
             sunsetTime = sunsetTime,
             hourlyWeatherList = hourlyWeatherList,
-            airQualityValue = airValue,
+            airQualityValue = airValue!!,
             airQualityName = WeatherUtils.getAirQualityDescription(airValue),
             airQualityTxt = WeatherUtils.getAirQualityTxt(airValue),
             dressLifeStyle = dressLifeStyle,
