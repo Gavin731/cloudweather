@@ -26,6 +26,9 @@
         android:layout_height="match_parent"
         app:srlEnableLoadMore="false">
 
+        <com.lnkj.weather.widget.refreshheader.WeatherClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/weather_dp_20"/>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"

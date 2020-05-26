@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.lnkj.library_base.base.BaseViewModel
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.weather.http.ApiService
+import com.lnkj.weather.http.bean.HeAirQualityBean
+import com.lnkj.weather.http.bean.HeForecastAirBean
 import com.lnkj.weather.http.bean.HourDetailsWeatherBean
 import com.lnkj.weather.utils.WeatherDataUtils
 import com.mufeng.mvvmlib.basic.Event
@@ -48,10 +50,11 @@ class HourDetailsViewModel : BaseViewModel() {
                         // 获取生活指数
                         val lifestyleBean = service.getLifestyle("${cityBean.lon},${cityBean.lat}")
                         // 获取今天空气质量
-                        val air = service.getAirData("${cityBean.lon},${cityBean.lat}")
+                        val air = HeAirQualityBean()//service.getAirData("${cityBean.lon},${cityBean.lat}")
 
+                        // || air.heWeather6?.get(0)?.status != "ok"
                         if (yesterdayWeatherBean.status != "ok" || todayWeatherBean.status != "ok" || heFlWeather.heWeather6?.get(0)?.status != "ok"
-                            ||  lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"){
+                            ||  lifestyleBean.heWeather6?.get(0)?.status != "ok"){
                             apiLoading.postValue(Event(false))
                             return@launch
                         }
@@ -71,11 +74,13 @@ class HourDetailsViewModel : BaseViewModel() {
                     2 -> {
                         val hourWeather = service.getHourlyWeather(cityBean.lon, cityBean.lat, 48)
                         // 获取今天空气质量
-                        val air = service.getForecastAirData("${cityBean.lon},${cityBean.lat}")
+                        val air = HeForecastAirBean()//service.getForecastAirData("${cityBean.lon},${cityBean.lat}")
                         // 获取生活指数
                         val lifestyleBean = service.getLifestyle("${cityBean.lon},${cityBean.lat}")
+
+                        // || air.heWeather6?.get(0)?.status != "ok"
                         if (todayWeatherBean.status != "ok" ||hourWeather.status != "ok"
-                            || lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"){
+                            || lifestyleBean.heWeather6?.get(0)?.status != "ok"){
                             apiLoading.postValue(Event(false))
                             return@launch
                         }
@@ -88,12 +93,13 @@ class HourDetailsViewModel : BaseViewModel() {
                     else -> {
 
                         val hourWeather = service.getHourlyWeather(cityBean.lon, cityBean.lat, 72)
-                        val air = service.getForecastAirData("${cityBean.lon},${cityBean.lat}")
+                        val air = HeForecastAirBean()//service.getForecastAirData("${cityBean.lon},${cityBean.lat}")
                         // 获取生活指数
                         val lifestyleBean = service.getLifestyle("${cityBean.lon},${cityBean.lat}")
 
+                        // || air.heWeather6?.get(0)?.status != "ok"
                         if (todayWeatherBean.status != "ok" ||  hourWeather.status != "ok"
-                            || lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"){
+                            || lifestyleBean.heWeather6?.get(0)?.status != "ok"){
                             apiLoading.postValue(Event(false))
                             return@launch
                         }

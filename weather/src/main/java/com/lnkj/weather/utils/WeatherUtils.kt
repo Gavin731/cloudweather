@@ -116,15 +116,15 @@ object WeatherUtils {
                 }
             }
             //小雨
-            str.startsWith("小雨") -> {
-                if (!isDayTime) {
-                    R.drawable.weather_bg_shower_night
-                } else {
-                    R.drawable.weather_bg_shower
-                }
-            }
+//            str.startsWith("小雨") -> {
+//                if (!isDayTime) {
+//                    R.drawable.weather_bg_shower_night
+//                } else {
+//                    R.drawable.weather_bg_shower
+//                }
+//            }
             // 雨
-            str.startsWith("中雨")
+            str.startsWith("小雨") || str.startsWith("中雨")
                     || str.startsWith("大雨") || str.startsWith("暴雨") -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
@@ -141,15 +141,15 @@ object WeatherUtils {
                 }
             }
             //小雪
-            str.startsWith("小雪") -> {
-                if (!isDayTime) {
-                    R.drawable.weather_bg_scouther_night
-                } else {
-                    R.drawable.weather_bg_scouther
-                }
-            }
+//            str.startsWith("小雪") -> {
+//                if (!isDayTime) {
+//                    R.drawable.weather_bg_scouther_night
+//                } else {
+//                    R.drawable.weather_bg_scouther
+//                }
+//            }
             // 雪
-            str.startsWith("中雪")
+            str.startsWith("小雪") || str.startsWith("中雪")
                     || str.startsWith("大雪") || str.startsWith("暴雪") -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night
@@ -225,16 +225,16 @@ object WeatherUtils {
                     R.drawable.weather_bg_haze
                 }
             }
-            //小雨
-            "LIGHT_RAIN" -> {
-                if (!isDayTime) {
-                    R.drawable.weather_bg_shower_night
-                } else {
-                    R.drawable.weather_bg_shower
-                }
-            }
+//            //小雨
+//            "LIGHT_RAIN" -> {
+//                if (!isDayTime) {
+//                    R.drawable.weather_bg_shower_night
+//                } else {
+//                    R.drawable.weather_bg_shower
+//                }
+//            }
             // 雨
-            "MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN" -> {
+            "LIGHT_RAIN","MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN" -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
                 } else {
@@ -249,16 +249,16 @@ object WeatherUtils {
                     R.drawable.weather_bg_fog
                 }
             }
-            //小雪
-            "LIGHT_SNOW" -> {
-                if (!isDayTime) {
-                    R.drawable.weather_bg_scouther_night
-                } else {
-                    R.drawable.weather_bg_scouther
-                }
-            }
+//            //小雪
+//            "LIGHT_SNOW" -> {
+//                if (!isDayTime) {
+//                    R.drawable.weather_bg_scouther_night
+//                } else {
+//                    R.drawable.weather_bg_scouther
+//                }
+//            }
             // 雪
-            "MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW" -> {
+            "LIGHT_SNOW","MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW" -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night
                 } else {

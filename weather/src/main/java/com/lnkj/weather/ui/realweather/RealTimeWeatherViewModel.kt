@@ -65,7 +65,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 // 获取生活指数
                 lateinit var lifestyleBean: LifestyleBean
                 // 获取今天空气质量
-                lateinit var air: HeAirQualityBean
+//                lateinit var air: HeAirQualityBean
                 //几个网咯请求并行请求，节约请求时间
                 //todo 目前先这么写，后面熟悉kotlin了再改看看
                 val time = measureTimeMillis {
@@ -83,22 +83,24 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         launch {
                             lifestyleBean = service.getLifestyle("${lat},$log")
                         }
-                        launch {
-                            air = service.getAirData("${lat},$log")
-                        }
+//                        launch {
+//                            air = service.getAirData("${lat},$log")
+//                        }
                     }
                 }
                 Log.e("-------网咯请求一起请求返回时间", time.toString())
 
-
+                // || air.heWeather6?.get(0)?.status != "ok"
                 if (weatherBean.status != "ok" || yesterdayWeatherBean.status != "ok"
-                    || lifestyleBean.heWeather6?.get(0)?.status != "ok" || air.heWeather6?.get(0)?.status != "ok"
+                    || lifestyleBean.heWeather6?.get(0)?.status != "ok"
                 ) {
                     Log.e("-------网咯请求", "还有网咯请求返回不对")
                     apiLoading.postValue(Event(false))
                     return@launch
                 }
                 val daily = weatherBean.result!!.daily
+                val realtime = weatherBean.result!!.realtime
+
                 // 今天天气
                 val todayWeather = TodayWeather(
                     DateUtils.formatDateT(
@@ -159,7 +161,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         formatDate = DateUtils.formatWeekT(temperature.date),
 
 //                        weatherName = WeatherUtils.getWeatherName(daily?.skycon?.get(index)?.value!!),
-                        weatherName=WeatherUtils.formatWeather(
+                        weatherName = WeatherUtils.formatWeather(
                             daily?.skycon08h20h?.get(index)?.value!!,
                             daily?.skycon20h32h?.get(index)?.value!!
                         ),
@@ -256,14 +258,14 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     knowledge = "穿衣指数综合了天空状况、气温、温度及风速等气象因素，提醒大家要好好穿衣服，身体才能棒棒哒。一般温度越低、风速越大，我们就要穿的越多哦。",
                     knowledgeTitle = "穿衣指数小知识：",
                     isGood = WeatherUtils.isDressGood(dress?.brf),
-                    weatherName = WeatherUtils.getWeatherName(weatherBean.result?.realtime?.skycon!!),
+                    weatherName = WeatherUtils.getWeatherName(realtime!!.skycon!!),
                     max = daily?.temperature?.get(0)?.max!!.toInt(),
                     min = daily?.temperature?.get(0)?.min!!.toInt(),
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -283,8 +285,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -306,8 +308,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -329,8 +331,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -351,8 +353,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -373,8 +375,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -395,8 +397,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -417,8 +419,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     temperatureDifference = daily?.temperature?.get(0)?.max!!.toInt() - daily?.temperature?.get(
                         0
                     )?.min!!.toInt(),
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean?.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean?.result?.realtime?.wind?.direction!!),
+                    windSpeed = WeatherUtils.getWindSpeed(realtime!!.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime!!.wind?.direction!!),
                     sunriseTime = daily?.astro?.get(0)?.sunrise?.time!!,
                     sunsetTime = daily?.astro?.get(0)?.sunset?.time!!
                 )
@@ -480,7 +482,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 val cityWeather = CityWeather(
                     cityName = cityBean.counties,
                     updateDate = DateUtils.formatTime(Date(), PATTERN_1),
-                    temperature = weatherBean.result?.realtime?.temperature!!.toInt(),
+                    temperature = realtime.temperature!!.toInt(),
                     weatherName = WeatherUtils.getWeatherName(weatherKey),
                     weatherIcon = WeatherUtils.getWeatherIcon(weatherKey),
                     weatherBg = WeatherUtils.getWeatherBg(weatherKey, isDayTime),
@@ -491,12 +493,12 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                      明日,天气${tomorrowWeather.weatherName},
                      温度${tomorrowWeather.min}到${tomorrowWeather.max}度
                 """,
-                    airQualityName = WeatherUtils.getAirQualityDescription(air.heWeather6?.get(0)?.airNowCity?.aqi!!),
-                    airQualityValue = air.heWeather6!![0]?.airNowCity?.aqi!!,
-                    windSpeed = WeatherUtils.getWindSpeed(weatherBean.result?.realtime?.wind?.speed!!.toInt()),
-                    windDirection = WeatherUtils.getWindDirection(weatherBean.result?.realtime?.wind?.direction!!),
-                    humidity = "${(weatherBean.result?.realtime?.humidity!! * 100).toInt()}%",
-//                    airPressure = "${weatherBean.result?.realtime?.pressure?.toInt()!! / 100}hPa",//气压
+                    airQualityName = WeatherUtils.getAirQualityDescription(realtime!!.airQuality!!.aqi!!.chn!!),
+                    airQualityValue = realtime!!.airQuality!!.aqi!!.chn!!,
+                    windSpeed = WeatherUtils.getWindSpeed(realtime.wind?.speed!!.toInt()),
+                    windDirection = WeatherUtils.getWindDirection(realtime.wind?.direction!!),
+                    humidity = "${(realtime.humidity!! * 100).toInt()}%",
+//                    airPressure = "${realtime.pressure?.toInt()!! / 100}hPa",//气压
                     airPressure = ultravioletLight?.brf,//不想换数据库了，用气压字段表示紫外线
                     rainTip = rainTip!!,
                     hasRain = WeatherUtils.hasRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!) || WeatherUtils.hasRain(

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.lnkj.weather.R;
 import com.lnkj.weather.utils.WeatherUtils;
+import com.mufeng.roundview.RoundTextView;
 
 
 /**
@@ -34,6 +35,7 @@ public class WeatherItemView extends LinearLayout {
     private ImageView ivDayWeather;
     private ImageView ivNightWeather;
     private LinearLayout llItemView;
+    private RoundTextView tvAirLevel2;
 
     public WeatherItemView(Context context) {
         this(context, null);
@@ -57,6 +59,7 @@ public class WeatherItemView extends LinearLayout {
         ttvTemp = rootView.findViewById(R.id.ttv_day);
         tvWindOri = rootView.findViewById(R.id.tv_wind_ori);
         tvWindLevel = rootView.findViewById(R.id.tv_wind_level);
+        tvAirLevel2 = rootView.findViewById(R.id.tv_air_level2);
         ivDayWeather = rootView.findViewById(R.id.iv_day_weather);
         ivNightWeather = rootView.findViewById(R.id.iv_night_weather);
         tvAirLevel = rootView.findViewById(R.id.tv_air_level);
@@ -147,6 +150,7 @@ public class WeatherItemView extends LinearLayout {
 
     public void setAirLevel(int airLevel) {
         WeatherUtils.INSTANCE.setAirLevel(tvAirLevel, airLevel);
+        tvAirLevel2.getDelegate().setBackgroundColor(getContext().getResources().getColor(WeatherUtils.INSTANCE.getAirQualityColor(airLevel)));
     }
 
     public void setDayTemp(int dayTemp) {

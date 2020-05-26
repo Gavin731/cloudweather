@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@color/weather_color_222222"
             android:textSize="@dimen/weather_sp_13"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_air_level"
@@ -69,7 +70,17 @@
             android:paddingEnd="6dp"
             android:textColor="#fff"
             android:textSize="7.33sp"
+            android:visibility="gone"
             tools:text="良" />
+
+        <com.mufeng.roundview.RoundTextView
+            android:id="@+id/tv_air_level2"
+            android:layout_width="15.33dp"
+            android:layout_height="3.33dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            app:rv_backgroundColor="#FF3316"
+            app:rv_cornerRadius="1.67dp" />
     </LinearLayout>
 
 </LinearLayout>

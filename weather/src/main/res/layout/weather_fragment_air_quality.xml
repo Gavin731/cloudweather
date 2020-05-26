@@ -84,6 +84,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/toolbar"
                 app:srlEnableLoadMore="false">
 
+                <com.lnkj.weather.widget.refreshheader.WeatherClassicsHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/weather_dp_20"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

@@ -38,9 +38,13 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
         binding.ivShare.clickWithTrigger {
 
             LiveEventBus.get(EventKey.EVENT_AIR_SHARE)
-                .post(AirSharedEvent(cityBean?.counties!!, DateUtils.formatTime(
-                    Date(), DateUtils.PATTERN_14
-                ), airQuality))
+                .post(
+                    AirSharedEvent(
+                        cityBean?.counties!!, DateUtils.formatTime(
+                            Date(), DateUtils.PATTERN_14
+                        ), airQuality
+                    )
+                )
 
             AirQualityShareActivity.launch(requireActivity())
         }
@@ -67,30 +71,82 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
     private fun refreshData(myCityBean: MyCityBean?) {
         this.cityBean = myCityBean
         viewModel.title.postValue("${myCityBean?.counties}空气质量")
-        viewModel.getAirData(myCityBean!!)
+//        viewModel.getAirData(myCityBean!!)
+        viewModel.getCaiYunAirData(myCityBean!!)
     }
 
     override fun startObserve() {
         super.startObserve()
-        viewModel.airData.observe(this) {
-            binding.refreshLayout.finishAll()
-            this.airQuality = it
-            val update = it.heWeather6?.get(0)?.update!!
-            val airNowCity = it.heWeather6?.get(0)?.airNowCity!!
 
-            binding.tvPushTime.text = update.loc?.split(" ")?.get(1) + "发布"
+        viewModel.airData.observe(this) {
+            //            binding.refreshLayout.finishAll()
+//            this.airQuality = it
+//            val update = it.heWeather6?.get(0)?.update!!
+//            val airNowCity = it.heWeather6?.get(0)?.airNowCity!!
+//
+//            binding.tvPushTime.text = update.loc?.split(" ")?.get(1) + "发布"
+//            // 空气质量数值
+//            binding.circleProgressBar.hint = airNowCity.aqi.toString()
+//            // 空气质量
+//            binding.circleProgressBar.unit = WeatherUtils.getAirQualityDescription(airNowCity.aqi!!)
+//            binding.circleProgressBar.value = when {
+//                airNowCity.aqi <= 150 -> {
+//                    Glide.with(requireActivity())
+//                        .load(R.drawable.weather_good_air_quality_bg)
+//                        .into(binding.ivMainBg)
+//                    airNowCity.aqi.toFloat()
+//                }
+//                airNowCity.aqi == 500 -> {
+//                    Glide.with(requireActivity())
+//                        .load(R.drawable.weather_bad_air_quality_bg)
+//                        .into(binding.ivMainBg)
+//                    300.toFloat()
+//                }
+//                else -> {
+//                    Glide.with(requireActivity())
+//                        .load(R.drawable.weather_bad_air_quality_bg)
+//                        .into(binding.ivMainBg)
+//                    150 + (airNowCity.aqi - 150) * (150 / 350).toFloat()
+//                }
+//            }
+//            binding.tvAirTip.text = WeatherUtils.getAirQualityTxt(airNowCity.aqi)
+//
+//            binding.tvPm25Value.text = airNowCity.pm25
+//            binding.tvPm10Value.text = airNowCity.pm10
+//            binding.tvPmSO2Value.text = airNowCity.so2
+//            binding.tvNo2Value.text = airNowCity.no2
+//            binding.tvCoValue.text = airNowCity.co
+//            binding.tvO3Value.text = airNowCity.o3
+//
+//            binding.tvPm25Color.delegate.backgroundColor =
+//                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.pm25?.toDouble()?.toInt()!!))
+//            binding.tvPm10Color.delegate.backgroundColor =
+//                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.pm10?.toDouble()?.toInt()!!))
+//            binding.tvPmSO2Color.delegate.backgroundColor =
+//                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.so2?.toDouble()?.toInt()!!))
+//            binding.tvNo2Color.delegate.backgroundColor =
+//                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.no2?.toDouble()?.toInt()!!))
+//            binding.tvCoColor.delegate.backgroundColor =
+//                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.co?.toDouble()?.toInt()!!))
+//            binding.tvO3Color.delegate.backgroundColor =
+//                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.o3?.toDouble()?.toInt()!!))
+        }
+
+        viewModel.caiYunAirData.observe(this) {
+            binding.refreshLayout.finishAll()
+            binding.tvPushTime.text = DateUtils.formatTime(Date(), DateUtils.PATTERN_15) + "发布"
             // 空气质量数值
-            binding.circleProgressBar.hint = airNowCity.aqi.toString()
+            binding.circleProgressBar.hint = it.aqi!!.chn.toString()
             // 空气质量
-            binding.circleProgressBar.unit = WeatherUtils.getAirQualityDescription(airNowCity.aqi!!)
+            binding.circleProgressBar.unit = WeatherUtils.getAirQualityDescription(it.aqi!!.chn!!)
             binding.circleProgressBar.value = when {
-                airNowCity.aqi <= 150 -> {
+                it.aqi!!.chn!! <= 150 -> {
                     Glide.with(requireActivity())
                         .load(R.drawable.weather_good_air_quality_bg)
                         .into(binding.ivMainBg)
-                    airNowCity.aqi.toFloat()
+                    it.aqi!!.chn!!.toFloat()
                 }
-                airNowCity.aqi == 500 -> {
+                it.aqi!!.chn!! == 500 -> {
                     Glide.with(requireActivity())
                         .load(R.drawable.weather_bad_air_quality_bg)
                         .into(binding.ivMainBg)
@@ -100,30 +156,30 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
                     Glide.with(requireActivity())
                         .load(R.drawable.weather_bad_air_quality_bg)
                         .into(binding.ivMainBg)
-                    150 + (airNowCity.aqi - 150) * (150 / 350).toFloat()
+                    150 + (it.aqi!!.chn!! - 150) * (150 / 350).toFloat()
                 }
             }
-            binding.tvAirTip.text = WeatherUtils.getAirQualityTxt(airNowCity.aqi)
+            binding.tvAirTip.text = WeatherUtils.getAirQualityTxt(it.aqi!!.chn!!)
 
-            binding.tvPm25Value.text = airNowCity.pm25
-            binding.tvPm10Value.text = airNowCity.pm10
-            binding.tvPmSO2Value.text = airNowCity.so2
-            binding.tvNo2Value.text = airNowCity.no2
-            binding.tvCoValue.text = airNowCity.co
-            binding.tvO3Value.text = airNowCity.o3
+            binding.tvPm25Value.text = it.pm25.toString()
+            binding.tvPm10Value.text = it.pm10.toString()
+            binding.tvPmSO2Value.text = it.so2.toString()
+            binding.tvNo2Value.text = it.no2.toString()
+            binding.tvCoValue.text = it.co.toString()
+            binding.tvO3Value.text = it.o3.toString()
 
             binding.tvPm25Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.pm25?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.pm25?.toDouble()?.toInt()!!))
             binding.tvPm10Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.pm10?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.pm10?.toDouble()?.toInt()!!))
             binding.tvPmSO2Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.so2?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.so2?.toDouble()?.toInt()!!))
             binding.tvNo2Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.no2?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.no2?.toDouble()?.toInt()!!))
             binding.tvCoColor.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.co?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.co?.toDouble()?.toInt()!!))
             binding.tvO3Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(airNowCity.o3?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.o3?.toDouble()?.toInt()!!))
 
         }
     }
