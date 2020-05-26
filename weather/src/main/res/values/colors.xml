@@ -51,70 +51,70 @@
     <color name="weather_color_seriousness">#b15828</color>
 
 
-    <color name="weather_bg_cloudy_top_color">#1ABDDB</color>
+    <color name="weather_bg_cloudy_top_color">#2891ff</color>
     <color name="weather_bg_cloudy_bottom_color">#129BC0</color>
 
-    <color name="weather_bg_cloudy_night_top_color">#0D243F</color>
+    <color name="weather_bg_cloudy_night_top_color">#1f2469</color>
     <color name="weather_bg_cloudy_night_bottom_color">#355B81</color>
 
-    <color name="weather_bg_cold_top_color">#478CCF</color>
+    <color name="weather_bg_cold_top_color">#8dbbdf</color>
     <color name="weather_bg_cold_bottom_color">#4C93D6</color>
 
-    <color name="weather_bg_cold_night_top_color">#2D4E86</color>
+    <color name="weather_bg_cold_night_top_color">#192b3d</color>
     <color name="weather_bg_cold_night_bottom_color">#2D4D84</color>
 
-    <color name="weather_bg_fine_top_color">#0197FF</color>
+    <color name="weather_bg_fine_top_color">#2891ff</color>
     <color name="weather_bg_fine_bottom_color">#0F9DFF</color>
 
-    <color name="weather_bg_fine_night_top_color">#1F246A</color>
+    <color name="weather_bg_fine_night_top_color">#1f2469</color>
     <color name="weather_bg_fine_night_bottom_color">#374491</color>
 
-    <color name="weather_bg_fog_top_color">#346B88</color>
+    <color name="weather_bg_fog_top_color">#6a7881</color>
     <color name="weather_bg_fog_bottom_color">#336B87</color>
 
-    <color name="weather_bg_fog_night_top_color">#2A434E</color>
+    <color name="weather_bg_fog_night_top_color">#44555f</color>
     <color name="weather_bg_fog_night_bottom_color">#29424D</color>
 
-    <color name="weather_bg_freezing_rain_top_color">#087A85</color>
+    <color name="weather_bg_freezing_rain_top_color">#303a5a</color>
     <color name="weather_bg_freezing_rain_bottom_color">#087A85</color>
 
-    <color name="weather_bg_freezing_rain_night_top_color">#0C3538</color>
+    <color name="weather_bg_freezing_rain_night_top_color">#1a1c26</color>
     <color name="weather_bg_freezing_rain_night_bottom_color">#0B3537</color>
 
-    <color name="weather_bg_haze_top_color">#978B78</color>
+    <color name="weather_bg_haze_top_color">#747b86</color>
     <color name="weather_bg_haze_bottom_color">#968877</color>
 
-    <color name="weather_bg_haze_night_top_color">#3E3A33</color>
+    <color name="weather_bg_haze_night_top_color">#424751</color>
     <color name="weather_bg_haze_night_bottom_color">#3D3932</color>
 
-    <color name="weather_bg_heat_top_color">#D56525</color>
+    <color name="weather_bg_heat_top_color">#da6a2c</color>
     <color name="weather_bg_heat_bottom_color">#D4954D</color>
 
-    <color name="weather_bg_heat_night_top_color">#1F2469</color>
+    <color name="weather_bg_heat_night_top_color">#1f2469</color>
     <color name="weather_bg_heat_night_bottom_color">#374491</color>
 
-    <color name="weather_bg_heavy_rain_top_color">#087A85</color>
+    <color name="weather_bg_heavy_rain_top_color">#295e80</color>
     <color name="weather_bg_heavy_rain_bottom_color">#087A84</color>
 
-    <color name="weather_bg_heavy_rain_bight_top_color">#0D3639</color>
+    <color name="weather_bg_heavy_rain_bight_top_color">#292f38</color>
     <color name="weather_bg_heavy_rain_bight_bottom_color">#0B3538</color>
 
-    <color name="weather_bg_heavy_snow_top_color">#3E3EB1</color>
+    <color name="weather_bg_heavy_snow_top_color">#366790</color>
     <color name="weather_bg_heavy_snow_bottom_color">#5152BD</color>
 
-    <color name="weather_bg_heavy_snow_night_top_color">#342E72</color>
+    <color name="weather_bg_heavy_snow_night_top_color">#192b3d</color>
     <color name="weather_bg_heavy_snow_night_bottom_color">#3F3980</color>
 
-    <color name="weather_bg_jansa_top_color">#6A5D4A</color>
+    <color name="weather_bg_jansa_top_color">#5a4d39</color>
     <color name="weather_bg_jansa_bottom_color">#655948</color>
 
-    <color name="weather_bg_jansa_night_top_color">#524935</color>
+    <color name="weather_bg_jansa_night_top_color">#3b362b</color>
     <color name="weather_bg_jansa_night_bottom_color">#514734</color>
 
-    <color name="weather_bg_overcast_top_color">#808D9F</color>
+    <color name="weather_bg_overcast_top_color">#303a5a</color>
     <color name="weather_bg_overcast_bottom_color">#4E6485</color>
 
-    <color name="weather_bg_overcast_night_top_color">#2F333A</color>
+    <color name="weather_bg_overcast_night_top_color">#1a1c26</color>
     <color name="weather_bg_overcast_night_bottom_color">#444D59</color>
 
     <color name="weather_bg_scouther_top_color">#3E3FB2</color>
@@ -129,17 +129,17 @@
     <color name="weather_bg_shower_night_top_color">#0D3639</color>
     <color name="weather_bg_shower_night_bottom_color">#0B3537</color>
 
-    <color name="weather_bg_sleet_top_color">#3E3EB2</color>
+    <color name="weather_bg_sleet_top_color">#1b577d</color>
     <color name="weather_bg_sleet_bottom_color">#5254BD</color>
 
 
-    <color name="weather_bg_sleet_night_top_color">#352E72</color>
+    <color name="weather_bg_sleet_night_top_color">#1b2938</color>
     <color name="weather_bg_sleet_night_bottom_color">#3E3880</color>
 
-    <color name="weather_bg_thunder_shower_top_color">#3B379F</color>
+    <color name="weather_bg_thunder_shower_top_color">#2a4371</color>
     <color name="weather_bg_thunder_shower_bottom_color">#5159BD</color>
 
-    <color name="weather_bg_thunder_shower_night_top_color">#17183A</color>
+    <color name="weather_bg_thunder_shower_night_top_color">#132545</color>
     <color name="weather_bg_thunder_shower_night_bottom_color">#262A51</color>
 
 
