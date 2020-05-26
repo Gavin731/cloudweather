@@ -129,7 +129,7 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
                 defaultImgAnimator.start()
             }
             RefreshState.ReleaseToRefresh -> {
-                contextView.text = "释放立即刷新"
+//                contextView.text = "释放立即刷新"
                 iconView.visibility = View.GONE
             }
         }
