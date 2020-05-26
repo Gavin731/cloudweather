@@ -235,9 +235,9 @@ class RealTimeWeatherItemFragment :
             }
         }
         binding.zzWeatherView.setOnWeatherItemClickListener { itemView, position, weatherModel ->
-            if (position == 0 || position > 3) return@setOnWeatherItemClickListener
+            if (position > 2) return@setOnWeatherItemClickListener
             (requireActivity() as MainActivity).selectFragment(1)
-            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(position - 1)
+            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(position)
         }
 
         // 生活指数点击事件
@@ -327,9 +327,9 @@ class RealTimeWeatherItemFragment :
         binding.rvDayList.removeAllAnimation()
 
         dailyListAdapter.setOnItemClickListener { _, _, position ->
-            if (position == 0 || position > 3) return@setOnItemClickListener
+            if (position > 2) return@setOnItemClickListener
             (requireActivity() as MainActivity).selectFragment(1)
-            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(position - 1)
+            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(position)
         }
     }
 
