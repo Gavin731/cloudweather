@@ -16,6 +16,7 @@
     <color name="weather_color_E1E1E1">#E1E1E1</color>
     <color name="weather_color_F2F2F2">#F2F2F2</color>
     <color name="weather_color_80ffffff">#80ffffff</color>
+    <color name="weather_color_eeeeee">#eeeeee</color>
 
     <!--白色透明度-->
     <color name="weather_translucent_white_05">#f2ffffff</color>

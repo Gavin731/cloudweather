@@ -35,7 +35,7 @@ class SettingsActivity : BaseVMActivity<SettingsViewModel, WeatherActivitySettin
     override val layoutResId: Int
         get() = R.layout.weather_activity_settings
 
-    private var isNotice by Preference("isNotice", false)
+    private var isNotice by Preference("isNotice", true)
     private var isLocation by Preference("isLocation", true)
 
     private var nightTime by Preference("night_time", "18:00")

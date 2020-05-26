@@ -185,7 +185,7 @@
 
                     <TextView
                         android:id="@+id/tvRainTip"
-                        android:layout_width="@dimen/weather_dp_260"
+                        android:layout_width="@dimen/weather_dp_250"
                         android:layout_height="27dp"
                         android:layout_marginTop="15.33dp"
                         android:background="@drawable/weather_bg_hout_alert"
@@ -195,8 +195,6 @@
                         android:ellipsize="marquee"
                         android:gravity="center"
                         android:marqueeRepeatLimit="marquee_forever"
-                        android:maxWidth="300dp"
-                        android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:singleLine="true"
                         android:text="@{cityWeather.rainTip}"
