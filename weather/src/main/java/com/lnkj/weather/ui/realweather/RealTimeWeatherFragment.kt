@@ -29,10 +29,7 @@ import com.mufeng.mvvmlib.image.GlideRequests
 import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
 import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
-import com.mufeng.mvvmlib.utilcode.ext.widget.backgroundColorResource
-import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
-import com.mufeng.mvvmlib.utilcode.ext.widget.gone
-import com.mufeng.mvvmlib.utilcode.ext.widget.visible
+import com.mufeng.mvvmlib.utilcode.ext.widget.*
 import com.mufeng.mvvmlib.utilcode.utils.Preference
 import com.mufeng.mvvmlib.utilcode.utils.StatusBarUtils
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator
@@ -310,41 +307,23 @@ class RealTimeWeatherFragment :
     }
 
     fun setTitleViewAlpha(alpha: Float) {
+        if(binding.toolbar.background==null){
+            binding.toolbar.setBackgroundResource(R.color.white)
+        }
         when (alpha) {
             0f -> { //为0时 则白色文字及图标显示  父布局background为透明
                 //设置控件的background的alpha 取值为0~255
                 //设置控件的alpha 取值为0~1
                 binding.toolbar.background.alpha = 0
-//                ivLeft_white.alpha = 1f
-//                ivLeft.alpha = 0f
-//                tvTitleWhite.alpha = 1f
-//                tvTitle.alpha = 0f
-//                tvTitle.visibility = View.INVISIBLE
-//                tvTitleWhite.visibility = View.VISIBLE
-//                ivLeft.visibility = View.INVISIBLE
-//                ivLeft_white.visibility = View.VISIBLE
+                binding.tvCity.textColor=resources.getColor(R.color.white)
             }
             1f -> { //为1时 则深色文字及图标显示  父布局background为白色
                 binding.toolbar.background.alpha = 255
-//                ivLeft_white.alpha = 0f
-//                ivLeft.alpha = 1f
-//                tvTitleWhite.alpha = 0f
-//                tvTitle.alpha = 1f
-//                tvTitle.visibility = View.VISIBLE
-//                tvTitleWhite.visibility = View.GONE
-//                ivLeft.visibility = View.VISIBLE
-//                ivLeft_white.visibility = View.GONE
+                binding.tvCity.textColor=resources.getColor(R.color.weather_color_222222)
+
             }
             else -> { //其余则设置alpha即可
                 binding.toolbar.background.alpha = (alpha * 255).toInt()
-//                ivLeft_white.alpha = 1f - alpha
-//                ivLeft.alpha = alpha
-//                tvTitleWhite.alpha = 1f - alpha
-//                tvTitle.alpha = alpha
-//                tvTitle.visibility = View.VISIBLE
-//                tvTitleWhite.visibility = View.VISIBLE
-//                ivLeft.visibility = View.VISIBLE
-//                ivLeft_white.visibility = View.VISIBLE
             }
         }
     }
