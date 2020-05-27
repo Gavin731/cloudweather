@@ -70,9 +70,12 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
 
     private fun refreshData(myCityBean: MyCityBean?) {
         this.cityBean = myCityBean
-        viewModel.title.postValue("${myCityBean?.counties}空气质量")
+        cityBean.apply {
+            viewModel.title.postValue("${this!!.counties}空气质量")
 //        viewModel.getAirData(myCityBean!!)
-        viewModel.getCaiYunAirData(myCityBean!!)
+            viewModel.getCaiYunAirData(this!!)
+        }
+
     }
 
     override fun startObserve() {
