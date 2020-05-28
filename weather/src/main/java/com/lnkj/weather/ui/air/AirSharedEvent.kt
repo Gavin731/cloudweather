@@ -1,6 +1,7 @@
 package com.lnkj.weather.ui.air
 
 import com.lnkj.weather.http.bean.HeAirQualityBean
+import com.lnkj.weather.http.bean.WeatherBean
 
 /**
  * @创建者 MuFeng-T
@@ -10,5 +11,5 @@ import com.lnkj.weather.http.bean.HeAirQualityBean
 data class AirSharedEvent(
     val cityName: String,
     val date: String,
-    val airQualityBean: HeAirQualityBean?
+    val airQualityBean: WeatherBean.Result.Realtime.AirQuality?
 )

@@ -77,6 +77,10 @@ class RealTimeWeatherFragment :
         }
 
         binding.ivShare.clickWithTrigger {
+            //防止数组越界
+            if(index==fragments.size){
+                return@clickWithTrigger
+            }
             // 截图
             val bitmapTop = ImageUtils.getViewBitmap(binding.toolbar, backgroundColor)
             val bitmapBottom = (fragments[index] as RealTimeWeatherItemFragment).getBitmap()
