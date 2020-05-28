@@ -214,12 +214,12 @@ class RealTimeWeatherItemFragment :
         binding.rgDayListChart.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rb_day_chart -> {
-                    binding.rvDayChart.visible()
+                    binding.zzWeatherView.visible()
                     binding.rvDayList.gone()
                 }
                 R.id.rb_day_list -> {
                     binding.rvDayList.visible()
-                    binding.rvDayChart.gone()
+                    binding.zzWeatherView.gone()
                 }
             }
         }
