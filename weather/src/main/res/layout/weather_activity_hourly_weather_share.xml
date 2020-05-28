@@ -7,9 +7,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/weather_main_bg">
+        android:layout_height="match_parent">
 
         <com.mufeng.roundview.RoundConstraintLayout
             android:id="@+id/rcl_bit"

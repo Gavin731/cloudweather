@@ -2,14 +2,18 @@ package com.lnkj.weather.ui.hour
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.lnkj.library_base.base.BaseViewModel
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityHourlyWeatherShareBinding
 import com.lnkj.weather.utils.ImageUtils
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
+import com.mufeng.mvvmlib.image.GlideApp
 import com.mufeng.mvvmlib.utilcode.ext.getString
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
@@ -87,6 +91,22 @@ class HourDetailsShareActivity : BaseVMActivity<BaseViewModel, WeatherActivityHo
         cityName = intent.getString("cityName","")
         date = intent.getString("date","")
         lifeTxt = intent.getString("lifeTxt","")
+
+        GlideApp.with(this)
+            .asDrawable()
+            .load(R.drawable.weather_main_bg)
+            .into(object : CustomTarget<Drawable>() {
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
+                    binding.clBg.background = resource
+                }
+
+            })
 
         if (weatherBg != -1) {
 //            binding.ivImageBg.imageResource = weatherBg

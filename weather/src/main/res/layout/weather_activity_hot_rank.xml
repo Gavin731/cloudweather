@@ -9,10 +9,10 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/ll_bg"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/weather_main_bg"
         >
 
         <FrameLayout
