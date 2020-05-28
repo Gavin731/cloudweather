@@ -65,6 +65,7 @@ android {
         Oppo {}
         qd001{}
         vivo{}
+        update{}
 
         productFlavors.all {
             flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
