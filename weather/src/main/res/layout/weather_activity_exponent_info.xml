@@ -10,8 +10,7 @@
         android:id="@+id/ll_root_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:background="@drawable/weather_life_index_good_bg">
+        android:orientation="vertical">
 
         <FrameLayout
             isShowStatusBar="@{true}"

@@ -79,7 +79,7 @@ object WeatherUtils {
             "THUNDER_SHOWER" -> R.drawable.weather_ico_thunder_shower  // 雷阵雨
             "HAIL" -> R.drawable.weather_ico_hail  // 冰雹
             "SLEET" -> R.drawable.weather_ico_sleet   // 雨夹雪
-            else -> -1
+            else -> R.drawable.weather_ico_clear_day
         }
     }
 
@@ -192,7 +192,7 @@ object WeatherUtils {
                     R.drawable.weather_bg_sleet
                 }
             }
-            else -> -1
+            else -> R.drawable.weather_bg_fine_night
         }
     }
 
@@ -298,7 +298,7 @@ object WeatherUtils {
                     R.drawable.weather_bg_sleet
                 }
             }
-            else -> -1
+            else -> R.drawable.weather_bg_fine
         }
     }
 

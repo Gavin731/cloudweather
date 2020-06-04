@@ -1,13 +1,17 @@
 package com.lnkj.weather.ui.hotrank
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityHotRankBinding
 import com.lnkj.weather.http.bean.HotRankBean
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
+import com.mufeng.mvvmlib.image.GlideApp
 import com.mufeng.mvvmlib.utilcode.ext.widget.removeAllAnimation
 import com.mufeng.mvvmlib.utilcode.ext.widget.setupData
 import kotlinx.android.synthetic.main.weather_activity_hot_rank.*
@@ -35,6 +39,22 @@ class HotRankActivity: BaseVMActivity<HotRankViewModel, WeatherActivityHotRankBi
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.removeAllAnimation()
+
+        GlideApp.with(this)
+            .asDrawable()
+            .load(R.drawable.weather_main_bg)
+            .into(object : CustomTarget<Drawable>() {
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
+                    binding.llBg.background = resource
+                }
+
+            })
 
     }
 

@@ -9,6 +9,7 @@ import com.lnkj.library_base.event.EventKey
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherFragmentAirQualityBinding
 import com.lnkj.weather.http.bean.HeAirQualityBean
+import com.lnkj.weather.http.bean.WeatherBean
 import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.utils.WeatherUtils
@@ -25,7 +26,7 @@ import java.util.*
  * @描述
  */
 class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAirQualityBinding>() {
-    private var airQuality: HeAirQualityBean? = null
+    private var airQuality: WeatherBean.Result.Realtime.AirQuality? = null
     private var cityBean: MyCityBean? = null
     override val viewModel: AirQualityViewModel
             by viewModels()
@@ -137,6 +138,7 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
 
         viewModel.caiYunAirData.observe(this) {
             binding.refreshLayout.finishAll()
+            this.airQuality = it
             binding.tvPushTime.text = DateUtils.formatTime(Date(), DateUtils.PATTERN_15) + "发布"
             // 空气质量数值
             binding.circleProgressBar.hint = it.aqi!!.chn.toString()
@@ -172,17 +174,17 @@ class AirQualityFragment : BaseVMFragment<AirQualityViewModel, WeatherFragmentAi
             binding.tvO3Value.text = it.o3.toString()
 
             binding.tvPm25Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(it.pm25?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.pm25?.toInt()!!))
             binding.tvPm10Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(it.pm10?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.pm10?.toInt()!!))
             binding.tvPmSO2Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(it.so2?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.so2?.toInt()!!))
             binding.tvNo2Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(it.no2?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.no2?.toInt()!!))
             binding.tvCoColor.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(it.co?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.co?.toInt()!!))
             binding.tvO3Color.delegate.backgroundColor =
-                resources.getColor(WeatherUtils.getAirQualityColor(it.o3?.toDouble()?.toInt()!!))
+                resources.getColor(WeatherUtils.getAirQualityColor(it.o3?.toInt()!!))
 
         }
     }

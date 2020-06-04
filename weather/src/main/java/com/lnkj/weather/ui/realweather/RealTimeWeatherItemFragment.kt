@@ -168,14 +168,16 @@ class RealTimeWeatherItemFragment :
         super.onResume()
         binding.vObscuration.visibility = View.VISIBLE
         if (!isRefreshData()) {
-            // 设置天气背景
-            (parentFragment as RealTimeWeatherFragment).setWeatherBg(
-                viewModel.cityWeatherData.value!!.weatherBg,
-                cityId
-            )
-            this.bottomColor =
-                ColorUtils.getBottomColor(viewModel.cityWeatherData.value!!.weatherBg)
-            binding.vObscuration.visibility = View.GONE
+            viewModel.cityWeatherData.let {
+                // 设置天气背景
+                (parentFragment as RealTimeWeatherFragment).setWeatherBg(
+                    it.value!!.weatherBg,
+                    cityId
+                )
+                this.bottomColor =
+                    ColorUtils.getBottomColor(it.value!!.weatherBg)
+                binding.vObscuration.visibility = View.GONE
+            }
             return
         }
 
