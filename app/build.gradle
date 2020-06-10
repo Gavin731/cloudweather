@@ -21,7 +21,6 @@ android {
             abiFilters 'armeabi-v7a', 'x86'
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
-
         manifestPlaceholders = [
                 qqappid: "101867668"
         ]
