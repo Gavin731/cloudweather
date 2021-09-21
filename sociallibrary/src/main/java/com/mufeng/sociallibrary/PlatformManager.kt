@@ -68,15 +68,15 @@ internal object PlatformManager {
         }
       }
 
-      PlatformType.SINA_WEIBO -> {
-        val wbHandler = SinaWBHandler(context, config)
-        if (wbHandler.isInstalled) {
-          val opList = wbHandler.getAvailableOperation()
-          wbHandler.release()
-          availablePlatMap[PlatformType.SINA_WEIBO] = Platform(config, opList)
-          return true
-        }
-      }
+//      PlatformType.SINA_WEIBO -> {
+//        val wbHandler = SinaWBHandler(context, config)
+//        if (wbHandler.isInstalled) {
+//          val opList = wbHandler.getAvailableOperation()
+//          wbHandler.release()
+//          availablePlatMap[PlatformType.SINA_WEIBO] = Platform(config, opList)
+//          return true
+//        }
+//      }
 
       PlatformType.ALI -> {
         val aliHandler = AliHandler(context, config)
@@ -131,10 +131,10 @@ internal object PlatformManager {
         val config = availablePlatMap[PlatformType.QQ]?.platConfig ?: return null
         QQHandler(context, config)
       }
-      PlatformType.SINA_WEIBO -> {
-        val config = availablePlatMap[PlatformType.SINA_WEIBO]?.platConfig ?: return null
-        SinaWBHandler(context, config)
-      }
+//      PlatformType.SINA_WEIBO -> {
+//        val config = availablePlatMap[PlatformType.SINA_WEIBO]?.platConfig ?: return null
+//        SinaWBHandler(context, config)
+//      }
       PlatformType.ALI -> {
         val config = availablePlatMap[PlatformType.ALI]?.platConfig ?: return null
         AliHandler(context, config)
