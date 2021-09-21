@@ -118,7 +118,8 @@ dependencies {
     implementation project(':sociallibrary')
 
     // 友盟基础组件库（所有友盟业务SDK都依赖基础组件库）
-    api "com.umeng.umsdk:common:2.1.0"
+    api "com.umeng.umsdk:common:9.4.2"
     // 友盟统计SDK
-    api "com.umeng.umsdk:analytics:8.1.3"
+    api  'com.umeng.umsdk:asms:1.4.0'// 必选
+    api "com.umeng.umsdk:apm:1.4.2"
 }

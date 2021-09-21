@@ -132,30 +132,30 @@ fun WeiboMultiMessage.setTextMsg(content: ShareTextContent):WeiboMultiMessage{
 }
 
 fun WeiboMultiMessage.setImgMsg(content: ShareImageContent):WeiboMultiMessage{
-  content.img?.let {
-    if (!it.isRecycled) {
-      val imageObject = ImageObject()
-      imageObject.setImageObject(content.img)
-      this.imageObject = imageObject
-    }
-  }
+//  content.img?.let {
+//    if (!it.isRecycled) {
+//      val imageObject = ImageObject()
+//      imageObject.setImageObject(content.img)
+//      this.imageObject = imageObject
+//    }
+//  }
   return this
 }
 
 fun WeiboMultiMessage.setTextImgMsg(content: ShareTextImageContent):WeiboMultiMessage{
-  content.img?.let {
-    if (!it.isRecycled) {
-      val imageObject = ImageObject()
-      imageObject.setImageObject(content.img)
-      this.imageObject = imageObject
-
-      val atUser = content.atUser
-      val textObject = TextObject()
-      textObject.text = content.description +
-          "${if (!content.url.isNullOrBlank()) content.url else ""}" + atUser
-      this.textObject = textObject
-    }
-  }
+//  content.img?.let {
+//    if (!it.isRecycled) {
+//      val imageObject = ImageObject()
+//      imageObject.setImageObject(content.img)
+//      this.imageObject = imageObject
+//
+//      val atUser = content.atUser
+//      val textObject = TextObject()
+//      textObject.text = content.description +
+//          "${if (!content.url.isNullOrBlank()) content.url else ""}" + atUser
+//      this.textObject = textObject
+//    }
+//  }
   return this
 }
 
@@ -195,7 +195,7 @@ fun WeiboMultiMessage.setWebMsg(content: ShareWebContent):WeiboMultiMessage{
  */
 fun WeiboMultiMessage.verificateMsg():Boolean{
   // 文本分享时，text不能为空
-  if (textObject != null && textObject.checkArgs()){
+  if (textObject != null){
     return true
   }
 
