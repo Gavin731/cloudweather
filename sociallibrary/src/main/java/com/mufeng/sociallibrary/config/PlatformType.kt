@@ -10,6 +10,6 @@ enum class PlatformType {
     WEIXIN_CIRCLE,
     QQ,
     QQ_ZONE,
-    SINA_WEIBO,
+//    SINA_WEIBO,
     ALI
 }

@@ -44,7 +44,7 @@ class PrivacyPolicyActivity :
         pageType = intent.getString("pageType", "")
         //校验组件是否有传参
         if (TextUtils.isEmpty(pageType) && intent.extras != null) {
-            val ccExtraRemoteCc: RemoteCC = intent.extras.get("cc_extra_remote_cc") as RemoteCC
+            val ccExtraRemoteCc: RemoteCC = intent.extras!!.get("cc_extra_remote_cc") as RemoteCC
             val jsonObject = ccExtraRemoteCc.params;
             pageType = jsonObject.get("pageType") as String;
         }

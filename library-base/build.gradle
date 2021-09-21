@@ -47,5 +47,5 @@ dependencies {
     api "androidx.room:room-ktx:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
     api project(path: ':roundview-library')
-    api 'com.gu.android:toolargetool:0.2.1@aar'
+    api 'com.gu.android:toolargetool:0.3.0@aar'
 }
