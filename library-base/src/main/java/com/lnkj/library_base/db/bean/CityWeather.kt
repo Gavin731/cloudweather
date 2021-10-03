@@ -59,6 +59,8 @@ data class CityWeather(
     var todayWeather: TodayWeather,
     // 明天天气
     var tomorrowWeather: TodayWeather,
+    // 后天天气
+    var afterTomorrowWeather: TodayWeather,
     // 24小时天气
     var hourlyWeatherList: MutableList<HourlyWeather>,
     // 15天天气列表
@@ -198,7 +200,11 @@ data class HourlyWeather(
     var temperature: Int,
     // 空气质量
     var airQualityName: String,
-    var airQualityValue: Int
+    var airQualityValue: Int,
+    //风速
+    var windQualityValue:Double,
+    //风的方向
+    var directionQualityValue:Double
 )
 
 /**

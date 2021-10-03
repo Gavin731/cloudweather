@@ -5,12 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
 import com.lnkj.weather.R;
 
 import java.util.Collections;
@@ -291,6 +293,8 @@ public class HourWeatherView extends HorizontalScrollView {
             itemView.setTemp(model.getHourTemp());
             itemView.setWeather(model.getHourWeather());
             itemView.setImg(model.getHourPic());
+            itemView.setWind(model.getWind());
+            itemView.setDirection(model.getDirection());
 
 
             itemView.setAirLevel(model.getAirLevel());

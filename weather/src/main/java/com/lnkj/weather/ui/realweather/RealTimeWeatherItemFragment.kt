@@ -133,7 +133,7 @@ class RealTimeWeatherItemFragment :
         binding.llAirQuality.clickWithTrigger {
             (requireActivity() as MainActivity).selectFragment(2)
         }
-        binding.clTodayWeather.clickWithTrigger {
+        binding.llTodayTomorrowWeather.clickWithTrigger {
             (requireActivity() as MainActivity).selectFragment(1)
             LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(0)
         }
@@ -141,17 +141,21 @@ class RealTimeWeatherItemFragment :
             (requireActivity() as MainActivity).selectFragment(1)
             LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(1)
         }
+        binding.clAfterTomorrowWeather.clickWithTrigger {
+            (requireActivity() as MainActivity).selectFragment(1)
+            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(2)
+        }
 
-//        LiveEventBus.get(EventKey.EVENT_CHANGE_CITY, MyCityBean::class.java)
-//            .observe(this) {
-//                // 设置天气背景
-//                if (it.counties == cityWeather?.cityName) {
-//                    (parentFragment as RealTimeWeatherFragment).setWeatherBg(
-//                        cityWeather?.weatherBg!!,
-//                        cityId
-//                    )
-//                }
-//            }
+        LiveEventBus.get(EventKey.EVENT_CHANGE_CITY, MyCityBean::class.java)
+            .observe(this) {
+                // 设置天气背景
+                if (it.counties == cityWeather?.cityName) {
+                    (parentFragment as RealTimeWeatherFragment).setWeatherBg(
+                        cityWeather?.weatherBg!!,
+                        cityId
+                    )
+                }
+            }
 
         LiveEventBus.get(EventKey.EVENT_STOP_VOICE_ANNOUNCEMENTS, Boolean::class.java)
             .observe(this) {
@@ -404,6 +408,7 @@ class RealTimeWeatherItemFragment :
             //设置快捷天气的空气质量
             WeatherUtils.setAirLevel(binding.tvTodayAirLevel, it.todayWeather.airQualityValue)
             WeatherUtils.setAirLevel(binding.tvTomorrowAirLevel, it.tomorrowWeather.airQualityValue)
+            WeatherUtils.setAirLevel(binding.tvAfterTomorrowAirLevel, it.afterTomorrowWeather.airQualityValue)
 
         }
     }
@@ -440,7 +445,9 @@ class RealTimeWeatherItemFragment :
                     if (index == 0) "现在" else it.time,
                     it.weatherIcon,
                     it.airQualityValue,
-                    index == 0
+                    index == 0,
+                    it.windQualityValue,
+                    it.directionQualityValue
                 )
             )
         }

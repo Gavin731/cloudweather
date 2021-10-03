@@ -4,16 +4,11 @@ import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.viewpager.widget.ViewPager
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.db.bean.MyCityBean
 import com.lnkj.library_base.event.EventKey
@@ -21,20 +16,22 @@ import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherFragmentRealTimeWeatherBinding
 import com.lnkj.weather.ui.city.SearchCityActivity
 import com.lnkj.weather.ui.city.add.AddCityActivity
+import com.lnkj.weather.ui.settings.SettingsActivity
 import com.lnkj.weather.utils.ColorUtils
 import com.lnkj.weather.utils.ImageUtils
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.core.AttachPopupView
+import com.lxj.xpopup.interfaces.OnSelectListener
 import com.mufeng.mvvmlib.basic.view.BaseVMFragment
-import com.mufeng.mvvmlib.image.GlideApp
-import com.mufeng.mvvmlib.image.GlideRequests
 import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
 import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
-import com.mufeng.mvvmlib.utilcode.ext.widget.backgroundColorResource
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.ext.widget.gone
 import com.mufeng.mvvmlib.utilcode.ext.widget.visible
 import com.mufeng.mvvmlib.utilcode.utils.Preference
 import com.mufeng.mvvmlib.utilcode.utils.StatusBarUtils
+import com.mufeng.mvvmlib.utilcode.utils.toast
 import net.lucode.hackware.magicindicator.buildins.circlenavigator.CircleNavigator
 
 /**
@@ -77,17 +74,44 @@ class RealTimeWeatherFragment :
         }
 
         binding.ivShare.clickWithTrigger {
-            //防止数组越界
-            if(index==fragments.size){
-                return@clickWithTrigger
-            }
-            // 截图
-            val bitmapTop = ImageUtils.getViewBitmap(binding.toolbar, backgroundColor)
-            val bitmapBottom = (fragments[index] as RealTimeWeatherItemFragment).getBitmap()
-                ?: return@clickWithTrigger
-            val bitmap = ImageUtils.combineImage(bitmapTop!!, bitmapBottom!!)
-            LiveEventBus.get("event_share_real_time_weather").post(bitmap)
-            startActivity<RealTimeWeatherShareActivity>()
+
+            val attachPopupView: AttachPopupView = XPopup.Builder(context)
+                .hasShadowBg(false)
+                //                        .isViewMode(true)
+//                .isClickThrough(true)
+                //                        .isDestroyOnDismiss(true) //对于只使用一次的弹窗，推荐设置这个
+                //                        .isDarkTheme(true)
+                //                        .popupAnimation(PopupAnimation.ScrollAlphaFromTop) //NoAnimation表示禁用动画
+                //                        .isCenterHorizontal(true) //是否与目标水平居中对齐
+                //                        .offsetY(60)
+                //                        .offsetX(80)
+                //                        .popupPosition(PopupPosition.Top) //手动指定弹窗的位置
+                //                        .popupWidth(500)
+                .atView(binding.ivShare) // 依附于所点击的View，内部会自动判断在上方或者下方显示
+                .asAttachList(
+                    arrayOf("分享今日天气", "设置"),
+                    intArrayOf(R.mipmap.weather_icon_share, R.mipmap.weather_icon_share),
+                    0,
+                    0,
+                    OnSelectListener { position, text ->
+                        if(position==0){
+                            if(index==fragments.size){
+                                return@OnSelectListener
+                            }
+                            // 截图
+                            val bitmapTop = ImageUtils.getViewBitmap(binding.toolbar, backgroundColor)
+                            val bitmapBottom = (fragments[index] as RealTimeWeatherItemFragment).getBitmap()
+                                ?: return@OnSelectListener
+                            val bitmap = ImageUtils.combineImage(bitmapTop!!, bitmapBottom!!)
+                            LiveEventBus.get("event_share_real_time_weather").post(bitmap)
+                            startActivity<RealTimeWeatherShareActivity>()
+                        }else if(position==1){
+                            startActivity<SettingsActivity>()
+                        }
+                    } /*, Gravity.LEFT*/
+                )
+
+            attachPopupView.show()
         }
 
         LiveEventBus.get(EventKey.EVENT_CHOOSE_REMOVE_CITY, MyCityBean::class.java)

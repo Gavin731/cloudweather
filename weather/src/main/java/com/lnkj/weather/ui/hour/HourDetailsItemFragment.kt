@@ -283,7 +283,9 @@ class HourDetailsItemFragment :
                     if (day == 1 && index == 0) "现在" else it.time,
                     it.weatherIcon,
                     it.airQualityValue,
-                    day == 1 && index == 0
+                    day == 1 && index == 0,
+                    it.windQualityValue,
+                    it.directionQualityValue
                 )
             )
         }

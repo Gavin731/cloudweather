@@ -86,9 +86,9 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
         defaultImgAnimator.end()
         iconView.imageResource = R.mipmap.icon_refresh_complete
         if (success) {
-            contextView.text = "刷新完成"
+            contextView.text = "更新成功"
         } else {
-            contextView.text = "刷新失败"
+            contextView.text = "更新失败"
         }
         return 500;//延迟500毫秒之后再弹回
     }
@@ -119,11 +119,11 @@ class WeatherClassicsHeader : LinearLayout, RefreshHeader {
     ) {
         when (newState) {
             RefreshState.None, RefreshState.PullDownToRefresh -> {
-                contextView.text = "下拉开始刷新"
+                contextView.text = "下拉松手可更新"
                 iconView.visibility = View.GONE
             }
             RefreshState.Refreshing -> {
-                contextView.text = "更新数据中..."
+                contextView.text = "正在更新"
                 iconView.imageResource = R.mipmap.icon_refresh
                 iconView.visibility = View.VISIBLE
                 defaultImgAnimator.start()

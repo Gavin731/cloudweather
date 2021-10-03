@@ -16,7 +16,7 @@ import com.mufeng.mvvmlib.utilcode.utils.application
  * @创建时间 2020/3/23 14:57
  * @描述
  */
-@Database(entities = [CityBean::class, MyCityBean::class, CityWeather::class], version = 2)
+@Database(entities = [CityBean::class, MyCityBean::class, CityWeather::class], version = 3)
 abstract class WeatherDatabase : RoomDatabase() {
 
     abstract fun cityDao(): CityDao

@@ -23,7 +23,7 @@ import com.mufeng.roundview.RoundTextView;
 public class HourWeatherItemView extends LinearLayout {
 
     private View rootView;
-    private TextView tvTime;
+    private TextView tvTime,tvWind,tvDirection;
     private TextView tvWeather;
     private HourTemperatureView ttvTemp;//显示圆点和温度view
     private TextView tvAirLevel, tvTemperature;
@@ -56,6 +56,8 @@ public class HourWeatherItemView extends LinearLayout {
         tvAirLevel = rootView.findViewById(R.id.tv_air_level);
         tvAirLevel2 = rootView.findViewById(R.id.tv_air_level2);
         llItemView = rootView.findViewById(R.id.ll_item_view);
+        tvWind=rootView.findViewById(R.id.tv_wind);
+        tvDirection=rootView.findViewById(R.id.tv_direction);
         rootView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         addView(rootView);
         if (isShowTempView) {
@@ -127,5 +129,17 @@ public class HourWeatherItemView extends LinearLayout {
 
     public void setTvTempColor(int resId) {
         tvTemperature.setTextColor(resId);
+    }
+
+    public void setWind(double wind){
+        if(tvWind!=null){
+            tvWind.setText(wind+"");
+        }
+    }
+
+    public void setDirection(double direction){
+        if(tvDirection!=null){
+            tvDirection.setText(direction+"");
+        }
     }
 }

@@ -40,6 +40,7 @@
             android:gravity="center"
             android:textColor="@color/weather_color_222222"
             android:textSize="@dimen/weather_sp_14"
+            android:visibility="gone"
             tools:text="晴" />
 
 
@@ -54,11 +55,24 @@
             android:id="@+id/tv_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="2dp"
             android:textColor="@color/weather_color_222222"
-            android:textSize="@dimen/weather_sp_13"
-            android:visibility="gone" />
+            android:textSize="@dimen/weather_sp_13" />
+
+        <TextView
+            android:id="@+id/tv_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/weather_color_222222"
+            android:textSize="@dimen/weather_sp_13" />
+        <TextView
+            android:id="@+id/tv_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/weather_color_222222"
+            android:textSize="@dimen/weather_sp_13" />
 
         <TextView
             android:id="@+id/tv_air_level"

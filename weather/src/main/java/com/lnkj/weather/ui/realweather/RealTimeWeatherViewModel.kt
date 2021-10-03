@@ -19,6 +19,7 @@ import com.lnkj.weather.utils.WeatherUtils
 import com.mufeng.mvvmlib.basic.Event
 import com.mufeng.mvvmlib.http.handler.Request
 import com.mufeng.mvvmlib.util.WeatherDayTimeManager
+import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
 import com.mufeng.mvvmlib.utilcode.ext.formatDateStr
 import com.mufeng.mvvmlib.utilcode.ext.loge
 import kotlinx.coroutines.Dispatchers
@@ -133,9 +134,26 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     WeatherUtils.getAirQualityDescription(daily?.airQuality?.aqi?.get(1)?.max!!.chn!!),
                     daily?.airQuality?.aqi?.get(1)?.max!!.chn!!
                 )
+                // 后天天气
+                val afterTomorrowWeather = TodayWeather(
+                    DateUtils.formatDateT(
+                        weatherBean.result?.daily?.temperature?.get(2)?.date!!,
+                        PATTERN_14
+                    ),
+                    weatherBean.result?.daily?.temperature?.get(2)?.max!!.toInt(),
+                    weatherBean.result?.daily?.temperature?.get(2)?.min!!.toInt(),
+                    WeatherUtils.formatWeather(
+                        weatherBean.result?.daily?.skycon08h20h?.get(2)?.value!!,
+                        weatherBean.result?.daily?.skycon20h32h?.get(2)?.value!!
+                    ),
+                    WeatherUtils.getWeatherIcon(weatherBean.result?.daily?.skycon08h20h?.get(2)?.value!!),
+                    WeatherUtils.getAirQualityDescription(daily?.airQuality?.aqi?.get(2)?.max!!.chn!!),
+                    daily?.airQuality?.aqi?.get(2)?.max!!.chn!!
+                )
                 // 小时天气数据
                 val hourly = weatherBean.result!!.hourly
                 val hourlyWeatherList = mutableListOf<HourlyWeather>()
+                Log.e("-----aaa11:", GsonUtils.INSTANCE.toJson(hourly));
                 hourly?.temperature?.forEachIndexed { index, temperature ->
                     val hourlyWeather = HourlyWeather(
                         time = DateUtils.formatDateT(temperature?.datetime!!, DateUtils.PATTERN_15),
@@ -147,7 +165,10 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                                 index
                             )?.value?.chn!!
                         ),
-                        airQualityValue = hourly?.airQuality?.aqi?.get(index)?.value?.chn!!
+                        airQualityValue = hourly?.airQuality?.aqi?.get(index)?.value?.chn!!,
+                        windQualityValue = hourly?.wind?.get(index)?.speed!!,
+                        directionQualityValue = hourly?.wind?.get(index)?.direction!!
+
                     )
                     hourlyWeatherList.add(hourlyWeather)
                 }
@@ -240,16 +261,22 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     dressIcon = WeatherUtils.getDressIcon(dress?.brf!!),
                     dressTopTip = when {
                         tt == 0 -> {
-                            "今天气温变化平稳(昨天${yesterdayWeatherBean?.result?.daily?.temperature?.get(0)?.min!!.toInt()}~${yesterdayWeatherBean?.result?.daily?.temperature?.get(
-                                0
-                            )?.max!!.toInt()}°)"
+                            "今天气温变化平稳(昨天${yesterdayWeatherBean?.result?.daily?.temperature?.get(0)?.min!!.toInt()}~${
+                                yesterdayWeatherBean?.result?.daily?.temperature?.get(
+                                    0
+                                )?.max!!.toInt()
+                            }°)"
                         }
-                        tt > 0 -> "今天最高气温上升${tt}°(昨天${yesterdayWeatherBean?.result?.daily?.temperature?.get(
-                            0
-                        )?.min!!.toInt()}~${yesterdayWeatherBean?.result?.daily?.temperature?.get(0)?.max!!.toInt()}°)"
-                        else -> "今天最高气温下降${tt.absoluteValue}°(昨天${yesterdayWeatherBean?.result?.daily?.temperature?.get(
-                            0
-                        )?.min!!.toInt()}~${yesterdayWeatherBean?.result?.daily?.temperature?.get(0)?.max!!.toInt()}°)"
+                        tt > 0 -> "今天最高气温上升${tt}°(昨天${
+                            yesterdayWeatherBean?.result?.daily?.temperature?.get(
+                                0
+                            )?.min!!.toInt()
+                        }~${yesterdayWeatherBean?.result?.daily?.temperature?.get(0)?.max!!.toInt()}°)"
+                        else -> "今天最高气温下降${tt.absoluteValue}°(昨天${
+                            yesterdayWeatherBean?.result?.daily?.temperature?.get(
+                                0
+                            )?.min!!.toInt()
+                        }~${yesterdayWeatherBean?.result?.daily?.temperature?.get(0)?.max!!.toInt()}°)"
                     },
                     dressBottomTip = dress.txt!!,
                     indexName = "穿衣指数",
@@ -455,10 +482,12 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 }
 
                 val rainTip = if (indexs.isEmpty()) {
-                    "未来2小时不会下${WeatherUtils.isRain(
-                        weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!,
-                        weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
-                    )}，放心出门吧"
+                    "未来2小时不会下${
+                        WeatherUtils.isRain(
+                            weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!,
+                            weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
+                        )
+                    }，放心出门吧"
                 } else {
                     weatherBean.result?.minutely?.description
                 }
@@ -506,6 +535,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     ),
                     todayWeather = todayWeather,
                     tomorrowWeather = tomorrowWeather,
+                    afterTomorrowWeather = afterTomorrowWeather,
                     hourlyWeatherList = hourlyWeatherList,
                     dailyWeatherList = dailyWeatherList,
                     dressLifeStyle = dressLifeStyle,
@@ -529,7 +559,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
             withContext(Dispatchers.IO) {
                 try {
                     cityWeatherTime.postValue(
-                        WeatherDatabase.get().cityWeatherDao().getWeatherByCity(cityBean.counties).updateDate
+                        WeatherDatabase.get().cityWeatherDao()
+                            .getWeatherByCity(cityBean.counties).updateDate
                     )
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
