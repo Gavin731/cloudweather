@@ -38,6 +38,8 @@ import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.widget.*
 import com.mufeng.mvvmlib.utilcode.utils.toast
+import java.time.DayOfWeek
+import java.time.MonthDay
 import java.util.*
 
 
@@ -166,6 +168,11 @@ class RealTimeWeatherItemFragment :
 
         //每次创建的时候先读取缓存
         viewModel.searchWeatherByCity(myCityBean!!)
+
+        //获取后天周几
+        val calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 2);
+        binding.tvAfterTomorrow.text = DateUtils.getWeek(calendar)
     }
 
     override fun onResume() {
@@ -408,7 +415,10 @@ class RealTimeWeatherItemFragment :
             //设置快捷天气的空气质量
             WeatherUtils.setAirLevel(binding.tvTodayAirLevel, it.todayWeather.airQualityValue)
             WeatherUtils.setAirLevel(binding.tvTomorrowAirLevel, it.tomorrowWeather.airQualityValue)
-            WeatherUtils.setAirLevel(binding.tvAfterTomorrowAirLevel, it.afterTomorrowWeather.airQualityValue)
+            WeatherUtils.setAirLevel(
+                binding.tvAfterTomorrowAirLevel,
+                it.afterTomorrowWeather.airQualityValue
+            )
 
         }
     }
@@ -436,13 +446,18 @@ class RealTimeWeatherItemFragment :
     }
 
     private fun generateHourWeatherData(cityWeather: CityWeather): MutableList<HourWeatherModel> {
+        //获取明天的日期
+        val calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        val tomorrowDate = DateUtils.formatTime(calendar.time, DateUtils.PATTERN_14);
+
         val list = arrayListOf<HourWeatherModel>()
         cityWeather.hourlyWeatherList.forEachIndexed { index, it ->
             list.add(
                 HourWeatherModel(
                     it.temperature,
                     it.weatherName,
-                    if (index == 0) "现在" else it.time,
+                    if (index == 0) "现在" else if (it.time == "00:00") tomorrowDate else it.time,
                     it.weatherIcon,
                     it.airQualityValue,
                     index == 0,

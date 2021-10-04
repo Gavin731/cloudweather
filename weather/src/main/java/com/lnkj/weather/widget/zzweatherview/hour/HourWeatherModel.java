@@ -31,11 +31,11 @@ public class HourWeatherModel {
     /**
      * 风速
      */
-    private double wind;
+    private String wind;
     /**
      * 风速方向
      */
-    private double direction;
+    private String direction;
 
     private boolean isCurrent;
 
@@ -43,7 +43,7 @@ public class HourWeatherModel {
     }
 
     public HourWeatherModel(int hourTemp, String hourWeather, String time, int hourPic,
-                            int airLevel, boolean isCurrent, double wind, double direction) {
+                            int airLevel, boolean isCurrent, String wind, String direction) {
         this.hourTemp = hourTemp;
         this.hourWeather = hourWeather;
         this.time = time;
@@ -102,19 +102,19 @@ public class HourWeatherModel {
         this.airLevel = airLevel;
     }
 
-    public double getWind() {
+    public String getWind() {
         return wind;
     }
 
-    public void setWind(double wind) {
+    public void setWind(String wind) {
         this.wind = wind;
     }
 
-    public double getDirection() {
+    public String getDirection() {
         return direction;
     }
 
-    public void setDirection(double direction) {
+    public void setDirection(String direction) {
         this.direction = direction;
     }
 }

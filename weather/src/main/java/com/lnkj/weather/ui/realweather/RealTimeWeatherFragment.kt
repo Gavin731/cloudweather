@@ -90,22 +90,24 @@ class RealTimeWeatherFragment :
                 .atView(binding.ivShare) // 依附于所点击的View，内部会自动判断在上方或者下方显示
                 .asAttachList(
                     arrayOf("分享今日天气", "设置"),
-                    intArrayOf(R.mipmap.weather_icon_share, R.mipmap.weather_icon_share),
+                    intArrayOf(R.drawable.weather_icon_share, R.drawable.weather_icon_setting),
                     0,
                     0,
                     OnSelectListener { position, text ->
-                        if(position==0){
-                            if(index==fragments.size){
+                        if (position == 0) {
+                            if (index == fragments.size) {
                                 return@OnSelectListener
                             }
                             // 截图
-                            val bitmapTop = ImageUtils.getViewBitmap(binding.toolbar, backgroundColor)
-                            val bitmapBottom = (fragments[index] as RealTimeWeatherItemFragment).getBitmap()
-                                ?: return@OnSelectListener
+                            val bitmapTop =
+                                ImageUtils.getViewBitmap(binding.toolbar, backgroundColor)
+                            val bitmapBottom =
+                                (fragments[index] as RealTimeWeatherItemFragment).getBitmap()
+                                    ?: return@OnSelectListener
                             val bitmap = ImageUtils.combineImage(bitmapTop!!, bitmapBottom!!)
                             LiveEventBus.get("event_share_real_time_weather").post(bitmap)
                             startActivity<RealTimeWeatherShareActivity>()
-                        }else if(position==1){
+                        } else if (position == 1) {
                             startActivity<SettingsActivity>()
                         }
                     } /*, Gravity.LEFT*/

@@ -47,8 +47,8 @@ object WeatherDataUtils {
                     )?.value?.chn!!
                 ),
                 airQualityValue = hourly?.airQuality?.aqi?.get(index)?.value?.chn!!,
-                windQualityValue = hourly?.wind?.get(index)?.speed!!,
-                directionQualityValue = hourly?.wind?.get(index)?.direction!!
+                windQualityValue = WeatherUtils.getWindSpeed(hourly?.wind?.get(index)?.speed!!.toInt()),
+                directionQualityValue = WeatherUtils.getWindDirection(hourly?.wind?.get(index)?.direction!!)
             )
             hourlyWeatherList.add(hourlyWeather)
         }
@@ -338,8 +338,8 @@ object WeatherDataUtils {
                     )?.value?.chn!!
                 ),
                 airQualityValue = hourly?.airQuality?.aqi?.get(index + currentIndex)?.value?.chn!!,
-                windQualityValue = hourly?.wind?.get(index)?.speed!!,
-                directionQualityValue = hourly?.wind?.get(index)?.direction!!
+                windQualityValue = WeatherUtils.getWindSpeed(hourly?.wind?.get(index)?.speed!!.toInt()),
+                directionQualityValue = WeatherUtils.getWindDirection(hourly?.wind?.get(index)?.direction!!)
             )
             hourlyWeatherList.add(hourlyWeather)
 
@@ -619,8 +619,8 @@ object WeatherDataUtils {
                     )?.value?.chn!!
                 ),
                 airQualityValue = hourly?.airQuality?.aqi?.get(index + currentIndex)?.value?.chn!!,
-                windQualityValue = hourly?.wind?.get(index)?.speed!!,
-                directionQualityValue = hourly?.wind?.get(index)?.direction!!
+                windQualityValue = WeatherUtils.getWindSpeed(hourly?.wind?.get(index)?.speed!!.toInt()),
+                directionQualityValue = WeatherUtils.getWindDirection(hourly?.wind?.get(index)?.direction!!)
             )
             hourlyWeatherList.add(hourlyWeather)
 

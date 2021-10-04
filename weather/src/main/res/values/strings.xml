@@ -5,6 +5,12 @@
     <string name="weather_temperature_min_max1">%s~%s℃</string>
     <string name="weather_temperature">%s %s℃</string>
     <string name="weather_degree_centigrade">%s℃</string>
+    <string name="weather_sunriseTime_hint">日出</string>
+    <string name="weather_sunsetTime_hint">日落</string>
+    <string name="weather_probability_hint">降雨概率</string>
+    <string name="weather_humidity_hint">湿度</string>
+    <string name="weather_ultraviolet_hint">紫外线</string>
+    <string name="weather_airPressure_hint">气压</string>
 
 
     <string-array name="weather_privacy_policy">
@@ -323,6 +329,5 @@
 
         <item><Data><![CDATA[如您对本协议条款有任何疑义，欢迎联系我们共同商讨，否则视为您已同意并接受本协议全部内容，联系邮箱：admin@qiluwl.com。]]></Data></item>
     </string-array>
-
 
 </resources>

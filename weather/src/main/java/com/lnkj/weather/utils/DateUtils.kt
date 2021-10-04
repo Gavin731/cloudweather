@@ -89,6 +89,14 @@ object DateUtils {
     }
 
     @SuppressLint("SimpleDateFormat")
+    fun getWeek(calendar: Calendar): String {
+        var weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
+        if (weekIndex < 0) weekIndex = 0
+        val weekDays = arrayListOf("周日", "周一", "周二", "周三", "周四", "周五", "周六")
+        return weekDays[weekIndex]
+    }
+
+    @SuppressLint("SimpleDateFormat")
     fun formatTime(date: Date, pattern: String = PATTERN_1): String {
         val df = SimpleDateFormat(pattern)
         return df.format(date)

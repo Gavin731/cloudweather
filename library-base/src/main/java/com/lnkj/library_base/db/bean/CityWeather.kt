@@ -51,6 +51,8 @@ data class CityWeather(
     var humidity: String,
     // 气压
     var airPressure: String,
+    //紫外线
+    var ultraviolet: String,
     // 下雨下雪提示
     var rainTip: String,
     // 是否雨雪天气
@@ -68,7 +70,9 @@ data class CityWeather(
     // 今日穿衣指数
     var dressLifeStyle: DressLifeStyle,
     // 其他生活指数
-    var lifeStyleList: MutableList<LifeStyle>
+    var lifeStyleList: MutableList<LifeStyle>,
+    //体表温度
+    var apparentTemperature:String
 )
 
 data class DressLifeStyle(
@@ -202,9 +206,9 @@ data class HourlyWeather(
     var airQualityName: String,
     var airQualityValue: Int,
     //风速
-    var windQualityValue:Double,
+    var windQualityValue:String,
     //风的方向
-    var directionQualityValue:Double
+    var directionQualityValue:String
 )
 
 /**

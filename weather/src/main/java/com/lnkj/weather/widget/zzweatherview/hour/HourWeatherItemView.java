@@ -131,15 +131,15 @@ public class HourWeatherItemView extends LinearLayout {
         tvTemperature.setTextColor(resId);
     }
 
-    public void setWind(double wind){
+    public void setWind(String wind){
         if(tvWind!=null){
-            tvWind.setText(wind+"");
+            tvWind.setText(wind);
         }
     }
 
-    public void setDirection(double direction){
+    public void setDirection(String direction){
         if(tvDirection!=null){
-            tvDirection.setText(direction+"");
+            tvDirection.setText(direction);
         }
     }
 }

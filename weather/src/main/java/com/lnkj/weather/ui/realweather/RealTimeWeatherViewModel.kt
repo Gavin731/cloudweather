@@ -89,7 +89,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
 //                        }
                     }
                 }
-                Log.e("-------网咯请求一起请求返回时间", time.toString())
+                Log.e("-------网咯请求一起请求返回时间", GsonUtils.INSTANCE.toJson(lifestyleBean))
 
                 // || air.heWeather6?.get(0)?.status != "ok"
                 if (weatherBean.status != "ok" || yesterdayWeatherBean.status != "ok"
@@ -153,7 +153,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 // 小时天气数据
                 val hourly = weatherBean.result!!.hourly
                 val hourlyWeatherList = mutableListOf<HourlyWeather>()
-                Log.e("-----aaa11:", GsonUtils.INSTANCE.toJson(hourly));
+//                Log.e("-----aaa11:", GsonUtils.INSTANCE.toJson(hourly));
                 hourly?.temperature?.forEachIndexed { index, temperature ->
                     val hourlyWeather = HourlyWeather(
                         time = DateUtils.formatDateT(temperature?.datetime!!, DateUtils.PATTERN_15),
@@ -166,8 +166,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                             )?.value?.chn!!
                         ),
                         airQualityValue = hourly?.airQuality?.aqi?.get(index)?.value?.chn!!,
-                        windQualityValue = hourly?.wind?.get(index)?.speed!!,
-                        directionQualityValue = hourly?.wind?.get(index)?.direction!!
+                        windQualityValue = WeatherUtils.getWindSpeed(hourly?.wind?.get(index)?.speed!!.toInt()),
+                        directionQualityValue = WeatherUtils.getWindDirection(hourly?.wind?.get(index)?.direction!!)
 
                     )
                     hourlyWeatherList.add(hourlyWeather)
@@ -527,8 +527,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     windSpeed = WeatherUtils.getWindSpeed(realtime.wind?.speed!!.toInt()),
                     windDirection = WeatherUtils.getWindDirection(realtime.wind?.direction!!),
                     humidity = "${(realtime.humidity!! * 100).toInt()}%",
-//                    airPressure = "${realtime.pressure?.toInt()!! / 100}hPa",//气压
-                    airPressure = ultravioletLight?.brf,//不想换数据库了，用气压字段表示紫外线
+                    airPressure = "${realtime.pressure?.toInt()!! / 100}hPa",//气压
+                    ultraviolet = ultravioletLight?.brf,
                     rainTip = rainTip!!,
                     hasRain = WeatherUtils.hasRain(weatherBean?.result?.daily?.skycon08h20h?.get(0)?.value!!) || WeatherUtils.hasRain(
                         weatherBean?.result?.daily?.skycon20h32h?.get(0)?.value!!
@@ -540,7 +540,8 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     dailyWeatherList = dailyWeatherList,
                     dressLifeStyle = dressLifeStyle,
                     lifeStyleList = lifeStyleList,
-                    alertInfo = alertInfo
+                    alertInfo = alertInfo,
+                    apparentTemperature="${realtime.apparentTemperature!!.toInt()}"
                 )
                 Log.e("-------网咯请求-组合结束", DateUtils.formatTime(Date(), DateUtils.PATTERN_0))
                 WeatherDatabase.get().cityWeatherDao().save(cityWeather)
