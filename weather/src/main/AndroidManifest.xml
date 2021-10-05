@@ -33,5 +33,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.settings.PrivacyPolicyActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.fifteen.FifteenWeatherActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

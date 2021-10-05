@@ -1,10 +1,8 @@
 package com.lnkj.weather.ui.realweather
 
 import android.graphics.Bitmap
-import android.opengl.Visibility
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +20,7 @@ import com.lnkj.weather.R
 import com.lnkj.weather.base.BaseVMFragment
 import com.lnkj.weather.databinding.WeatherFragmentItemRealTimeWeatherBinding
 import com.lnkj.weather.ui.exponent.ExponentActivity
+import com.lnkj.weather.ui.fifteen.FifteenWeatherActivity
 import com.lnkj.weather.ui.hotrank.HotRankActivity
 import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.ui.rain.RainActivity
@@ -38,8 +37,6 @@ import com.mufeng.mvvmlib.utilcode.ext.observe
 import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.widget.*
 import com.mufeng.mvvmlib.utilcode.utils.toast
-import java.time.DayOfWeek
-import java.time.MonthDay
 import java.util.*
 
 
@@ -78,8 +75,8 @@ class RealTimeWeatherItemFragment :
     private var handler: Handler = Handler()
 
     // 15天天气列表
-    private lateinit var dailyListAdapter: RealTimeWeather15DailyListAdapter
     private val dailyListData = arrayListOf<DailyWeather>()
+    val trendListData = arrayListOf<WeatherModel>()
 
     private var myCityBean: MyCityBean? = null
 
@@ -169,6 +166,13 @@ class RealTimeWeatherItemFragment :
         //每次创建的时候先读取缓存
         viewModel.searchWeatherByCity(myCityBean!!)
 
+        binding.tv15Weather.clickWithTrigger {
+            startActivity<FifteenWeatherActivity>(
+                "dailyListData" to dailyListData,
+                "trendListData" to trendListData
+            )
+        }
+
         //获取后天周几
         val calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 2);
@@ -209,7 +213,6 @@ class RealTimeWeatherItemFragment :
         }
 
         initAlertRecycler()
-        initDailyList()
 
         binding.refreshLayout.setOnRefreshListener {
             if (!isRefreshData()) {
@@ -224,18 +227,7 @@ class RealTimeWeatherItemFragment :
             viewModel?.getCaiYunRealtimeWeather(myCityBean!!, myCityBean?.lon!!, myCityBean?.lat!!)
         }
 
-        binding.rgDayListChart.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.rb_day_chart -> {
-                    binding.rvDayChart.visible()
-                    binding.rvDayList.gone()
-                }
-                R.id.rb_day_list -> {
-                    binding.rvDayList.visible()
-                    binding.rvDayChart.gone()
-                }
-            }
-        }
+
         binding.rvHourWeather.isDrawPath(false)
         binding.rvHourWeather.setOnWeatherItemClickListener { itemView, position, weatherModel ->
             (requireActivity() as MainActivity).selectFragment(1)
@@ -247,12 +239,6 @@ class RealTimeWeatherItemFragment :
                 LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(0)
             }
         }
-        binding.zzWeatherView.setOnWeatherItemClickListener { itemView, position, weatherModel ->
-            if (position > 2) return@setOnWeatherItemClickListener
-            (requireActivity() as MainActivity).selectFragment(1)
-            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(position)
-        }
-
         // 生活指数点击事件
         // 穿衣指数
         binding.clLiveIndexCoat.clickWithTrigger {
@@ -333,19 +319,6 @@ class RealTimeWeatherItemFragment :
         }
     }
 
-    private fun initDailyList() {
-        binding.rvDayList.layoutManager = LinearLayoutManager(requireActivity())
-        dailyListAdapter = RealTimeWeather15DailyListAdapter(dailyListData)
-        binding.rvDayList.adapter = dailyListAdapter
-        binding.rvDayList.removeAllAnimation()
-
-        dailyListAdapter.setOnItemClickListener { _, _, position ->
-            if (position > 2) return@setOnItemClickListener
-            (requireActivity() as MainActivity).selectFragment(1)
-            LiveEventBus.get(EventKey.EVENT_CHOOSE_HOUR_DETAILS_INDEX).post(position)
-        }
-    }
-
     private fun initAlertRecycler() {
         binding.rvAlert.layoutManager = LinearLayoutManager(requireActivity())
         alertAdapter = RealTimeWeatherAlertAdapter(alertData)
@@ -402,15 +375,13 @@ class RealTimeWeatherItemFragment :
             binding.rvHourWeather.setColumnNumber(5)
 
             // 15天天气趋势
-            binding.zzWeatherView.postDelayed({
-                binding.zzWeatherView.list = generateDayWeatherData(it)
-                binding.zzWeatherView.setColumnNumber(5)
-            }, 500)
+            trendListData.clear()
+            trendListData.addAll(generateDayWeatherData(it));
+
 
             // 15天天气列表
             dailyListData.clear()
             dailyListData.addAll(it.dailyWeatherList)
-            dailyListAdapter.notifyDataSetChanged()
 
             //设置快捷天气的空气质量
             WeatherUtils.setAirLevel(binding.tvTodayAirLevel, it.todayWeather.airQualityValue)

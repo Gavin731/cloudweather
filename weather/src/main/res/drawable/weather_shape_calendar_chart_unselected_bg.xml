@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:topLeftRadius="@dimen/weather_dp_8"
+        android:bottomLeftRadius="@dimen/weather_dp_8"/>
+
+    <solid android:color="@color/white"/>
+
+    <stroke android:width="@dimen/weather_dp_1" android:color="#4294EA"/>
+
+</shape>

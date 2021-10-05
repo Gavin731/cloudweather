@@ -163,6 +163,7 @@ data class LifeStyle(
  * @property windDirection String
  * @constructor
  */
+@Parcelize
 data class DailyWeather(
     var date: String,
     var formatDate: String,
@@ -181,7 +182,7 @@ data class DailyWeather(
     var windSpeed: String,
     // 风向
     var windDirection: String
-)
+):Parcelable
 
 /**
  * 小时天气

@@ -489,109 +489,12 @@
                         android:background="@color/weather_color_F2F2F2"
                         app:layout_constraintTop_toBottomOf="@+id/ll_advertising1" />
 
-                    <LinearLayout
-                        android:id="@+id/ll_day_list_chart"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:orientation="vertical"
-                        android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@+id/interval4">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="18dp"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="15日天气"
-                                android:textColor="@color/weather_color_222222"
-                                android:textSize="16.67sp" />
-
-                            <RadioGroup
-                                android:id="@+id/rg_day_list_chart"
-                                android:layout_width="wrap_content"
-                                android:layout_height="26.67dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginEnd="18dp"
-                                android:background="@drawable/weather_shape_day_list_chart_bg"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <RadioButton
-                                    android:id="@+id/rb_day_chart"
-                                    android:layout_width="45.3dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/weather_secetor_day_chart_bg"
-                                    android:button="@null"
-                                    android:checked="true"
-                                    android:gravity="center"
-                                    android:text="趋势"
-                                    android:textColor="@color/white"
-                                    android:textSize="10.67sp" />
-
-                                <RadioButton
-                                    android:id="@+id/rb_day_list"
-                                    android:layout_width="45.3dp"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/weather_secetor_day_chart_bg"
-                                    android:button="@null"
-                                    android:gravity="center"
-                                    android:text="列表"
-                                    android:textColor="@color/white"
-                                    android:textSize="10.67sp" />
-
-                            </RadioGroup>
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="0.33dp"
-                            android:background="@color/weather_color_E1E1E1" />
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/rv_day_list"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:overScrollMode="never"
-                                android:visibility="gone" />
-
-                            <LinearLayout
-                                android:id="@+id/rv_day_chart"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <com.lnkj.weather.widget.zzweatherview.ZzWeatherView
-                                    android:id="@+id/zzWeatherView"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:overScrollMode="never" />
-
-                            </LinearLayout>
-
-                        </FrameLayout>
-
-                    </LinearLayout>
-
                     <View
                         android:id="@+id/interval3"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/weather_dp_6"
                         android:background="@color/weather_color_F2F2F2"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_day_list_chart" />
+                        app:layout_constraintTop_toBottomOf="@+id/interval4" />
 
                     <LinearLayout
                         android:id="@+id/ll_live_index"
@@ -770,7 +673,7 @@
                         <LinearLayout
                             android:id="@+id/cl_live_index_coat"
                             android:layout_width="match_parent"
-                            android:layout_height="83dp"
+                            android:layout_height="53dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
