@@ -8,7 +8,7 @@ android {
     buildToolsVersion rootProject.buildVersion
 
     defaultConfig {
-        applicationId "com.lnkj.cloudweather"
+        applicationId "com.tdsq.cloudweather"
         minSdkVersion rootProject.minVersion
         targetSdkVersion rootProject.compileVersion
         versionCode 13
