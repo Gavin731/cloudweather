@@ -67,7 +67,7 @@
         <!--高德-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="1573b7adc68a57de4c503836f5c25249" />
+            android:value="3b5ffd5eb1b1f9034ab7ba1688176562" />
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService">
 
