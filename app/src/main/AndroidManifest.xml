@@ -29,6 +29,16 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <!-- 删除第三方多余的权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" tools:node="remove"/><!-- 读联系人 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" tools:node="remove"/><!-- 写联系人 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove"/><!-- 录音 -->
+    <uses-permission android:name="android.permission.READ_SMS" tools:node="remove"/><!-- 读取短信内容 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" tools:node="remove"/><!-- 使用蓝牙 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" tools:node="remove"/><!-- 发现和配对蓝牙 -->
+    <uses-permission android:name="android.permission.GET_TASKS" tools:node="remove"/><!-- 获取当前或最近运行的应用 -->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" tools:node="remove"/><!-- 访问媒体文件中的地理位置 -->
+
     <application
         android:name=".App"
         android:allowBackup="true"
