@@ -97,6 +97,12 @@ object DateUtils {
     }
 
     @SuppressLint("SimpleDateFormat")
+    fun getWeekIndex(calendar: Calendar): Int {
+        var weekIndex = calendar.get(Calendar.DAY_OF_WEEK) - 1
+        return weekIndex;
+    }
+
+    @SuppressLint("SimpleDateFormat")
     fun formatTime(date: Date, pattern: String = PATTERN_1): String {
         val df = SimpleDateFormat(pattern)
         return df.format(date)

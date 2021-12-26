@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="dailyWeather"
+            type="com.lnkj.library_base.db.bean.DailyWeather" />
+
+        <variable
+            name="alpha"
+            type="Float" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_root_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{alpha}"
+            android:textColor="@color/weather_color_999999"
+            android:textSize="10sp"
+            tools:text="11/28" />
+
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{alpha}"
+            android:text="@{dailyWeather.formatDate}"
+            android:textColor="@color/weather_color_222222"
+            android:textSize="12sp"
+            tools:text="昨天" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{alpha}"
+            android:text="@{dailyWeather.date}"
+            android:textColor="@color/weather_color_999999"
+            android:textSize="10sp"
+            tools:text="11/28" />
+
+        <ImageView
+            binding_image_res="@{dailyWeather.weatherIcon}"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:alpha="@{alpha}"
+            android:src="@drawable/weather_ico_clear_day" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{alpha}"
+            android:text="@{dailyWeather.weatherName}"
+            android:textColor="@color/weather_color_222222"
+            android:textSize="12sp"
+            tools:text="晴" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="@{alpha}"
+            android:text="@{@string/weather_temperature_min_max(dailyWeather.min,dailyWeather.max)}"
+            android:textColor="@color/weather_color_222222"
+            android:textSize="12sp"
+            tools:text="15~20°" />
+
+    </LinearLayout>
+
+</layout>

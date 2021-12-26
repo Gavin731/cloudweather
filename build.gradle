@@ -3,11 +3,17 @@
 buildscript {
     ext.kotlin_version = '1.3.61'
     repositories {
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+//        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+//        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+//        jcenter()
+        if(IS_USE_ALI_CENTER){
+            maven { url ALI_GROUPS_PUBLIC_URL }
+            maven { url ALI_REPOSITORY_JCENTER_URL }
+        }else{
+            jcenter()
+        }
         maven { url "https://jitpack.io" }
         google()
-        jcenter()
         mavenCentral()
         maven { url 'https://dl.bintray.com/umsdk/release' }
     }
@@ -22,11 +28,17 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
-        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+//        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
+//        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+//        jcenter()
+        if(IS_USE_ALI_CENTER){
+            maven { url ALI_GROUPS_PUBLIC_URL }
+            maven { url ALI_REPOSITORY_JCENTER_URL }
+        }else{
+            jcenter()
+        }
         maven { url "https://jitpack.io" }
         google()
-        jcenter()
         mavenCentral()
         maven { url 'https://dl.bintray.com/guardian/android' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
