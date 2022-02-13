@@ -28,7 +28,6 @@
                 android:id="@+id/iv_return_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:onClick="@{()->vm.finishEvent()}"
                 android:paddingStart="18dp"
                 android:paddingEnd="18dp"
                 android:src="@mipmap/weather_icon_back_gray" />

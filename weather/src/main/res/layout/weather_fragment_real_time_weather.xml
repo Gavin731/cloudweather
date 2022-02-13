@@ -61,7 +61,7 @@
                     android:id="@+id/ivShare"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_gravity="end"
+                    android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="5dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"

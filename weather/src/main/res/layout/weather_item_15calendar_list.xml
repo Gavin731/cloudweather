@@ -57,6 +57,7 @@
             binding_image_res="@{dailyWeather.weatherIcon}"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginTop="@dimen/weather_dp_6"
             android:alpha="@{alpha}"
             android:src="@drawable/weather_ico_clear_day" />
 
@@ -65,6 +66,7 @@
             android:id="@+id/tv_weatherName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/weather_dp_6"
             android:alpha="@{alpha}"
             android:text="@{dailyWeather.weatherName}"
             android:textColor="@color/weather_color_222222"
@@ -90,7 +92,7 @@
             android:id="@+id/tv_direction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/weather_dp_6"
             android:text="@{dailyWeather.windDirection}"
             android:textColor="@color/weather_color_222222"
             android:textSize="@dimen/weather_sp_13" />
@@ -105,19 +107,19 @@
             android:textSize="@dimen/weather_sp_13" />
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_air_level"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="12dp"-->
-<!--            android:layout_marginBottom="20dp"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingStart="6dp"-->
-<!--            android:paddingEnd="6dp"-->
-<!--            android:text="@{dailyWeather.airQualityName}"-->
-<!--            android:textColor="#fff"-->
-<!--            android:textSize="7.33sp"-->
-<!--            android:visibility="gone"-->
-<!--            tools:text="良" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_air_level"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="12dp"-->
+        <!--            android:layout_marginBottom="20dp"-->
+        <!--            android:gravity="center"-->
+        <!--            android:paddingStart="6dp"-->
+        <!--            android:paddingEnd="6dp"-->
+        <!--            android:text="@{dailyWeather.airQualityName}"-->
+        <!--            android:textColor="#fff"-->
+        <!--            android:textSize="7.33sp"-->
+        <!--            android:visibility="gone"-->
+        <!--            tools:text="良" />-->
 
         <com.mufeng.roundview.RoundTextView
             android:id="@+id/tv_air_level2"

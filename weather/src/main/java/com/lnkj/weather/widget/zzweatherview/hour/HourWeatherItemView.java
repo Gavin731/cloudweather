@@ -129,6 +129,7 @@ public class HourWeatherItemView extends LinearLayout {
 
     public void setTvTempColor(int resId) {
         tvTemperature.setTextColor(resId);
+        tvWind.setTextColor(resId);
     }
 
     public void setWind(String wind){

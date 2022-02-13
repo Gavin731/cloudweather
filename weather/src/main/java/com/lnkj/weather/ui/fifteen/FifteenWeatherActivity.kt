@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lnkj.library_base.db.bean.DailyWeather
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityFifteenWeatherBinding
+import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.ui.realweather.RealTimeWeather15CalendarListAdapter
 import com.lnkj.weather.ui.realweather.RealTimeWeather15DailyListAdapter
 import com.lnkj.weather.ui.realweather.SpaceItemDecoration
@@ -14,6 +15,7 @@ import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.widget.zzweatherview.WeatherModel
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
+import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.ext.widget.gone
 import com.mufeng.mvvmlib.utilcode.ext.widget.removeAllAnimation
 import com.mufeng.mvvmlib.utilcode.ext.widget.visible
@@ -73,6 +75,9 @@ class FifteenWeatherActivity :
                     binding.llCalendar.gone()
                 }
             }
+        }
+        binding.ivReturnBack.clickWithTrigger {
+            finish()
         }
         initTrendList();
         initDailyList()
