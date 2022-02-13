@@ -167,7 +167,11 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         ),
                         airQualityValue = hourly?.airQuality?.aqi?.get(index)?.value?.chn!!,
                         windQualityValue = WeatherUtils.getWindSpeed(hourly?.wind?.get(index)?.speed!!.toInt()),
-                        directionQualityValue = WeatherUtils.getWindDirection(hourly?.wind?.get(index)?.direction!!)
+                        directionQualityValue = WeatherUtils.getWindDirection(
+                            hourly?.wind?.get(
+                                index
+                            )?.direction!!
+                        )
 
                     )
                     hourlyWeatherList.add(hourlyWeather)
@@ -176,9 +180,11 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 // 天级天气数据
 
                 val dailyWeatherList = mutableListOf<DailyWeather>()
+                val todayTime = DateUtils.formatTime(Date(), PATTERN_14)
                 daily!!.temperature?.forEachIndexed { index, temperature ->
+                    val itemDate = DateUtils.formatDateT(temperature?.date!!, PATTERN_14)
                     val dailyWeather = DailyWeather(
-                        date = DateUtils.formatDateT(temperature?.date!!, PATTERN_14),
+                        date = if (todayTime == itemDate) "今天" else itemDate,
                         formatDate = DateUtils.formatWeekT(temperature.date),
 
 //                        weatherName = WeatherUtils.getWeatherName(daily?.skycon?.get(index)?.value!!),
@@ -188,10 +194,14 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                         ),
 
                         weatherIcon = WeatherUtils.getWeatherIcon(daily?.skycon?.get(index)?.value!!),
-                        weatherDayName = WeatherUtils.getWeatherName(daily.skycon08h20h?.get(index)?.value!!),
-                        weatherDayIcon = WeatherUtils.getWeatherIcon(daily.skycon08h20h[index]?.value!!),
-                        weatherNightName = WeatherUtils.getWeatherName(daily.skycon20h32h?.get(index)?.value!!),
-                        weatherNightIcon = WeatherUtils.getWeatherIcon(daily.skycon20h32h[index]?.value!!),
+                        weatherDayName =
+                        WeatherUtils.getWeatherName(daily.skycon08h20h?.get(index)?.value!!),
+                        weatherDayIcon =
+                        WeatherUtils.getWeatherIcon(daily.skycon08h20h[index]?.value!!),
+                        weatherNightName =
+                        WeatherUtils.getWeatherName(daily.skycon20h32h?.get(index)?.value!!),
+                        weatherNightIcon =
+                        WeatherUtils.getWeatherIcon(daily.skycon20h32h[index]?.value!!),
                         max = temperature.max!!.toInt(),
                         min = temperature.min!!.toInt(),
                         airQualityName = WeatherUtils.getAirQualityDescription(
@@ -200,8 +210,10 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                             )?.max!!.chn!!
                         ),
                         airQualityValue = daily.airQuality.aqi.get(index)?.max!!.chn!!,
-                        windSpeed = WeatherUtils.getWindSpeed(daily.wind?.get(index)?.max!!.speed!!.toInt()),
-                        windDirection = WeatherUtils.getWindDirection(daily.wind.get(index)?.max!!.direction!!)
+                        windSpeed =
+                        WeatherUtils.getWindSpeed(daily.wind?.get(index)?.max!!.speed!!.toInt()),
+                        windDirection =
+                        WeatherUtils.getWindDirection(daily.wind.get(index)?.max!!.direction!!)
                     )
                     dailyWeatherList.add(dailyWeather)
                 }
@@ -541,7 +553,7 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                     dressLifeStyle = dressLifeStyle,
                     lifeStyleList = lifeStyleList,
                     alertInfo = alertInfo,
-                    apparentTemperature="${realtime.apparentTemperature!!.toInt()}"
+                    apparentTemperature = "${realtime.apparentTemperature!!.toInt()}"
                 )
                 Log.e("-------网咯请求-组合结束", DateUtils.formatTime(Date(), DateUtils.PATTERN_0))
                 WeatherDatabase.get().cityWeatherDao().save(cityWeather)

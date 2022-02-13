@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -21,28 +22,30 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_date"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:alpha="@{alpha}"-->
+        <!--            android:textColor="@color/weather_color_999999"-->
+        <!--            android:textSize="10sp"-->
+        <!--            tools:text="11/28" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_week"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:alpha="@{alpha}"-->
+        <!--            android:text="@{dailyWeather.formatDate}"-->
+        <!--            android:textColor="@color/weather_color_222222"-->
+        <!--            android:textSize="12sp"-->
+        <!--            tools:text="昨天" />-->
+
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="@{alpha}"
-            android:textColor="@color/weather_color_999999"
-            android:textSize="10sp"
-            tools:text="11/28" />
-
-        <TextView
-            android:id="@+id/tv_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha="@{alpha}"
-            android:text="@{dailyWeather.formatDate}"
-            android:textColor="@color/weather_color_222222"
-            android:textSize="12sp"
-            tools:text="昨天" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
             android:alpha="@{alpha}"
             android:text="@{dailyWeather.date}"
             android:textColor="@color/weather_color_999999"
@@ -50,13 +53,16 @@
             tools:text="11/28" />
 
         <ImageView
+            android:id="@+id/iv_date"
             binding_image_res="@{dailyWeather.weatherIcon}"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:alpha="@{alpha}"
             android:src="@drawable/weather_ico_clear_day" />
 
+
         <TextView
+            android:id="@+id/tv_weatherName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="@{alpha}"
@@ -65,12 +71,13 @@
             android:textSize="12sp"
             tools:text="晴" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+        <!--        <View-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="1dp"-->
+        <!--            android:layout_weight="1" />-->
 
         <TextView
+            android:id="@+id/tv_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="@{alpha}"
@@ -78,6 +85,48 @@
             android:textColor="@color/weather_color_222222"
             android:textSize="12sp"
             tools:text="15~20°" />
+
+        <TextView
+            android:id="@+id/tv_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{dailyWeather.windDirection}"
+            android:textColor="@color/weather_color_222222"
+            android:textSize="@dimen/weather_sp_13" />
+
+        <TextView
+            android:id="@+id/tv_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{dailyWeather.windSpeed}"
+            android:textColor="@color/weather_color_999999"
+            android:textSize="@dimen/weather_sp_13" />
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_air_level"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="12dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingStart="6dp"-->
+<!--            android:paddingEnd="6dp"-->
+<!--            android:text="@{dailyWeather.airQualityName}"-->
+<!--            android:textColor="#fff"-->
+<!--            android:textSize="7.33sp"-->
+<!--            android:visibility="gone"-->
+<!--            tools:text="良" />-->
+
+        <com.mufeng.roundview.RoundTextView
+            android:id="@+id/tv_air_level2"
+            android:layout_width="15.33dp"
+            android:layout_height="3.33dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
+            app:rv_backgroundColor="#FF3316"
+            app:rv_cornerRadius="1.67dp" />
 
     </LinearLayout>
 
