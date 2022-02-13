@@ -1,20 +1,22 @@
 package com.lnkj.weather.ui.fifteen
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lnkj.library_base.db.bean.DailyWeather
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherActivityFifteenWeatherBinding
-import com.lnkj.weather.ui.main.MainActivity
-import com.lnkj.weather.ui.realweather.RealTimeWeather15CalendarListAdapter
-import com.lnkj.weather.ui.realweather.RealTimeWeather15DailyListAdapter
-import com.lnkj.weather.ui.realweather.SpaceItemDecoration
+import com.lnkj.weather.ui.realweather.*
+import com.lnkj.weather.ui.web.WebMainActivity
 import com.lnkj.weather.utils.DateUtils
+import com.lnkj.weather.utils.ImageUtils
 import com.lnkj.weather.widget.zzweatherview.WeatherModel
 import com.mufeng.mvvmlib.basic.view.BaseVMActivity
 import com.mufeng.mvvmlib.utilcode.ext.GsonUtils
+import com.mufeng.mvvmlib.utilcode.ext.startActivity
 import com.mufeng.mvvmlib.utilcode.ext.widget.clickWithTrigger
 import com.mufeng.mvvmlib.utilcode.ext.widget.gone
 import com.mufeng.mvvmlib.utilcode.ext.widget.removeAllAnimation
@@ -54,6 +56,22 @@ class FifteenWeatherActivity :
 
         dailyListData = intent.getParcelableArrayListExtra<DailyWeather>("dailyListData")
         trendListData = intent.getParcelableArrayListExtra<WeatherModel>("trendListData")
+
+        binding.ivShare.clickWithTrigger {
+            // 截图
+            val bitmapTop =
+                ImageUtils.getViewBitmap(binding.toolbar, R.color.white)
+            val bitmapBottom = getBitmap()
+            val bitmap = ImageUtils.combineImage(bitmapTop!!, bitmapBottom!!)
+            LiveEventBus.get("event_share_real_time_weather").post(bitmap)
+            startActivity<RealTimeWeatherShareActivity>()
+        }
+        binding.ivAdvertising1.clickWithTrigger {
+            startActivity<WebMainActivity>(
+                "webUrl" to "https://www.baidu.com",
+                "webTitle" to "我是百度"
+            )
+        }
     }
 
     override fun initData() {
@@ -84,6 +102,12 @@ class FifteenWeatherActivity :
         initCalendar();
     }
 
+    fun getBitmap(): Bitmap? {
+        binding.nestedScrollView.setBackgroundColor(resources.getColor(R.color.white))
+        val bitmap = ImageUtils.getScrollViewBitmap(binding.nestedScrollView, R.color.white)
+        binding.nestedScrollView.background = null
+        return bitmap
+    }
 
     private fun initDailyList() {
         binding.rvDayList.layoutManager = LinearLayoutManager(this)

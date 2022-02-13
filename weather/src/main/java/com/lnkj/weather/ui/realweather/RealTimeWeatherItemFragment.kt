@@ -24,6 +24,7 @@ import com.lnkj.weather.ui.fifteen.FifteenWeatherActivity
 import com.lnkj.weather.ui.hotrank.HotRankActivity
 import com.lnkj.weather.ui.main.MainActivity
 import com.lnkj.weather.ui.rain.RainActivity
+import com.lnkj.weather.ui.web.WebMainActivity
 import com.lnkj.weather.utils.ColorUtils
 import com.lnkj.weather.utils.DateUtils
 import com.lnkj.weather.utils.ImageUtils
@@ -177,6 +178,19 @@ class RealTimeWeatherItemFragment :
         val calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 2);
         binding.tvAfterTomorrow.text = DateUtils.getWeek(calendar)
+
+        binding.ivAdvertising1.clickWithTrigger {
+            startActivity<WebMainActivity>(
+                "webUrl" to "https://www.baidu.com",
+                "webTitle" to "我是百度"
+            )
+        }
+        binding.ivAdvertising2.clickWithTrigger {
+            startActivity<WebMainActivity>(
+                "webUrl" to "https://im.qq.com/pcqq",
+                "webTitle" to "我是qq"
+            )
+        }
     }
 
     override fun onResume() {

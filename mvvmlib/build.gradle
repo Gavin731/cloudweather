@@ -101,4 +101,6 @@ dependencies {
     api "com.gyf.immersionbar:immersionbar:3.0.0"
     api "com.gyf.immersionbar:immersionbar-components:3.0.0"
     api "com.gyf.immersionbar:immersionbar-ktx:3.0.0"
+
+    api 'com.tencent.tbs:tbssdk:44153'
 }
