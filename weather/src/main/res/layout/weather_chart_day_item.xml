@@ -73,14 +73,13 @@
             android:textSize="14sp"
             tools:text="晴" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_wind_ori"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
             android:layout_marginTop="23dp"
             android:gravity="center"
             android:textColor="@color/weather_color_222222"
-            android:textSize="11.33sp"
             tools:text="西南风" />
 
         <TextView
@@ -90,7 +89,7 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="@color/weather_color_999999"
-            android:textSize="11.33sp"
+            android:textSize="9sp"
             tools:text="3级" />
 
         <TextView

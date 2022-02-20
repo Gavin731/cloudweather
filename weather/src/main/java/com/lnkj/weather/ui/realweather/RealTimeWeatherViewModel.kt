@@ -476,6 +476,12 @@ class RealTimeWeatherViewModel : BaseViewModel() {
                 // 预警信息
                 val alertInfo = if (weatherBean?.result?.alert?.content?.isNullOrEmpty() == true) {
                     emptyList<String>()
+//                    val list = arrayListOf<String>()
+//                    list.add("台风蓝色预警")
+//                    list.add("台风黄色预警")
+//                    list.add("台风橙色预警")
+//                    list.add("台风红色预警")
+//                    list
                 } else {
                     val list = arrayListOf<String>()
                     weatherBean.result!!.alert?.content?.forEach {

@@ -49,14 +49,14 @@
             android:alpha="@{alpha}"
             android:text="@{dailyWeather.date}"
             android:textColor="@color/weather_color_999999"
-            android:textSize="10sp"
+            android:textSize="9sp"
             tools:text="11/28" />
 
         <ImageView
             android:id="@+id/iv_date"
             binding_image_res="@{dailyWeather.weatherIcon}"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="@dimen/weather_dp_6"
             android:alpha="@{alpha}"
             android:src="@drawable/weather_ico_clear_day" />
@@ -70,7 +70,7 @@
             android:alpha="@{alpha}"
             android:text="@{dailyWeather.weatherName}"
             android:textColor="@color/weather_color_222222"
-            android:textSize="12sp"
+            android:textSize="9sp"
             tools:text="晴" />
 
         <!--        <View-->
@@ -85,17 +85,15 @@
             android:alpha="@{alpha}"
             android:text="@{@string/weather_temperature_min_max(dailyWeather.min,dailyWeather.max)}"
             android:textColor="@color/weather_color_222222"
-            android:textSize="12sp"
+            android:textSize="11sp"
             tools:text="15~20°" />
 
-        <TextView
+        <ImageView
             android:id="@+id/tv_direction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
             android:layout_marginTop="@dimen/weather_dp_6"
-            android:text="@{dailyWeather.windDirection}"
-            android:textColor="@color/weather_color_222222"
-            android:textSize="@dimen/weather_sp_13" />
+            android:textColor="@color/weather_color_222222" />
 
         <TextView
             android:id="@+id/tv_wind"
@@ -104,7 +102,7 @@
             android:layout_marginTop="2dp"
             android:text="@{dailyWeather.windSpeed}"
             android:textColor="@color/weather_color_999999"
-            android:textSize="@dimen/weather_sp_13" />
+            android:textSize="9sp" />
 
 
         <!--        <TextView-->

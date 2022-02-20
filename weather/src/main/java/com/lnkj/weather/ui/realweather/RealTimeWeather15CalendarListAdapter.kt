@@ -11,6 +11,7 @@ import com.lnkj.library_base.db.bean.DailyWeather
 import com.lnkj.weather.R
 import com.lnkj.weather.databinding.WeatherItem15calendarListBinding
 import com.lnkj.weather.utils.WeatherUtils
+import com.lnkj.weather.utils.WeatherUtils.getWeatherWindDirectionByWeatherName
 import com.mufeng.roundview.RoundTextView
 
 /**
@@ -32,7 +33,7 @@ class RealTimeWeather15CalendarListAdapter(data: MutableList<DailyWeather>) :
             helper.getView<ImageView>(R.id.iv_date).visibility = View.GONE
             helper.getView<TextView>(R.id.tv_weatherName).visibility = View.GONE
             helper.getView<TextView>(R.id.tv_temperature).visibility = View.GONE
-            helper.getView<TextView>(R.id.tv_direction).visibility = View.GONE
+            helper.getView<ImageView>(R.id.tv_direction).visibility = View.GONE
             helper.getView<TextView>(R.id.tv_wind).visibility = View.GONE
             helper.getView<RoundTextView>(R.id.tv_air_level2).visibility = View.GONE
             helper.getView<LinearLayout>(R.id.ll_root_view)
@@ -41,7 +42,7 @@ class RealTimeWeather15CalendarListAdapter(data: MutableList<DailyWeather>) :
             helper.getView<ImageView>(R.id.iv_date).visibility = View.VISIBLE
             helper.getView<TextView>(R.id.tv_weatherName).visibility = View.VISIBLE
             helper.getView<TextView>(R.id.tv_temperature).visibility = View.VISIBLE
-            helper.getView<TextView>(R.id.tv_direction).visibility = View.VISIBLE
+            helper.getView<ImageView>(R.id.tv_direction).visibility = View.VISIBLE
             helper.getView<TextView>(R.id.tv_wind).visibility = View.VISIBLE
             helper.getView<RoundTextView>(R.id.tv_air_level2).visibility = View.VISIBLE
             helper.getView<LinearLayout>(R.id.ll_root_view)
@@ -51,6 +52,9 @@ class RealTimeWeather15CalendarListAdapter(data: MutableList<DailyWeather>) :
         if (binding != null) {
             binding.alpha = 1f
             binding.dailyWeather = item
+            val tvDirection = helper.getView<ImageView>(R.id.tv_direction)
+            tvDirection.setImageResource(getWeatherWindDirectionByWeatherName(item.windDirection))
+
             val roundTextView = helper.getView<RoundTextView>(R.id.tv_air_level2)
             roundTextView.delegate.backgroundColor = (
                     context.resources.getColor(

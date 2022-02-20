@@ -29,7 +29,7 @@ public class WeatherItemView extends LinearLayout {
     private TextView tvDayWeather;
     private TextView tvNightWeather;
     private TemperatureView ttvTemp;
-    private TextView tvWindOri;
+    private ImageView ivWindOri;
     private TextView tvWindLevel;
     private TextView tvAirLevel;
     private ImageView ivDayWeather;
@@ -57,7 +57,7 @@ public class WeatherItemView extends LinearLayout {
         tvDayWeather = rootView.findViewById(R.id.tv_day_weather);
         tvNightWeather = rootView.findViewById(R.id.tv_night_weather);
         ttvTemp = rootView.findViewById(R.id.ttv_day);
-        tvWindOri = rootView.findViewById(R.id.tv_wind_ori);
+        ivWindOri = rootView.findViewById(R.id.tv_wind_ori);
         tvWindLevel = rootView.findViewById(R.id.tv_wind_level);
         tvAirLevel2 = rootView.findViewById(R.id.tv_air_level2);
         ivDayWeather = rootView.findViewById(R.id.iv_day_weather);
@@ -101,8 +101,8 @@ public class WeatherItemView extends LinearLayout {
     }
 
     public void setWindOri(String windOri) {
-        if (tvWindOri != null)
-            tvWindOri.setText(windOri);
+        if (ivWindOri != null)
+            ivWindOri.setImageResource(WeatherUtils.INSTANCE.getWeatherWindDirectionByWeatherName(windOri));
     }
 
     public void setWindLevel(String windLevel) {
@@ -126,7 +126,7 @@ public class WeatherItemView extends LinearLayout {
             ttvTemp.setPointNightColor(0x665DBDFF);
             ttvTemp.setTextDayColor(Color.parseColor("#66ffffff"));
             ttvTemp.setTextNightColor(Color.parseColor("#66ffffff"));
-            tvWindOri.setTextColor(Color.parseColor("#66ffffff"));
+//            ivWindOri.setTextColor(Color.parseColor("#66ffffff"));
             tvWindLevel.setTextColor(Color.parseColor("#66ffffff"));
             tvAirLevel.setTextColor(Color.parseColor("#66ffffff"));
             ivDayWeather.setAlpha(0.5f);
@@ -140,7 +140,7 @@ public class WeatherItemView extends LinearLayout {
             ttvTemp.setPointNightColor(0xFF5DBDFF);
             ttvTemp.setTextDayColor(Color.parseColor("#ffffff"));
             ttvTemp.setTextNightColor(Color.parseColor("#ffffff"));
-            tvWindOri.setTextColor(Color.parseColor("#ffffff"));
+//            ivWindOri.setTextColor(Color.parseColor("#ffffff"));
             tvWindLevel.setTextColor(Color.parseColor("#ffffff"));
             tvAirLevel.setTextColor(Color.parseColor("#ffffff"));
             ivDayWeather.setAlpha(1f);

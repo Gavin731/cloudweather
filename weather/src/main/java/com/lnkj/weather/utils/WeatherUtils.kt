@@ -234,7 +234,7 @@ object WeatherUtils {
 //                }
 //            }
             // 雨
-            "LIGHT_RAIN","MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN" -> {
+            "LIGHT_RAIN", "MODERATE_RAIN", "HEAVY_RAIN", "STORM_RAIN" -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_rain_bight
                 } else {
@@ -258,7 +258,7 @@ object WeatherUtils {
 //                }
 //            }
             // 雪
-            "LIGHT_SNOW","MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW" -> {
+            "LIGHT_SNOW", "MODERATE_SNOW", "HEAVY_SNOW", "STORM_SNOW" -> {
                 if (!isDayTime) {
                     R.drawable.weather_bg_heavy_snow_night
                 } else {
@@ -570,6 +570,220 @@ object WeatherUtils {
                 }
             }
         }
+    }
+
+    fun getWeatherWindDirectionByWeatherName(str: String): Int {
+        return when (str) {
+            "东风" -> R.mipmap.weather_icon_fx7
+            "南风" -> R.mipmap.weather_icon_fx5
+            "西风" -> R.mipmap.weather_icon_fx3
+            "北风" -> R.mipmap.weather_icon_fx1
+            "东南风" -> R.mipmap.weather_icon_fx6
+            "东北风" -> R.mipmap.weather_icon_fx8
+            "西南风" -> R.mipmap.weather_icon_fx4
+            "西北风" -> R.mipmap.weather_icon_fx2
+            else -> R.mipmap.weather_icon_fx6
+        }
+    }
+
+    fun getAlertIcon(alertInfo: String): Int {
+        var icon: Int = 0
+        if (alertInfo.indexOf("台风") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_yjtf1
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjtf2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjtf3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjtf4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("暴雨") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_yjby1
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjby2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjby3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjby4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("暴雪") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_yjbx1
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjbx2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjbx3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjbx4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("寒潮") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_yjhc1
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjhc2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjhc3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjhc4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("大风") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdf1
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdf2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdf3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdf4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("沙尘暴") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("高温") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjgw2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjgw3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjgw4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("干旱") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjgh3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjgh4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("雷电") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjld2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjld3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjld4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("冰雹") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("霜冻") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_yjsd1
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjsd2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjsd3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("大雾") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdw2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdw3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjdw4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("霾") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjm2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjm3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjm4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("道路结冰") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_yjjb2
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_yjjb3
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_yjjb4
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("森林火灾") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else if (alertInfo.indexOf("雷雨大风") >= 0) {
+            if (alertInfo.indexOf("蓝色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("黄色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("橙色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else if (alertInfo.indexOf("红色") >= 0) {
+                icon = R.mipmap.weather_icon_alert
+            } else {
+                icon = R.mipmap.weather_icon_alert
+            }
+        } else {
+            icon = R.mipmap.weather_icon_alert
+        }
+        return icon
     }
 }
 
